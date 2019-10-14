@@ -1,6 +1,8 @@
 ### K_Lab
 
-> 
+
+#### draft
+1. 记录工作中的草稿
 > - 安装 
 > 1. npm install http-server -g
 > 
@@ -8,9 +10,6 @@
 > 1. http-server . -p 7000
 > 1. localhost:7000/canvas/index.html 
 > 2. localhost:7000/draft/test.html 
-
-#### draft
-1. 记录工作中的草稿
 #### leetcode
 1. 记录做的算法题目
 #### pantMail
