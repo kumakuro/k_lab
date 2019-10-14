@@ -1,0 +1,392 @@
+{
+  "cover": "d89afa4482bc55c29e11514ed6898d9d.jpg",
+  "title": {
+    "pic1": "4c124bc7622569f53b3bc76599f3b609",
+    "pic2": "085adbd42af17461c68595625e7bc68f",
+    "sound": "14e6e3e9defc15d54c738e81cf46fd9d",
+    "position": {
+      "x": 0.5,
+      "y": 0.1
+    }
+  },
+  "writtenBy": {
+    "pic1": "81d124ca314d694ce974d4ef552454b1",
+    "pic2": "dba7591638ef65193ea72204b9883a93",
+    "sound": "9c6a96b83b0c6dd9a830325d6fa99ff9",
+    "position": {
+      "x": 0.5,
+      "y": 0.2
+    }
+  },
+  "illustratedBy": {
+    "pic1": "81d124ca314d694ce974d4ef552454b1",
+    "pic2": "dba7591638ef65193ea72204b9883a93",
+    "sound": "9c6a96b83b0c6dd9a830325d6fa99ff9",
+    "position": {
+      "x": 0.5,
+      "y": 0.2
+    }
+  },
+  "introSound": "6d84a53622dc83e031eb47732da240c2",
+  "dictionary": {
+    "charity work": {
+      "sound": "5fe5a9b7bf5bc0d030a55da96ca227f3",
+      "pic": "",
+      "scale": 0.9,
+      "explain": "The kind of work that gives help to people who need\nit.",
+      "word": "charity work",
+      "type": "noun",
+      "typeSound": "c8aff4b9e3f399f49a8cb064518da7c9",
+      "explainSound": "faf7e3a974b8dca2f3bf34ab372e21c1"
+    },
+    "volunteer": {
+      "sound": "171671a1b363da23325af13f15fd7666",
+      "pic": "",
+      "scale": 0.9,
+      "explain": "To agree to do a job or help someone without\ngetting paid.",
+      "word": "volunteer",
+      "type": "verb",
+      "typeSound": "87c995e56b74741ab0c258639f3204a9",
+      "explainSound": "daa163bb15fd1f48e75acf4a30047ad5"
+    },
+    "volunteered": {
+      "sound": "171671a1b363da23325af13f15fd7666",
+      "pic": "",
+      "scale": 0.9,
+      "explain": "To agree to do a job or help someone without\ngetting paid.",
+      "word": "volunteer",
+      "type": "verb",
+      "typeSound": "87c995e56b74741ab0c258639f3204a9",
+      "explainSound": "daa163bb15fd1f48e75acf4a30047ad5"
+    },
+    "community": {
+      "sound": "25889952909e6eded927328457e0a23a",
+      "pic": "",
+      "scale": 0.9,
+      "explain": "A group of people who live together in the same\nplace.",
+      "word": "community",
+      "type": "noun",
+      "typeSound": "c8aff4b9e3f399f49a8cb064518da7c9",
+      "explainSound": "27059dd6f352cb6823604c1960ead649"
+    },
+    "decided": {
+      "sound": "fb57fde236a0291d311cb79410c997c2",
+      "pic": "",
+      "scale": 0.9,
+      "explain": "To choose something.",
+      "word": "decide",
+      "type": "verb",
+      "typeSound": "87c995e56b74741ab0c258639f3204a9",
+      "explainSound": "d0e7093996981f89eee4bb2df4bc8323",
+      "idiom": {
+        "word": "synonym: determine",
+        "sound": [
+          "10aa5aac6cb2144f69d67467e3140f91",
+          "c7357db89833f9c0933a7ff50f523c03"
+        ]
+      }
+    },
+    "collect": {
+      "sound": "caead51da6dbc027eb44180f73fc9032",
+      "pic": "",
+      "scale": 0.9,
+      "explain": "To gather information or things.",
+      "word": "collect",
+      "type": "verb",
+      "typeSound": "87c995e56b74741ab0c258639f3204a9",
+      "explainSound": "c8f1e1e4798563ae8064e7f32c83f918"
+    },
+    "collected": {
+      "sound": "caead51da6dbc027eb44180f73fc9032",
+      "pic": "",
+      "scale": 0.9,
+      "explain": "To gather information or things.",
+      "word": "collect",
+      "type": "verb",
+      "typeSound": "87c995e56b74741ab0c258639f3204a9",
+      "explainSound": "c8f1e1e4798563ae8064e7f32c83f918"
+    },
+    "donate": {
+      "sound": "71b6f251c3ff081a98ac1cca7a3e764b",
+      "pic": "",
+      "scale": 0.9,
+      "explain": "To give for free.",
+      "word": "donate",
+      "type": "verb",
+      "typeSound": "87c995e56b74741ab0c258639f3204a9",
+      "explainSound": "2754280d26248b53f111f26fe2e45a9c"
+    },
+    "organize": {
+      "sound": "b2e61b7b992b6bd72ef2fb51b3372654",
+      "pic": "",
+      "scale": 0.9,
+      "explain": "To put something in order.",
+      "word": "organize",
+      "type": "verb",
+      "typeSound": "87c995e56b74741ab0c258639f3204a9",
+      "explainSound": "83c5209000f33fbb0ee32c646fba9be3"
+    },
+    "food drive": {
+      "sound": "c38de4d285f943c35d42af8d9ddc4079",
+      "pic": "",
+      "scale": 0.9,
+      "explain": "An event where people bring food to give to those\nwho need it.",
+      "word": "food drive",
+      "type": "noun",
+      "typeSound": "c8aff4b9e3f399f49a8cb064518da7c9",
+      "explainSound": "cbcdadce883eb3f6ed1227d470990ff7"
+    },
+    "donations": {
+      "sound": "52c4275a4c907cd3308c1b818f02e694",
+      "pic": "",
+      "scale": 0.9,
+      "explain": "Something you give away for free.",
+      "word": "donation",
+      "type": "noun",
+      "typeSound": "c8aff4b9e3f399f49a8cb064518da7c9",
+      "explainSound": "7adc4282b7a20173d10b20e65429a759"
+    },
+    "compete": {
+      "sound": "317cd32fe563e9b28f7296b01d3c1c50",
+      "pic": "",
+      "scale": 0.9,
+      "explain": "To try and win or do better than another person or\nteam.",
+      "word": "compete",
+      "type": "verb",
+      "typeSound": "87c995e56b74741ab0c258639f3204a9",
+      "explainSound": "7dc3832a87113927d66b64f03fccae5e"
+    },
+    "assigned": {
+      "sound": "b2b930634a94f6c9e14cdddf0f4a7869",
+      "pic": "",
+      "scale": 0.9,
+      "explain": "To give someone a job to do.",
+      "word": "assign",
+      "type": "verb",
+      "typeSound": "87c995e56b74741ab0c258639f3204a9",
+      "explainSound": "846a2f3fe261960038b20eb791b30be8"
+    },
+    "section": {
+      "sound": "f4d4dc0f6fa307ec8765ddf9a0995225",
+      "pic": "",
+      "scale": 0.9,
+      "explain": "An area or part of something bigger; a piece.",
+      "word": "section",
+      "type": "noun",
+      "typeSound": "c8aff4b9e3f399f49a8cb064518da7c9",
+      "explainSound": "f83f86393b9fec75166e52b0103248e1"
+    },
+    "introduced": {
+      "sound": "da85274507618d11ed0b8d6702c3dcf7",
+      "pic": "",
+      "scale": 0.9,
+      "explain": "To tell someone what your name is when you meet\nfor the first time.",
+      "word": "introduce",
+      "type": "verb",
+      "typeSound": "87c995e56b74741ab0c258639f3204a9",
+      "explainSound": "8c5d09675a2522a292d40c121446fa56"
+    },
+    "spotlight": {
+      "sound": "bfe877dd9171adb7367008018da7763c",
+      "pic": "",
+      "scale": 0.9,
+      "explain": "A bright light that shines on things; also means the\nfocus or center of attention.",
+      "word": "spotlight",
+      "type": "noun",
+      "typeSound": "c8aff4b9e3f399f49a8cb064518da7c9",
+      "explainSound": "8292bc2d0b7ed7bf49e62fd58739a345"
+    },
+    "tour": {
+      "sound": "aed705ac91edf343032b96cc59a741f7",
+      "pic": "",
+      "scale": 0.9,
+      "explain": "A trip through a place to see it. You could take a\ntour through a museum.",
+      "word": "tour",
+      "type": "noun",
+      "typeSound": "c8aff4b9e3f399f49a8cb064518da7c9",
+      "explainSound": "150b3cb5ea4859b29b4c99d85db852ee"
+    },
+    "offered": {
+      "sound": "e40befab684b1086e82e2bce68e2d3a3",
+      "pic": "",
+      "scale": 0.9,
+      "explain": "To say you are willing to do something.",
+      "word": "offer",
+      "type": "verb",
+      "typeSound": "87c995e56b74741ab0c258639f3204a9",
+      "explainSound": "6be224650c107fac9859f9d7370ae053",
+      "idiom": {
+        "word": "synonym: propose",
+        "sound": [
+          "10aa5aac6cb2144f69d67467e3140f91",
+          "9ced37e3ce86cb66b4e3128e301c7e0b"
+        ]
+      }
+    },
+    "double": {
+      "sound": "08f0a41099ebe2215709fe6625eec61f",
+      "pic": "",
+      "scale": 0.9,
+      "explain": "Twice as much.",
+      "word": "double",
+      "type": "verb",
+      "typeSound": "87c995e56b74741ab0c258639f3204a9",
+      "explainSound": "2514d20e27f8d4eca0be0dfd703fb621"
+    },
+    "national": {
+      "sound": "734102e2502ceb45449b274e8ce61aac",
+      "pic": "",
+      "scale": 0.9,
+      "explain": "Having to do with the whole country.",
+      "word": "national",
+      "type": "adjective",
+      "typeSound": "6eaf337aa8603cc8f9138b6077fa5c46",
+      "explainSound": "d354bb5dc9d6ef351bcaff97e193a6db"
+    }
+  },
+  "pages": [
+    {
+      "pic": "5072f4af80185fb6d3392cfc37e58b76.jpg",
+      "subtitle": "Right now there are hundreds of people beyond that\ncurtain and millions more watching by television . And all of\nthem are waiting for me to sing . I've always dreamed of\nbeing on TV . But how did I get here ? Well , it all started\nwhen ...",
+      "position": {
+        "x": 80,
+        "y": 400
+      },
+      "fontColor": "#000",
+      "lineHeight": 36,
+      "fontSize": 22
+    },
+    {
+      "pic": "cf2357775957d3cd2e748c25e4f3e359.jpg",
+      "subtitle": "I was teaching my pet duck Stumpy to dance to the latest\nKayzha album . In the booklet that came with the CD ,\nKayzha wrote about her {{charity|work}} helping others . She\nincluded a list of ways to {{volunteer}} and help people in your\nown {{community}} . I thought her ideas were cool , so I {{decided}}\nthat I wanted to make a difference as well .",
+      "position": {
+        "x": 70,
+        "y": 400
+      },
+      "fontColor": "#000",
+      "lineHeight": 36,
+      "fontSize": 22
+    },
+    {
+      "pic": "5cc0f88af4f5d64afea56af12ddedb9f.jpg",
+      "subtitle": "One idea was to {{collect}} and {{donate}} canned foods to a\nlocal food bank . This food would then go to people who did\nnot have enough to eat . My dad helped me pick out\nseveral cans from our kitchen . Stumpy looked happy to\nshare his canned worms , but those stayed on the shelf .",
+      "position": {
+        "x": 70,
+        "y": 400
+      },
+      "fontColor": "#000",
+      "lineHeight": 36,
+      "fontSize": 22
+    },
+    {
+      "pic": "8ba69edeb8da1408d067f564d4a9ae07.jpg",
+      "subtitle": "I knew every little bit helped , but my few cans didn't look\nlike they would feed very many people . I {{decided}} to\n{{organize}} a {{food|drive}} and ask everyone I knew to help me\n{{collect}} food {{donations}} . Together we would feed a lot more\npeople than I ever could by myself .",
+      "position": {
+        "x": 70,
+        "y": 400
+      },
+      "fontColor": "#000",
+      "lineHeight": 36,
+      "fontSize": 22
+    },
+    {
+      "pic": "9a5cdcc4e619a52c138eef771335dd9d.jpg",
+      "subtitle": "First I made a list of all my friends and family who\n{{volunteered}} to help . I divided us into four teams: the Red\nTeam , Blue Team , Yellow Team , and Plaid Team . We would\n{{compete}} to see who could {{collect}} the most cans . The losing\nteams would have to treat the winning team to a\nbarbeque .",
+      "position": {
+        "x": 80,
+        "y": 400
+      },
+      "fontColor": "#000",
+      "lineHeight": 36,
+      "fontSize": 22
+    },
+    {
+      "pic": "10bd172e048da4bfe287eca0164238e6.jpg",
+      "subtitle": "Each team was {{assigned}} a different {{section}} of town\nwhere they would knock on doors and ask for {{donations}} .",
+      "position": {
+        "x": 80,
+        "y": 420
+      },
+      "fontColor": "#000",
+      "lineHeight": 36,
+      "fontSize": 22
+    },
+    {
+      "pic": "c7d7fb713716ee9bf760859a041915fc.jpg",
+      "subtitle": "Everyone tried to find ways to get people's attention so\nthey'd {{collect}} more cans . My cousins decorated their cart\nlike a giant can &- &eating monster . My friends Matt and Casey\nsang funny songs they made up on the spot . When I\nknocked on doors , I took Stumpy with me so we could sing\nand dance .",
+      "position": {
+        "x": 75,
+        "y": 400
+      },
+      "fontColor": "#000",
+      "lineHeight": 36,
+      "fontSize": 22
+    },
+    {
+      "pic": "277572ea91ce126a315b8399aa1869d4.jpg",
+      "subtitle": "When I finally got to the last house on my list , the family\nthere was having a big party . They all came out to watch\nme and Stumpy perform . After they filled my wagon with\ncans , one of them {{introduced}} herself .",
+      "position": {
+        "x": 80,
+        "y": 430
+      },
+      "fontColor": "#000",
+      "lineHeight": 36,
+      "fontSize": 22
+    },
+    {
+      "pic": "e54399d047836444d8576332778a52de.jpg",
+      "subtitle": "\" &I work in the city on The Johnny Holliday Show ,\" she said .\n\" &Would you and Stumpy like to do your act on TV ?\"\nHow could I say no to one of my biggest dreams ? I\n{{decided}} that Stumpy's quack was a happy |\" &Yes !\" He loves\nthe {{spotlight}} .",
+      "position": {
+        "x": 80,
+        "y": 400
+      },
+      "fontColor": "#000",
+      "lineHeight": 36,
+      "fontSize": 22
+    },
+    {
+      "pic": "7168343406f54d7a801afeabe43cbb14.jpg",
+      "subtitle": "The TV show brought me , my dad , and Stumpy to the city .\nWe went on a {{tour}} of the big television studio . I got to see\nthe cameras and the sets and meet the other guests for\nthat night's show . Would you believe Kayzha was going to\nbe on the show as well ? I almost fainted .",
+      "position": {
+        "x": 80,
+        "y": 400
+      },
+      "fontColor": "#000",
+      "lineHeight": 36,
+      "fontSize": 22
+    },
+    {
+      "pic": "df000b4093fab80bfa63292e68181f65.jpg",
+      "subtitle": "I was nervous being on TV , but I was OK after Stumpy tried\nto eat Johnny Holliday's coat buttons . Mr . Holliday told jokes\nand asked about my can drive . He {{offered}} to {{double}} the\namount of cans I already had . My team would win for sure !",
+      "position": {
+        "x": 75,
+        "y": 420
+      },
+      "fontColor": "#000",
+      "lineHeight": 36,
+      "fontSize": 22
+    },
+    {
+      "pic": "da2926fe661f7bf0bb3528939fe05411.jpg",
+      "subtitle": "And now here I am on a {{national}} television show , singing\nand dancing with my pet duck . Kayzha is even singing with\nus ! It is a dream come true , well , at least for me . I think\nStumpy dreams of fat , juicy bugs .",
+      "position": {
+        "x": 75,
+        "y": 420
+      },
+      "fontColor": "#000",
+      "lineHeight": 36,
+      "fontSize": 22
+    },
+    {
+      "pic": "510579d9dd576f0f5df28407de902f70.jpg",
+      "subtitle": "It all started with a few cans from the cupboard and\nended with thousands of punds of food {{collected}} to help\nfight hunger . It is amazing how small beginnings can lead to\ngreat things &— &even more amazing than a dancing\nduck .",
+      "position": {
+        "x": 75,
+        "y": 400
+      },
+      "fontColor": "#000",
+      "lineHeight": 36,
+      "fontSize": 22
+    }
+  ]
+}

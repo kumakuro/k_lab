@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+	<link rel="stylesheet" type="text/css" href="test.css"/>
+
+    <title>mojimo</title>
+</head>
+<body>
+    <div id="container" class="container">
+        <div class="box_parallax" style="background:url('images/mojimo/main_layer1.png')">
+            <div id="scene" class="scene">
+                <div data-depth="0.20"><img src="images/mojimo/main_layer2.png"></div>
+                <div data-depth="0.40"><img src="images/mojimo/main_layer3.png"></div>
+                <div data-depth="0.60"><img src="images/mojimo/main_layer4.png"></div>
+            </div>
+        </div>
+
+        <div class="box_first" id="box_first">
+            <div>MOJITO</div>
+        </div>
+        <div class="box_second">
+            <div>second</div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="./parallax.js"></script>
+    <script>
+        var scene = document.getElementById('scene');
+        var parallax = new Parallax(scene);
+        var box1Top = document.getElementById('box_first');
+
+        window.onscroll() = function(){
+            console.log('box1Top.scrollTop>>>>>>',box1Top.scrollTop);
+        }
+        // parallax.disable();
+        // parallax.enable();        
+
+
+
+    </script>
+</body>
+</html>
