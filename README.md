@@ -8,7 +8,6 @@
 > 
 > - 运行
 > 1. http-server . -p 7000
-> 1. localhost:7000/canvas/index.html 
 > 2. localhost:7000/draft/test.html 
 #### leetcode
 1. 记录做的算法题目
@@ -16,5 +15,8 @@
 1. express+nodemailer写了个发送邮件的接口
 #### webReader
 1. 页面的pdf阅读器
+
+#### reptile
+1. nodejs写了个爬虫
 
 
