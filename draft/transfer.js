@@ -5,6 +5,8 @@ $("#transfer").click(function () { handleData() })
 
 function handleData() {
   var before = JSON.parse($('#before').val())
+
+  // before.title.position.y
   var after = {
     "cover": {
       "image": before.cover
@@ -16,8 +18,8 @@ function handleData() {
           before.title.pic2
         ],
         "sound": before.title.sound,
-        "x": before.title.position.x,
-        "y": before.title.position.y,
+        "x": 0.1,
+        "y": 0.1,
         "scale": 1.2
       },
       {
@@ -65,7 +67,7 @@ function handleData() {
       "font": {
         "font": "Century Gothic",
         "fill": "#000",
-        "fontSize": 24
+        "fontSize": 22
       },
       "wordCanClickIndex": []
     }
