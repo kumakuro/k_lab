@@ -1,5 +1,3 @@
-// import _ from 'lodash'
-
 
 $("#transfer").click(function () { handleData() })
 

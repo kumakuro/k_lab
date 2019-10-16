@@ -20,3 +20,9 @@
 1. nodejs写了个爬虫
 
 
+#### 迷茫
+1. 明明还有一堆事儿可以干，却不知道要干嘛...
+2. 仿cnode的后台
+3. typescript
+4. python 数据结构
+5. 刷leetcode算法题
