@@ -1,12 +1,103 @@
-var majorityElement = function (nums) {
-  let arr = [], num, numCount = 0;
-  nums.sort();
+let strArr = [
+  "race a car",
+  "A man, a plan, a canal: Panama",
+  ".,"];
 
-  for (let i in nums) {
+//false
+//true
+//true
 
+var isPalindrome = function (s) {
+  if (s.length > 0) {
+    let { s1: str1, s2: str2 } = reverse(s);
+    if (str2 === str1) {
+      return true;
+    } else {
+      let pattern2 = /\w+/g;
+      let temp = str1.match(pattern2, '');
+      if (temp) {
+        let { s1: str3, s2: str4 } = reverse(temp.join(''));
+        if (str3 === str4) {
+          return true;
+        } else {
+          return false;
+        }
+      } else {
+        return true;
+      }
+    }
+  } else {
+    return true;
   }
 };
+function reverse(ins) {
+  let str = ins, s1 = '', s2 = '';
+  for (let i = 0; i < str.length; i++) {
+    s1 += str[i].toLowerCase();
+    s2 += str[str.length - 1 - i].toLowerCase();
+  }
+  return { s1, s2 };
+}
 
+for (let i in strArr) {
+  console.log('isPalindrome--->', isPalindrome(strArr[i]))
+}
+
+
+
+
+// var searchMatrix = function (matrix, target) {
+//   let booleanTag = false;
+//   for (let i = 0; i < matrix.length; i++) {
+//     let itm = matrix[i];
+//     for (let j = 0; j < itm.length; j++) {
+//       if (itm[j] === target) {
+//         booleanTag = true;
+//       }
+//       if (itm[j] > target) {
+//         break;
+//       }
+//     }
+//   }
+//   return boo
+// };
+// let matrix = [
+//   [1, 4, 7, 11, 15],
+//   [2, 5, 8, 12, 19],
+//   [3, 6, 9, 16, 22],
+//   [10, 13, 14, 17, 24],
+//   [18, 21, 23, 26, 30]
+// ]
+// console.log(searchMatrix(matrix, 5))
+
+
+
+
+// var majorityElement = function (nums) {
+//   nums.sort();
+//   let arr = [], nval = nums[0], nvalCount = 0;
+//   for (let i in nums) {
+
+//     if (nums[i] === nval) {
+//       nvalCount++;
+//       if (i * 1 === nums.length - 1) {
+//         if (nvalCount > parseInt(nums.length / 2)) {
+//           arr.push(nval)
+//         }
+//       }
+//     }
+//     if (nums[i] !== nval) {
+//       if (nvalCount > parseInt(nums.length / 2)) {
+//         arr.push(nval)
+//       }
+//       nval = nums[i];
+//       nvalCount = 1;
+//     }
+//   }
+//   return arr.length > 1 ? arr : arr[0]
+// };
+// let arr = [1, 1, 1, 2, 2, 2, 2];
+// console.log(majorityElement(arr))
 
 
 // console.log(10^4)
