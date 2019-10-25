@@ -1,13 +1,13 @@
-// console.log(10^4)
-// let arr = [[1,1,0],[1,0,1],[0,0,0]]
+let arr = [1, 2, 3, 4, 5]
+arr.splice(1, 2)
+console.log(arr)
 
 
-
-
-
-
-
-
+// let str = 'sdkjah{\ndasjd';
+// reg = /(\{)(\\n)/g;
+// console.log(str.replace(reg, "$2 $1"))
+// console.log(str.replace(/\n/g, '#'));
+// console.log(str.replace(/\#/g, '\n'));
 
 
 
