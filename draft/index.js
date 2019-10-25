@@ -1,6 +1,31 @@
-let arr = [1, 2, 3, 4, 5]
-arr.splice(1, 2)
-console.log(arr)
+let str = "  Wow! It wasn't just a *crack* in the rock. It was a secret *entrance to* an *ancient*\n*room*!",
+  correct_word = "ancient";
+str = str.replace(/\n/g, ' ');
+let arr = str.split(' ');
+
+for (let i in arr) {
+  let idx = arr[i].indexOf('*');
+  if (idx > -1) {
+    switch (idx * 1) {
+      case 0:
+        console.log(arr[i], ' idx为0')
+        break;
+      case (arr[i].length - 1):
+        console.log(arr[i], ' idx为', arr[i].length - 1)
+        break;
+      default:
+        break;
+    }
+  }
+
+
+}
+
+
+
+// let arr = [1, 2, 3, 4, 5]
+// arr.splice(1, 2)
+// console.log(arr)
 
 
 // let str = 'sdkjah{\ndasjd';
