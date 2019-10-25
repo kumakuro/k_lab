@@ -15,7 +15,8 @@
 #### webReader
 1. 页面的pdf阅读器
 #### algo
-1. 在leetcode写了一些题目，留个记录给以后复盘用
+1. 进度[18-1241]
+2. 在leetcode写了一些题目，留个记录给以后复盘用
 #### reptile
 1. nodejs写爬虫
 #### 迷茫
