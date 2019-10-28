@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>
+    <%- title %>
+  </title>
+  <style>
+    html,
+    body,
+    input,
+    textarea {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    input{
+      outline:transparent;
+    }
+
+    .box {
+      width: 100%;
+    }
+
+    .box .item {
+      border: 1px solid #cccccc;
+      border-radius: 3px;
+      float: left;
+      margin: 0px 3px 3px 0px;
+      cursor: pointer;
+    }
+
+    .item.active {
+      background-color: pink;
+    }
+
+    .clear {
+      clear: both;
+    }
+
+    .result {
+      width: 300px;
+    }
+
+    .textarea {
+      padding: 0px 3px;
+      float: left;
+    }
+
+    .btn {
+      border: 1px solid #ccc;
+      float: left;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background-color: #ccc;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="panel">
+    <input type="text" class="result" />
+    <div class="box">
+    </div>
+    <textarea class="textarea" name="" id="input" cols="30" rows="10" placeholder="输入需要选取的内容"></textarea>
+    <div class="btn" id="handle">处理</div>
+  </div>
+</body>
+
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="../javascripts/tools/choose.js"></script>
+
+</html>
