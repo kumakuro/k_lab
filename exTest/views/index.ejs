@@ -5,72 +5,26 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>index</title>
-  <style>
-    html,
-    body,
-    textarea,
-    pre {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
-    }
-
-    textarea {
-      width: 100%;
-      height: auto;
-      padding: 5px;
-    }
-
-    .btn {
-      background-color: pink;
-      border-radius: 3px;
-      width: 40px;
-      height: 30px;
-      text-align: center;
-      cursor: pointer;
-      font-size: 16px;
-      line-height: 30px;
-    }
-
-    pre {
-      white-space: pre-wrap;
-      /* css-3 */
-      white-space: -moz-pre-wrap;
-      /* Mozilla, since 1999 */
-      white-space: -pre-wrap;
-      /* Opera 4-6 */
-      white-space: -o-pre-wrap;
-      /* Opera 7 */
-      overflow: auto;
-      word-break: break-all;
-      word-wrap: break-word;
-    }
-
-    .box {
-      border: 1px solid #cccccc;
-    }
-
-    .box .item {
-      padding: 0px 3px;
-      border-radius: 3px;
-      background-color: #dddddd;
-      float: left;
-      margin: 0px 3px 3px 0px;
-      cursor: pointer;
-    }
-
-    .item .active {
-      background-color: aquamarine;
-    }
-  </style>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <title>
+    <%- title -%>
+  </title>
 </head>
 
 <body>
-  <h1>oh,home</h1>
-  <h1>sweet home</h1>
+  <h1>oh,home,sweet home</h1>
   <img src="/images/1.jpeg" alt="">
+  <ul>
+    <li>
+      <a href="/tools" target="_blank">tools</a>
+    </li>
+    <li>
+      <a href="/find" target="_blank">find-the-word2</a>
+    </li>
+  </ul>
 </body>
 <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
-<script src="../javascripts/work/readonmyownlb_3.js"></script>
-<script src="../javascripts/tools/choose.js"></script>
+<script src="/javascripts/work/readonmyownlb_3.js"></script>
+<script src="/javascripts/tools/choose.js"></script>
 
 </html>

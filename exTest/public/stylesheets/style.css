@@ -1,8 +1,59 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+html,
+body,
+input,
+textarea {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 12px;
 }
 
-a {
-  color: #00B7FF;
+input,
+textarea {
+  outline:transparent;
+  padding: 5px;
+  margin: 0px 5px 5px 0px;
+  border-radius: 3px;
+  border:none;
+  background-color: lightblue;
+}
+
+.box {
+  width: 100%;
+}
+
+.box .item {
+  border: 1px solid #cccccc;
+  border-radius: 3px;
+  float: left;
+  margin: 0px 3px 3px 0px;
+  cursor: pointer;
+}
+
+.item.active {
+  background-color: pink;
+}
+
+.clear {
+  clear: both;
+}
+
+.result {
+  width: 300px;
+}
+
+.textarea {
+  float: left;
+}
+
+.btn {
+  border: 1px solid #ccc;
+  float: left;
+  cursor: pointer;
+  margin-right: 5px;
+  border-radius: 3px;
+  padding: 0px 3px;
+ 
+}
+
+.btn:hover {
+  background-color: #ccc;
 }

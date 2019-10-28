@@ -5,19 +5,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="/stylesheets/style.css">
   <title>
     <%- title %>
   </title>
 </head>
 
 <body>
+  <h3>find-the-word2 json数据转换</h3>
   <div>
-    ddd
+    <input type="text" class="wrongcode" style="width: 80%" placeholder="wrongcode" />
+    <textarea class="textarea" name="" id="left" cols="30" rows="10" placeholder="转换前json"></textarea>
+    <div class="btn" id="change">转换</div>
+    <textarea class="textarea" name="" id="right" cols="30" rows="10" placeholder="转换后json"></textarea>
+    <div class="btn" id="copy">复制</div>
   </div>
 </body>
 
 <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
-<script src="../javascripts/tools/choose.js"></script>
-<script src=../javascripts/works/findtheword2.js></script>
+<script src="/javascripts/work/findtheword2.js"></script>
 
 </html>
