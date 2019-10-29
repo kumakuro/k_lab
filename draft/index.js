@@ -1,3 +1,22 @@
+
+
+
+
+// let wrongwordArr = [
+//   "an author",
+//   "a diplomat",
+//   "common goods",
+//   "good citizen"
+// ]
+
+// for (let i in wrongwordArr) {
+//   let word = wrongwordArr[i],
+//     wordArr = wrongwordArr[i].split(' ');
+
+//   console.log(word, ',str->', word.indexOf('good'), ',arr->', wordArr.indexOf('good'))
+// }
+
+
 // let str = "  Wow! It wasn't just a *crack* in the rock. It was a secret *entrance to* an *ancient*\n*room*!",
 //   correct_word = "ancient";
 // str = str.replace(/\n/g, ' ');

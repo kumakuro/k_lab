@@ -1,3 +1,6 @@
+
+// var _ = require('lodash');
+
 $("#change").click(() => {
   handleData()
 })
@@ -17,16 +20,17 @@ const handleData = () => {
         arr = sentence.match(/(\*)+(\w+\'*\s*)+(\*)+/g, '$1');
 
       arr.forEach(itm => {
-        let mresult = itm.replace(/\*/g, '')
-        if (mresult !== correctWord) {
-          temp.push(mresult)
-        }
+        let mresult = itm.replace(/\*/g, '');
+        temp.push(_.trim(mresult))
+        // if (mresult !== correctWord) {
+        //   temp.push(_.trim(mresult))
+        // }
       });
     }
-    pageArr[i].wrongword = temp;
+    pageArr[i].boldword = temp;
     markArr.push(temp);
   }
 
-  $(".wrongcode").val(JSON.stringify(markArr))
+  $(".boldword").val(JSON.stringify(markArr))
   $("#right").val(JSON.stringify(rightJson))
 }
