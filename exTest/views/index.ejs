@@ -9,22 +9,48 @@
   <title>
     <%- title -%>
   </title>
+  <style>
+    .img {
+      margin: 0 auto;
+      display: block;
+    }
+
+    .column {
+      width: 150px;
+      height: auto;
+      box-shadow: 2px 2px 2px #cccccc;
+      padding: 5px;
+    }
+
+    .itm {
+      line-height: 30px;
+      border-bottom: 1px solid #dcdcdc;
+    }
+  </style>
 </head>
 
 <body>
-  <h1>oh,home,sweet home</h1>
-  <img src="/images/1.jpeg" alt="">
-  <ul>
-    <li>
-      <a href="/tools" target="_blank">tools</a>
-    </li>
-    <li>
-      <a href="/find" target="_blank">find-the-word2</a>
-    </li>
-  </ul>
+  <img src="/images/1.jpeg" class="img">
+  <h1>本鹅厂服务器还有
+    <span id="leave"></span>天到期，冲鸭~</h1>
+  <div class="column">
+    <div class="title">工作副产品</div>
+    <a href="/tools" target="_blank">
+      <div class="itm">tools</div>
+    </a>
+    <a href="/find" target="_blank">
+      <div class="itm">find-the-word2</div>
+    </a>
+  </div>
 </body>
 <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
 <script src="/javascripts/work/readonmyownlb_3.js"></script>
 <script src="/javascripts/tools/choose.js"></script>
+<script>
+  var now = (new Date()).getTime();
+  var future = (new Date('2020-10-25')).getTime();
+  var leave = Math.floor((future - now) / 1000 / 60 / 60 / 24);
+  $("#leave").html(leave);
+</script>
 
 </html>
