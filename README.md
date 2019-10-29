@@ -10,6 +10,8 @@
 > 1. http-server . -p 7000
 > 2. localhost:7000/draft/test.html 
 
+#### exTest
+1. 租了个一年的腾讯服务器，把这个工具项目丢上去了....http://192.144.204.141:3007/
 #### pantMail
 1. express+nodemailer写了个发送邮件的接口
 #### webReader
