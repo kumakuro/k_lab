@@ -9,21 +9,51 @@
   <title>
     <%- title %>
   </title>
+  <style>
+    .boldword {
+      width: 100%;
+      height: 100px;
+    }
+
+    .textarea {
+      width: 100%;
+      min-height: 400px;
+    }
+
+    .wrapper {
+      width: 40%;
+      float: left;
+      margin: 10px;
+    }
+
+    .fl {
+      float: left;
+    }
+  </style>
 </head>
 
 <body>
   <h3>find-the-word2 json数据转换</h3>
-  <div>
-    <input type="text" class="boldword" style="width: 80%" placeholder="boldword" />
-    <textarea class="textarea" name="" id="left" cols="30" rows="10" placeholder="转换前json"></textarea>
-    <div class="btn" id="change">转换</div>
-    <textarea class="textarea" name="" id="right" cols="30" rows="10" placeholder="转换后json"></textarea>
-    <div class="btn" id="copy">复制</div>
+  <div class="wrapper">
+    转换前
+    <textarea class="textarea" id="left" placeholder="转换前json"></textarea>
+  </div>
+  <div class="btn fl" id="change">转换</div>
+  <div class="wrapper">
+    转换后
+    <textarea class="textarea" id="right" placeholder="转换后json"></textarea>
+    <textarea class="boldword" type="text" placeholder="boldword" /></textarea>
   </div>
 </body>
 
 <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.15/lodash.min.js"></script>
 <script src="/javascripts/work/findtheword2.js"></script>
+<script>
+  $(document).ready(() => {
+    let json = { "pageSizeFill": "#000000", "highLightFill": "#FC6D19", "total-pages": 12, "pages": [{ "bg": "008307f904daa44dee2517badce1fa36.jpg", "str": ["  Wow! It wasn't just a *crack* in the rock. It was a secret *entrance* to an *ancient*\n*room*!"], "clickthewordthatmeans": "2dcf8632da526ed38fea1e3846671ba1", "correct-word-audio": "fcb3d6889b1509dca03d1d4bf9af63fc", "page-num": 9, "sample": { "pic": "", "str": [{ "word": "ancient", "sound": "fcb3d6889b1509dca03d1d4bf9af63fc" }, { "word": "adjective", "sound": "6eaf337aa8603cc8f9138b6077fa5c46" }, { "word": "Describes something that is very, very old.", "sound": "dd1900e444152116d79112643f4a91bb" }, { "word": "antonym: moderm", "sound": ["093fead679d62c2d71a96bb6c333f76a", "9d7ce49ee3d72593cb7030d71fb217b6"] }] }, "correct-word": "ancient", "position": [{ "x": 30, "y": 450 }, { "x": 200, "y": 100 }], "style": { "fontSize": "14pt", "fill": "#000000", "font": "Century Gothic" } }, { "bg": "cd365a690d12ae3e0e2c3154e2eb0561.jpg", "str": ["    \"*Awesome*!\" he gasped as he wiggled through the *crack*. \"They're\n*petroglyphs*, Sandy. Let's show *Mom* and Dad.\""], "clickthewordthatmeans": "4b7a58d64a6d97fb1346de1a45d49ede", "correct-word-audio": "5ae4aef85ac740ca283bc53a40368d6f", "page-num": 11, "sample": { "pic": "5e4b54309bd194200083133af490d847", "str": [{ "word": "petroglyph", "sound": "5ae4aef85ac740ca283bc53a40368d6f" }, { "word": "noun", "sound": "c8aff4b9e3f399f49a8cb064518da7c9" }, { "word": "A picture scratched on\nrocks by people who lived\nlong ago to tell a story.", "sound": "585272b97fcd50777231a0ff5c7f2481" }] }, "correct-word": "petroglyphs", "position": [{ "x": 30, "y": 450 }], "style": { "fontSize": "16pt", "fill": "#000", "font": "Century Gothic" } }, { "bg": "cd365a690d12ae3e0e2c3154e2eb0561.jpg", "str": ["  \"Oh, *and* by way— **you're** **out**. I *win* *the* *game*.\""], "clickthewordthatmeans": "85cd88a316d5312f93d0501d54cce98a", "correct-word-audio": "e39c25758c97b347e209aa0aa9eb445b", "page-num": 12, "sample": { "pic": "", "str": [{ "word": "you're out", "sound": "e39c25758c97b347e209aa0aa9eb445b" }, { "word": "misc", "sound": "" }, { "word": "Short for \"you're out of the game,\" or \"you lost.\" If it is\nthe game hide and seek, it means that someone\ncaught you.", "sound": "14b89099020de4d5c12ee99ae35bb010" }] }, "correct-word": "you're out", "position": [{ "x": 30, "y": 450 }], "style": { "fontSize": "16pt", "fill": "#000", "font": "Century Gothic" } }] }
+    $("#left").val(JSON.stringify(json));
+  })
+</script>
 
 </html>

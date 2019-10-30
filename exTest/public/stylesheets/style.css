@@ -40,18 +40,13 @@ textarea {
   width: 300px;
 }
 
-.textarea {
-  float: left;
-}
-
 .btn {
   border: 1px solid #ccc;
-  float: left;
   cursor: pointer;
   margin-right: 5px;
   border-radius: 3px;
   padding: 0px 3px;
- 
+  display: inline-block;
 }
 
 .btn:hover {
