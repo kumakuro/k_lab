@@ -12,16 +12,16 @@ $(document).ready(function () {
         let fragment = '';
         if (contentArr[i].indexOf('*') > -1) {
           fragment = `<div class="item active">${contentArr[i]}</div>`;
-          markArr.push(contentArr[i])
+          markArr.push(contentArr[i].replace(/\*/g, ''))
         } else {
           fragment = `<div class="item">${contentArr[i]}</div>`
         }
         contentHtml += fragment;
       }
       $(document).find('.box').html(contentHtml + `<div class="clear"></div>`);
-      wordsHandle(markArr);
+      $('.result').val(JSON.stringify(markArr))
+      // wordsHandle(markArr);
     }
-
   })
 })
 
