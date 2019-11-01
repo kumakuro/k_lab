@@ -4,6 +4,8 @@ input,
 textarea {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 12px;
+  padding: 0px;
+  margin: 0px;
 }
 
 input,
