@@ -13,12 +13,7 @@
 </head>
 
 <body>
-  <div class="clock">
-    <span id="day"></span>天
-    <span id="hour"></span>时
-    <span id="minute"></span>分
-    <span id="second"></span>秒
-  </div>
+  <div id="clock"></div>
   <div class="main">
     <div class="header">
       <h1>冲鸭~</h1>
@@ -49,10 +44,8 @@
     var minute = parseInt(timediff / 60 % 60);
     var second = timediff % 60;
 
-    $("#day").html(day);
-    $("#hour").html(hour);
-    $("#minute").html(minute);
-    $("#second").html(second);
+    let hStr = `${day}天${hour}时${minute}分${second}秒`
+    $("#clock").html(hStr);
 
     setTimeout(showTime, 1000);
     if (timediff == 0) { return; }

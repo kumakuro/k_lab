@@ -34,7 +34,7 @@ body {
   border-bottom: 1px solid #dcdcdc;
 }
 
-.clock {
+#clock {
   color: snow;
   padding: 0px 5px;
 }
