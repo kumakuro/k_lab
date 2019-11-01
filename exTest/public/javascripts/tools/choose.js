@@ -18,9 +18,18 @@ $(document).ready(function () {
         }
         contentHtml += fragment;
       }
-      $(document).find('.box').html(contentHtml + `<div class="clear"></div>`);
+      $(document).find('#choose .box').html(contentHtml + `<div class="clear"></div>`);
       $('.result').val(JSON.stringify(markArr))
       // wordsHandle(markArr);
+    }
+  })
+
+  $('#time').on('click', '.btn', function () {
+    let timestamp = $('#time .input').val();
+    if (timestamp) {
+      var date = new Date(timestamp * 1);
+      dateTime = date.toLocaleString();
+      $('#time .box').html(dateTime)
     }
   })
 })

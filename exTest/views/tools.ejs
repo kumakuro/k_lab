@@ -9,16 +9,33 @@
   <title>
     <%- title %>
   </title>
+
+  <style>
+    .panel {
+      width: 500px;
+      height: auto;
+      padding: 5px 10px 10px 10px;
+      border: 1px dashed #cccccc;
+      float: left;
+      margin: 0px 10px 10px 0px;
+    }
+  </style>
 </head>
 
 <body>
-    <h3>抓取字符串中*号之间的内容</h3>
-  <div class="panel">
+  <div class="panel" id="choose">
+    <h4>抓取字符串中*号之间的内容</h4>
     <input type="text" class="result" />
-    <div class="box">
-    </div>
+    <div class="box"></div>
     <textarea class="textarea" name="" id="input" cols="30" rows="10" placeholder="输入需要选取的内容"></textarea>
     <div class="btn" id="handle">处理</div>
+  </div>
+
+  <div class="panel" id="time">
+    <h4>毫秒转时间</h4>
+    <div class="box"></div>
+    <input type="text" class="input" />
+    <div class="btn" >处理</div>
   </div>
 </body>
 
