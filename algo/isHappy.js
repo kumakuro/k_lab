@@ -1,0 +1,3 @@
+var isHappy = function(n) {
+    
+};
