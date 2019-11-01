@@ -1,0 +1,40 @@
+html,
+body {
+  background-color: slategrey;
+}
+
+.main {
+  width: 80%;
+  max-width: 800px;
+  height: 100%;
+  margin: 0 auto;
+  display: block;
+  background-color: #ffffff;
+  border-radius: 4px;
+}
+
+.header {
+  width: 100%;
+  text-align: center;
+}
+
+.header img {
+  width: 100%;
+}
+
+.column {
+  width: 150px;
+  height: auto;
+  box-shadow: 2px 2px 2px #cccccc;
+  padding: 5px;
+}
+
+.itm {
+  line-height: 30px;
+  border-bottom: 1px solid #dcdcdc;
+}
+
+.clock {
+  color: snow;
+  padding: 0px 5px;
+}
