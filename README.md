@@ -6,6 +6,7 @@
 2. typescript学习使用 => 不管是做react还是vue3.X都是势必要会的
 3. 仿cnode的后台 => node
 4. 刷leetcode算法题 => 算法还是很有用的，晚会不如早会，不懂不如了解，了解不如精通，慢慢升级吧
+5. three.js => 想做个sweethome的world...把喜欢的人都放在里面...大概是这样的...
    
 #### draft
 1. 记录工作中的草稿
