@@ -10,6 +10,11 @@ router.get('/find', function(req, res, next) {
   res.render('findtheword2', { title: 'Findtheword2' });
 });
 
+router.get('/read', function(req, res, next) {
+  res.render('readonmyownlb', { title: 'Readonmyownlb' });
+});
+
+
 router.get('/tools', function(req, res, next) {
   res.render('tools', { title: 'Tools' });
 });

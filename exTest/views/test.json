@@ -1,0 +1,470 @@
+{
+  "cover": "4b84f6ea4a95ac1efc11b50e23cec999.jpg",
+  "title": {
+    "pic1": "cc3488ff7a46c4e10e8af6f40b784353",
+    "pic2": "aa2819a21ea2f3dff31ae42a67915a98",
+    "sound": "04df68bf5701c4882ac8707a271d7fa0",
+    "position": {
+      "x": 0.5,
+      "y": 0.22
+    }
+  },
+  "writtenBy": {
+    "pic1": "428fd79f36f88dd514dec504bace79fe",
+    "pic2": "21dc5b3fd9fc03f0d16e27431faaecb6",
+    "sound": "7a8c58c8566f96a24cc9466c33d39f6d",
+    "position": {
+      "x": 0.3,
+      "y": 0.3
+    }
+  },
+  "illustratedBy": {
+    "pic1": "2e0eb637d49afa9d2d2b06aa7f8a818b",
+    "pic2": "3e88959ab1a6bf57204cfbcc3b11d248",
+    "sound": "1148d4ec0843b28ebcbb049869fb4544",
+    "position": {
+      "x": 0.7,
+      "y": 0.3
+    }
+  },
+  "introSound": "17e2ddcb1f36762385f5a7150698aef1",
+  "dictionary": {
+    "Suppose": {
+      "sound": "337f26a33f51e802dcc8840aec5d6cb5",
+      "pic": "",
+      "scale": 0.9,
+      "explain": "To think or believe something, although you are not\nsure.",
+      "word": "suppose",
+      "type": "verb",
+      "typeSound": "87c995e56b74741ab0c258639f3204a9",
+      "explainSound": "87df96da716d42a7c31bc867c5ee88c2"
+    },
+    "Thousands": {
+      "sound": "7d9bb6d2c682139f3336d149cb506913",
+      "pic": "40c562ab029c18cb06f34a1ee35d4dc4",
+      "scale": 0.9,
+      "explain": "A very large number of\nyears or things. For\nexample, \"thousands of\nyears\" or \"thousands of\npeople.\"",
+      "word": "thousands",
+      "type": "adjective",
+      "typeSound": "6eaf337aa8603cc8f9138b6077fa5c46",
+      "explainSound": "63cb40c5a3aade8800c46e48f8713573"
+    },
+    "scratched": {
+      "sound": "58cab8ed1b207fed211c09fbd52cacf4",
+      "pic": "f61ed1208ac52ad8c5b7fc6eeaea658c",
+      "scale": 0.9,
+      "explain": "To make a mark on\nsomething by dragging\nsomething sharp against it.",
+      "word": "scratch",
+      "type": "verb",
+      "typeSound": "87c995e56b74741ab0c258639f3204a9",
+      "explainSound": "dd824ea571d46e9d3dbe7194283d1669"
+    },
+    "history": {
+      "sound": "23ac683c3e1cf1e7715514e592bbdbb7",
+      "pic": "",
+      "scale": 0.9,
+      "explain": "Things that happened in the past.",
+      "word": "history",
+      "type": "noun",
+      "typeSound": "c8aff4b9e3f399f49a8cb064518da7c9",
+      "explainSound": "099bf5ff105a1442c13919e4ec2f26e3"
+    },
+    "adventures": {
+      "sound": "757ef5a9d997c38740bb1a5eac9d3ad6",
+      "pic": "",
+      "scale": 0.9,
+      "explain": "An exciting experience that could be dangerous or\nstrange.",
+      "word": "adventure",
+      "type": "noun",
+      "typeSound": "c8aff4b9e3f399f49a8cb064518da7c9",
+      "explainSound": "928ed2ecc286bf0d5c388cc01518b629"
+    },
+    "Petroglyphs": {
+      "sound": "5ae4aef85ac740ca283bc53a40368d6f",
+      "pic": "5e4b54309bd194200083133af490d847",
+      "scale": 0.9,
+      "explain": "A picture scratched on\nrocks by people who lived\nlong ago to tell a story.",
+      "word": "petroglyph",
+      "type": "noun",
+      "typeSound": "c8aff4b9e3f399f49a8cb064518da7c9",
+      "explainSound": "585272b97fcd50777231a0ff5c7f2481"
+    },
+    "petroglyphs": {
+      "sound": "5ae4aef85ac740ca283bc53a40368d6f",
+      "pic": "5e4b54309bd194200083133af490d847",
+      "scale": 0.9,
+      "explain": "A picture scratched on\nrocks by people who lived\nlong ago to tell a story.",
+      "word": "petroglyph",
+      "type": "noun",
+      "typeSound": "c8aff4b9e3f399f49a8cb064518da7c9",
+      "explainSound": "585272b97fcd50777231a0ff5c7f2481"
+    },
+    "clear": {
+      "sound": "292d705bfff93e41e3e62e4a2afced0e",
+      "pic": "",
+      "scale": 0.9,
+      "explain": "Clean or easy to see and understand.",
+      "word": "clear",
+      "type": "adjective",
+      "typeSound": "6eaf337aa8603cc8f9138b6077fa5c46",
+      "explainSound": "770f1830d179fdf673ea7d9292a9868c"
+    },
+    "disappeared": {
+      "sound": "0ae18223cdec245c751a6b6846b2c6d1",
+      "pic": "",
+      "scale": 0.9,
+      "explain": "To vanish or go away.",
+      "word": "disappear",
+      "type": "verb",
+      "typeSound": "87c995e56b74741ab0c258639f3204a9",
+      "explainSound": "8ed77e0b846bf9d2646dabbe21b014ee"
+    },
+    "erode": {
+      "sound": "58521f2de6b6c015a48ce692c0411b0a",
+      "pic": "194c1b1df63f3818a9738b3fc1b68191",
+      "scale": 0.9,
+      "explain": "When little pieces break\noff of something until it\ngets smaller and smaller.",
+      "word": "erode",
+      "type": "verb",
+      "typeSound": "87c995e56b74741ab0c258639f3204a9",
+      "explainSound": "373da08b004f0c7830efb5f9cce2c608"
+    },
+    "damage": {
+      "sound": "e7c3ff10e1ed9faec982fc4302130ee4",
+      "pic": "",
+      "scale": 0.9,
+      "explain": "To hurt or cause harm to something: If people\ndamage a petroglyph too much, it is destroyed.",
+      "word": "damage",
+      "type": "verb",
+      "typeSound": "87c995e56b74741ab0c258639f3204a9",
+      "explainSound": "7b029a970b7ce260fb0c0ebcf1b196b6"
+    },
+    "destroyed": {
+      "sound": "9ccd2abd5abe9d064a7485b4eb27e1d6",
+      "pic": "",
+      "scale": 0.9,
+      "explain": "To damage something so badly that it cannot be\nused anymore.",
+      "word": "destroy",
+      "type": "verb",
+      "typeSound": "87c995e56b74741ab0c258639f3204a9",
+      "explainSound": "84468b9371354a3404e010e2f9cbeda0"
+    },
+    "protected": {
+      "sound": "23dc18fc8e3e10028c8a25385db10ad8",
+      "pic": "",
+      "scale": 0.9,
+      "explain": "To keep something safe.",
+      "word": "protect",
+      "type": "verb",
+      "typeSound": "87c995e56b74741ab0c258639f3204a9",
+      "explainSound": "800168388af78c1dad7a247590661f9a"
+    }
+  },
+  "pages": [
+    {
+      "pic": "38cbe16f1745691d2a6c3469a7e5f0e1.jpg",
+      "subtitle": "{{Suppose}} you have a great story to write , but you have no\npaper or pencil . How would you save your story ?",
+      "wordTime": [
+        500,
+        250,
+        250,
+        100,
+        350,
+        400,
+        200,
+        350,
+        1,
+        300,
+        250,
+        350,
+        200,
+        400,
+        200,
+        450,
+        1,
+        250,
+        400,
+        300,
+        400,
+        400,
+        450,
+        1
+      ],
+      "position": {
+        "x": 60,
+        "y": 450
+      },
+      "picPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "fontColor": "#000",
+      "lineHeight": 38,
+      "fontSize": 24
+    },
+    {
+      "pic": "822d238b4920f40e5194f73456521535.jpg",
+      "subtitle": "{{Thousands}} of years ago , people {{scratched}} pictures on\nrock to tell their {{history}} .",
+      "wordTime": [
+        600,
+        200,
+        400,
+        300,
+        1,
+        450,
+        500,
+        500,
+        150,
+        350,
+        200,
+        350,
+        400,
+        500,
+        1
+      ],
+      "position": {
+        "x": 85,
+        "y": 450
+      },
+      "picPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "fontColor": "#000",
+      "lineHeight": 38,
+      "fontSize": 24
+    },
+    {
+      "pic": "00baba8441cd81bffb1d333c55780490.jpg",
+      "subtitle": "They would show what they did every day . They would\ndraw pictures of their families and their favorite animals .",
+      "wordTime": [
+        300,
+        350,
+        250,
+        350,
+        350,
+        300,
+        400,
+        300,
+        1,
+        300,
+        350,
+        300,
+        500,
+        200,
+        300,
+        500,
+        300,
+        300,
+        500,
+        450,
+        1
+      ],
+      "position": {
+        "x": 70,
+        "y": 450
+      },
+      "picPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "fontColor": "#000",
+      "lineHeight": 38,
+      "fontSize": 24
+    },
+    {
+      "pic": "f15e1948a4698490b5f175cbb4ecbb3d.jpg",
+      "subtitle": "They would draw pictures to tell stories about their\n{{adventures}} and the places that they had visited .",
+      "wordTime": [
+        350,
+        350,
+        300,
+        500,
+        200,
+        350,
+        500,
+        400,
+        350,
+        600,
+        250,
+        250,
+        400,
+        400,
+        350,
+        250,
+        500,
+        1
+      ],
+      "position": {
+        "x": 100,
+        "y": 450
+      },
+      "picPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "fontColor": "#000",
+      "lineHeight": 38,
+      "fontSize": 24
+    },
+    {
+      "pic": "6e7727650b5ba25436fc5eab6e939ec8.jpg",
+      "subtitle": "{{Petroglyphs}} are found all over the world .",
+      "wordTime": [
+        700,
+        300,
+        350,
+        200,
+        400,
+        300,
+        500,
+        1
+      ],
+      "position": {
+        "x": 150,
+        "y": 490
+      },
+      "picPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "fontColor": "#000",
+      "lineHeight": 38,
+      "fontSize": 24
+    },
+    {
+      "pic": "0d140c0ebdc175c1f0a5bc46dc0bffc5",
+      "subtitle": "Some are {{clear}} and easy to see .\nOthers have almost {{disappeared}}\nbecause the weather has caused\nthe rocks to {{erode}} .",
+      "wordTime": [
+        400,
+        300,
+        400,
+        300,
+        400,
+        200,
+        300,
+        1,
+        500,
+        400,
+        500,
+        700,
+        500,
+        300,
+        500,
+        300,
+        400,
+        300,
+        400,
+        200,
+        400,
+        1
+      ],
+      "position": {
+        "x": 40,
+        "y": 425
+      },
+      "picPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "fontColor": "#000",
+      "lineHeight": 38,
+      "fontSize": 24
+    },
+    {
+      "pic": "887e931a1926e846c8706336745d12d8.jpg",
+      "subtitle": "Sometimes people {{damage}} {{petroglyphs}} by touching\nthem or writing on them .",
+      "wordTime": [
+        600,
+        500,
+        500,
+        700,
+        200,
+        600,
+        400,
+        200,
+        500,
+        200,
+        400,
+        1
+      ],
+      "position": {
+        "x": 90,
+        "y": 450
+      },
+      "picPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "fontColor": "#000",
+      "lineHeight": 38,
+      "fontSize": 24
+    },
+    {
+      "pic": "b25024544e03a94c928f4297ff8126db.png",
+      "subtitle": "Sometimes {{petroglyphs}} are\n{{destroyed}} when roads or buildings\nare built .",
+      "wordTime": [
+        550,
+        700,
+        300,
+        550,
+        400,
+        400,
+        200,
+        500,
+        300,
+        400,
+        1
+      ],
+      "position": {
+        "x": 365,
+        "y": 400
+      },
+      "picPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "fontColor": "#000",
+      "lineHeight": 38,
+      "fontSize": 24
+    },
+    {
+      "pic": "d6ffbc12bb8eef9d61d10313a09e0849.jpg",
+      "subtitle": "We need to be sure {{petroglyphs}} are {{protected}} . They tell\nus the {{history}} of people who lived long ago .",
+      "wordTime": [
+        200,
+        300,
+        200,
+        200,
+        350,
+        700,
+        200,
+        600,
+        1,
+        300,
+        350,
+        200,
+        300,
+        500,
+        200,
+        400,
+        300,
+        400,
+        400,
+        300,
+        1
+      ],
+      "position": {
+        "x": 70,
+        "y": 450
+      },
+      "picPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "fontColor": "#000",
+      "lineHeight": 38,
+      "fontSize": 24
+    }
+  ]
+}

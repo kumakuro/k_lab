@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <title>
+    <%- title %>
+  </title>
+  <style>
+    .boldword {
+      width: 100%;
+      height: 100px;
+    }
+
+    .textarea {
+      width: 100%;
+      min-height: 400px;
+    }
+
+    .wrapper {
+      width: 40%;
+      float: left;
+      margin: 10px;
+    }
+
+    .fl {
+      float: left;
+    }
+  </style>
+</head>
+
+<body>
+  <h3>read-on-my-own-lb json数据转换</h3>
+  <div class="wrapper">
+    转换前
+    <textarea class="textarea" id="before" placeholder="转换前json"></textarea>
+  </div>
+  <div class="btn fl" id="transfer">转换</div>
+  <div class="wrapper">
+    转换后
+    <textarea class="textarea" id="after" placeholder="转换后json"></textarea>
+  </div>
+</body>
+
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.15/lodash.min.js"></script>
+<script src="/javascripts/work/readonmyownlb_1.js"></script>
+
+</html>
