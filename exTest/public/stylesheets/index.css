@@ -1,6 +1,6 @@
 html,
 body {
-  background-color: slategrey;
+  background-color: #dcdcdc;
 }
 
 .main {
@@ -23,18 +23,30 @@ body {
 }
 
 .column {
-  width: 150px;
+  width: 300px;
   height: auto;
   box-shadow: 2px 2px 2px #cccccc;
   padding: 5px;
-}
-
-.itm {
-  line-height: 30px;
-  border-bottom: 1px solid #dcdcdc;
+  float: left;
+  margin: 0px 5px 5px 0px;
 }
 
 #clock {
-  color: snow;
+  color: cadetblue;
   padding: 0px 5px;
+}
+
+.clear{
+  clear: both;
+}
+
+a{
+  color: cadetblue;
+}
+
+ul{}
+li{
+  list-style: none;
+  line-height: 25px;
+  margin-left: -20px;
 }
