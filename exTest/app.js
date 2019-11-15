@@ -1,15 +1,22 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+
+const nunjucks = require('nunjucks')
+const session = require('cookie-session')
+const bodyParser = require('body-parser')
 // const sass = require('node-sass');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var _ = require('lodash');
+const _ = require('lodash');
 
-var app = express();
+const app = express();
+
+app.use(bodyParser.urlencoded({
+  extended: false,
+}))
+app.use(bodyParser.json())
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -21,16 +28,30 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+
+
+const index = require('./routes/index');
+const users = require('./routes/users');
+const todos = require('./routes/todos');
+
+app.use('/', index);
+app.use('/users', users);
+app.use('/todos', todos);
+
+
+// const apiTodo = require('./api/todo')
+// const apiCate = require('./api/cate')
+// app.use('/api/todo', apiTodo)
+// app.use('/api/cate', apiCate)
+
 
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
+app.use((req, res, next) => {
   next(createError(404));
 });
 
 // error handler
-app.use(function (err, req, res, next) {
+app.use((err, req, res, next) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
