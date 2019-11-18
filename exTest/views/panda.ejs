@@ -31,7 +31,6 @@
         this.load.image('ground', './images/panda/platform.png');
         this.load.image('star', './images/panda/star.png');
         this.load.image('bomb', './images/panda/bomb.png');
-        // this.load.spritesheet('dude', './images/panda/dude.png', { frameWidth: 32, frameHeight: 48 });
         this.load.spritesheet('panda', './images/panda/panda.png', { frameWidth: 100, frameHeight: 184 });
       },
 
@@ -40,7 +39,6 @@
         var platforms = this.physics.add.staticGroup();
         platforms.create(400, 568, 'ground').setScale(2).refreshBody();
 
-        // var player = this.physics.add.sprite(this.targetX, this.targetY, 'dude');
         var player = this.physics.add.sprite(this.targetX, this.targetY, 'panda');
         player.setBounce(0.2);
         player.setCollideWorldBounds(true);
