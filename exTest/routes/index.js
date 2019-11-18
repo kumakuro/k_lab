@@ -19,4 +19,8 @@ router.get('/tools', function(req, res, next) {
   res.render('tools', { title: 'Tools' });
 });
 
+router.get('/panda', function(req, res, next) {
+  res.render('panda', { title: 'panda' });
+});
+
 module.exports = router;
