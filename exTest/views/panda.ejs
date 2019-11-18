@@ -31,7 +31,8 @@
         this.load.image('ground', './images/panda/platform.png');
         this.load.image('star', './images/panda/star.png');
         this.load.image('bomb', './images/panda/bomb.png');
-        this.load.spritesheet('dude', './images/panda/dude.png', { frameWidth: 32, frameHeight: 48 });
+        // this.load.spritesheet('dude', './images/panda/dude.png', { frameWidth: 32, frameHeight: 48 });
+        this.load.spritesheet('panda', './images/panda/panda.png', { frameWidth: 109, frameHeight: 184 });
       },
 
       create: function () {
@@ -39,7 +40,8 @@
         var platforms = this.physics.add.staticGroup();
         platforms.create(400, 568, 'ground').setScale(2).refreshBody();
 
-        var player = this.physics.add.sprite(this.targetX, this.targetY, 'dude');
+        // var player = this.physics.add.sprite(this.targetX, this.targetY, 'dude');
+        var player = this.physics.add.sprite(this.targetX, this.targetY, 'panda');
         player.setBounce(0.2);
         player.setCollideWorldBounds(true);
         player.setInteractive();
@@ -47,20 +49,20 @@
 
         this.anims.create({
           key: 'left',
-          frames: this.anims.generateFrameNumbers('dude', { start: 0, end: 3 }),
+          frames: this.anims.generateFrameNumbers('panda', { start: 0, end: 4 }),
           frameRate: 10,
           repeat: -1
         });
 
         this.anims.create({
           key: 'turn',
-          frames: [{ key: 'dude', frame: 4 }],
+          frames: [{ key: 'panda', frame: 5 }],
           frameRate: 20
         });
 
         this.anims.create({
           key: 'right',
-          frames: this.anims.generateFrameNumbers('dude', { start: 5, end: 8 }),
+          frames: this.anims.generateFrameNumbers('panda', { start: 5, end: 9 }),
           frameRate: 10,
           repeat: -1
         });
