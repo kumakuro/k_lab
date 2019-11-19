@@ -8,6 +8,7 @@ var GameScene = new Phaser.Class(
       function GameScene() {
         Phaser.Scene.call(this, { key: 'gameScene', active: true });
 
+        this.player = null;
         this.playerGroup = null;
         this.clothNum = clothNum;
         this.backgroundNum = backgroundNum;
@@ -29,19 +30,24 @@ var GameScene = new Phaser.Class(
       this.load.spritesheet('dude4', '../images/panda/dude4.png', { frameWidth: 32, frameHeight: 48 });
     },
     create: function () {
-      var player = this.initDude(this.clothNum, this.backgroundNum);
-      var platforms = this.physics.add.staticGroup();
-      platforms.create(400, 568, 'ground').setScale(2).refreshBody();
+
+      this.playerGroup = this.add.group();
+
+      this.sky = this.add.image(400, 300, 'sky' + this.backgroundNum);
+      this.platforms = this.physics.add.staticGroup();
+      this.platforms.create(400, 568, 'ground').setScale(2).refreshBody();
 
       this.input.mouse.capture = true;
       this.input.on('pointerdown', this.moveDude, this)
 
-      this.physics.add.collider(player, platforms);
-      this.playerGroup = player;
+      this.player = this.initDude(this.clothNum, this.backgroundNum);
 
+      this.playerGroup.add(this.player);
+      console.log(this.playerGroup)
+      this.physics.add.collider(this.player, this.platforms);
     },
     update: function () {
-      var player = this.playerGroup;
+      var player = this.player;
       if (Math.floor(this.targetX) - Math.floor(player.x) > 5) {
         player.setVelocityX(100);
         player.anims.play('right', true);
@@ -53,15 +59,17 @@ var GameScene = new Phaser.Class(
         player.anims.play('turn');
       }
 
-      if (backgroundNum != this.backgroundNum || clothNum != this.clothNum) {
-        console.log('不一样了~！')
-        this.playerGroup = this.initDude(this.clothNum, this.backgroundNum)
+      if (clothNum != this.clothNum) {
+        this.player = this.initDude(this.clothNum)
+      }
+      if (backgroundNum != this.backgroundNum) {
+        this.sky = this.add.image(400, 300, 'sky' + this.backgroundNum);
+        this.backgroundNum = backgroundNum;
       }
     },
-    initDude: function (clothNum, backgroundNum) {
+    initDude: function (clothNum) {
       let clothImg = 'dude' + clothNum
 
-      this.add.image(400, 300, 'sky' + backgroundNum);
       var player = this.physics.add.sprite(this.targetX, this.targetY, clothImg);
       player.setBounce(0.2);
       player.setCollideWorldBounds(true);
@@ -89,7 +97,6 @@ var GameScene = new Phaser.Class(
       });
 
       this.clothNum = clothNum;
-      this.backgroundNum = backgroundNum;
       return player
     },
     clickDude: function () {
@@ -98,9 +105,11 @@ var GameScene = new Phaser.Class(
     moveDude: function () {
       this.targetX = this.input.x
       this.targetY = this.input.y
+
+      console.log('move?')
     },
     setDudeAlpha: function (num) {
-      this.playerGroup.alpha = num;
+      this.player.alpha = num;
     }
   }
 );

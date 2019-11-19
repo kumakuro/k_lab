@@ -2,7 +2,7 @@ import { changeBg, changeCloth } from "./panda2.js";
 
 
 // setTimeout(() => {
-//   changeBg(2)
+//   changeBg(1)
 //  }, 1000)
 
 
