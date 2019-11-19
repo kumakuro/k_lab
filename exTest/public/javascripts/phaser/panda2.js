@@ -1,5 +1,5 @@
-var clothNum = 3;
-var backgroundNum = 3;
+var clothNum = 4;
+var backgroundNum = 4;
 
 var GameScene = new Phaser.Class(
   {
@@ -8,7 +8,6 @@ var GameScene = new Phaser.Class(
       function GameScene() {
         Phaser.Scene.call(this, { key: 'gameScene', active: true });
 
-        this.player = null;
         this.playerGroup = null;
         this.clothNum = clothNum;
         this.backgroundNum = backgroundNum;
@@ -30,7 +29,6 @@ var GameScene = new Phaser.Class(
       this.load.spritesheet('dude4', '../images/panda/dude4.png', { frameWidth: 32, frameHeight: 48 });
     },
     create: function () {
-
       this.playerGroup = this.add.group();
 
       this.sky = this.add.image(400, 300, 'sky' + this.backgroundNum);
@@ -40,36 +38,35 @@ var GameScene = new Phaser.Class(
       this.input.mouse.capture = true;
       this.input.on('pointerdown', this.moveDude, this)
 
-      this.player = this.initDude(this.clothNum, this.backgroundNum);
-
-      this.playerGroup.add(this.player);
-      console.log(this.playerGroup)
-      this.physics.add.collider(this.player, this.platforms);
+      this.playerGroup.add(this.initDude(this.clothNum, this.backgroundNum));
+      this.physics.add.collider(this.playerGroup, this.platforms);
     },
     update: function () {
-      var player = this.player;
-      if (Math.floor(this.targetX) - Math.floor(player.x) > 5) {
-        player.setVelocityX(100);
-        player.anims.play('right', true);
-      } else if (Math.floor(player.x) - Math.floor(this.targetX) > 5) {
-        player.setVelocityX(-100);
-        player.anims.play('left', true);
-      } else {
-        player.setVelocityX(0);
-        player.anims.play('turn');
-      }
-
       if (clothNum != this.clothNum) {
-        this.player = this.initDude(this.clothNum)
+        this.clothNum = clothNum;
+        this.playerGroup.clear();
+        this.playerGroup.add(this.initDude(clothNum));
       }
       if (backgroundNum != this.backgroundNum) {
-        this.sky = this.add.image(400, 300, 'sky' + this.backgroundNum);
         this.backgroundNum = backgroundNum;
+        this.sky = this.add.image(400, 300, 'sky' + this.backgroundNum);
+      }
+
+      var player = this.playerGroup.children.entries[this.playerGroup.children.entries.length - 1];
+
+      if (Math.floor(this.targetX) - Math.floor(player.x) > 5) {
+        player.setVelocityX(100);
+        player.anims.play('right' + clothNum, true);
+      } else if (Math.floor(player.x) - Math.floor(this.targetX) > 5) {
+        player.setVelocityX(-100);
+        player.anims.play('left' + clothNum, true);
+      } else {
+        player.setVelocityX(0);
+        player.anims.play('turn' + clothNum);
       }
     },
     initDude: function (clothNum) {
       let clothImg = 'dude' + clothNum
-
       var player = this.physics.add.sprite(this.targetX, this.targetY, clothImg);
       player.setBounce(0.2);
       player.setCollideWorldBounds(true);
@@ -77,26 +74,25 @@ var GameScene = new Phaser.Class(
       player.on('pointerdown', this.clickDude, this)
 
       this.anims.create({
-        key: 'left',
+        key: 'left' + clothNum,
         frames: this.anims.generateFrameNumbers(clothImg, { start: 0, end: 3 }),
         frameRate: 10,
         repeat: -1
       });
 
       this.anims.create({
-        key: 'turn',
+        key: 'turn' + clothNum,
         frames: [{ key: clothImg, frame: 4 }],
         frameRate: 20
       });
 
       this.anims.create({
-        key: 'right',
+        key: 'right' + clothNum,
         frames: this.anims.generateFrameNumbers(clothImg, { start: 5, end: 8 }),
         frameRate: 10,
         repeat: -1
       });
 
-      this.clothNum = clothNum;
       return player
     },
     clickDude: function () {
@@ -109,7 +105,6 @@ var GameScene = new Phaser.Class(
       console.log('move?')
     },
     setDudeAlpha: function (num) {
-      this.player.alpha = num;
     }
   }
 );
