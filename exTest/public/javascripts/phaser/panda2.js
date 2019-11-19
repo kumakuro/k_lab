@@ -8,6 +8,7 @@ var GameScene = new Phaser.Class(
       function GameScene() {
         Phaser.Scene.call(this, { key: 'gameScene', active: true });
 
+        this.player = null;
         this.playerGroup = null;
         this.clothNum = clothNum;
         this.backgroundNum = backgroundNum;
@@ -38,14 +39,17 @@ var GameScene = new Phaser.Class(
       this.input.mouse.capture = true;
       this.input.on('pointerdown', this.moveDude, this)
 
-      this.playerGroup.add(this.initDude(this.clothNum, this.backgroundNum));
+      this.player = this.initDude(this.clothNum, this.backgroundNum);
+      this.playerGroup.add(this.player);
       this.physics.add.collider(this.playerGroup, this.platforms);
     },
     update: function () {
       if (clothNum != this.clothNum) {
         this.clothNum = clothNum;
-        this.playerGroup.clear();
-        this.playerGroup.add(this.initDude(clothNum));
+        this.player.destroy();
+        console.log('this.playerGroup->', this.playerGroup)
+        this.player = this.initDude(clothNum)
+        this.playerGroup.add(this.player);
       }
       if (backgroundNum != this.backgroundNum) {
         this.backgroundNum = backgroundNum;
@@ -68,6 +72,7 @@ var GameScene = new Phaser.Class(
     initDude: function (clothNum) {
       let clothImg = 'dude' + clothNum
       var player = this.physics.add.sprite(this.targetX, this.targetY, clothImg);
+      player.setId = clothNum;
       player.setBounce(0.2);
       player.setCollideWorldBounds(true);
       player.setInteractive();
