@@ -19,11 +19,11 @@ var GameScene = new Phaser.Class(
 
         this.speed = 1;
         this.targetX = 300;
-        this.targetY = 450;
+        this.targetY = 400;
 
         this.bgSourceArr = [];
         this.bgArr = [];
-        
+
         this.ground = null;
       },
 
@@ -62,7 +62,6 @@ var GameScene = new Phaser.Class(
 
       this.player = this.initDude(this.clothNum);
       this.playerGroup.add(this.player);
-      
     },
     update: function () {
       if (clothNum != this.clothNum) {
@@ -92,7 +91,8 @@ var GameScene = new Phaser.Class(
         player.anims.play('left' + clothNum, true);
       } else {
         player.setVelocityX(0);
-        player.anims.play('turn' + clothNum);
+        // player.anims.play('turn' + clothNum, true);
+        this.anims.staggerPlay('breath' + clothNum, this.player, 1000);
       }
     },
     initDude: function (clothNum) {
@@ -127,8 +127,8 @@ var GameScene = new Phaser.Class(
 
       this.anims.create({
         key: 'breath' + clothNum,
-        frames: this.anims.generateFrameNumbers(clothImg, { start: 0, end: 3 }),
-        frameRate: 10,
+        frames: this.anims.generateFrameNumbers(clothImg, { prefix: 'turn', start: 0, end: 4 }),
+        frameRate: 5,
         repeat: -1
       });
 
@@ -140,10 +140,7 @@ var GameScene = new Phaser.Class(
     moveDude: function () {
       this.targetX = this.input.x
       this.targetY = this.input.y
-
       console.log('move?')
-    },
-    setDudeAlpha: function (num) {
     }
   }
 );
