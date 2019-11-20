@@ -16,13 +16,15 @@ var GameScene = new Phaser.Class(
         this.speed = 1;
         this.targetX = 100;
         this.targetY = 450;
+
+        this.bgArr = [];
       },
 
     preload: function () {
-      this.load.image('sky1', '../images/panda/sky1.png');
-      this.load.image('sky2', '../images/panda/sky2.png');
-      this.load.image('sky3', '../images/panda/sky3.png');
-      this.load.image('sky4', '../images/panda/sky4.png');
+      this.load.image('bg1', '../images/panda/sky1.png');
+      this.load.image('bg2', '../images/panda/sky2.png');
+      this.load.image('bg3', '../images/panda/sky3.png');
+      this.load.image('bg4', '../images/panda/sky4.png');
       this.load.image('ground', '../images/panda/platform.png');
       this.load.spritesheet('dude1', '../images/panda/dude1.png', { frameWidth: 32, frameHeight: 48 });
       this.load.spritesheet('dude2', '../images/panda/dude2.png', { frameWidth: 32, frameHeight: 48 });
@@ -32,7 +34,26 @@ var GameScene = new Phaser.Class(
     create: function () {
       this.playerGroup = this.add.group();
 
-      this.sky = this.add.image(400, 300, 'sky' + this.backgroundNum);
+      var bg1 = this.add.image(400, 300, 'bg1');
+      bg1.num = 1;
+      bg1.alpha = 0;
+      this.bgArr.push(bg1)
+
+      var bg2 = this.add.image(400, 300, 'bg2');
+      bg2.num = 2;
+      bg2.alpha = 1;
+      this.bgArr.push(bg2)
+
+      var bg3 = this.add.image(400, 300, 'bg3');
+      bg3.num = 3;
+      bg3.alpha = 0;
+      this.bgArr.push(bg3)
+
+      var bg4 = this.add.image(400, 300, 'bg4');
+      bg4.num = 4;
+      bg4.alpha = 0;
+      this.bgArr.push(bg4)
+
       this.platforms = this.physics.add.staticGroup();
       this.platforms.create(400, 568, 'ground').setScale(2).refreshBody();
 
@@ -47,13 +68,18 @@ var GameScene = new Phaser.Class(
       if (clothNum != this.clothNum) {
         this.clothNum = clothNum;
         this.player.destroy();
-        console.log('this.playerGroup->', this.playerGroup)
         this.player = this.initDude(clothNum)
         this.playerGroup.add(this.player);
       }
       if (backgroundNum != this.backgroundNum) {
         this.backgroundNum = backgroundNum;
-        this.sky = this.add.image(400, 300, 'sky' + this.backgroundNum);
+        this.bgArr.forEach(itm => {
+          if (itm.num == backgroundNum) {
+            itm.alpha = 1
+          } else {
+            itm.alpha = 0
+          }
+        });
       }
 
       var player = this.playerGroup.children.entries[this.playerGroup.children.entries.length - 1];

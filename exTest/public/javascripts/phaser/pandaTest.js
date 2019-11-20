@@ -1,26 +1,15 @@
 import { changeBg, changeCloth } from "./panda2.js";
 
 
-// setTimeout(() => {
-//   changeBg(1)
-//  }, 1000)
+$('.options .cloth').on('click', function () {
+  changeCloth($(this).html())
+})
 
 
-setTimeout(() => {
-  changeCloth(4)
-}, 3000)
+$('.options .bg').on('click', function () {
+  changeBg($(this).html())
+})
 
 
-setTimeout(() => {
-  changeCloth(3)
-}, 6000)
 
 
-setTimeout(() => {
-  changeCloth(2)
-}, 9000)
-
-
-setTimeout(() => {
-  changeCloth(1)
-}, 12000)
