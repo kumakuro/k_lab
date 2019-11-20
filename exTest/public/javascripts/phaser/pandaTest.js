@@ -1,4 +1,4 @@
-import { changeBg, changeCloth } from "./panda2.js";
+import { changeBg, changeCloth } from "./panda.js";
 
 
 $('.options .cloth').on('click', function () {
