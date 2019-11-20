@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script src="//cdn.jsdelivr.net/npm/phaser@3.20.1/dist/phaser.min.js"></script>
+  <script type="module" src="../javascripts/phaser/panda2.js"></script>
+
+  <style>
+    .options {
+      position: fixed;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    .btn {
+      cursor: pointer;
+      border: 1px solid salmon;
+    }
+
+    .btn:hover {
+      background-color: salmon;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="options">
+    <h3>Santa Panda</h3>
+    衣服
+    <ul>
+      <li class="btn cloth">1</li>
+      <li class="btn cloth">2</li>
+      <!-- <li class="btn cloth">3</li>
+      <li class="btn cloth">4</li> -->
+    </ul>
+    背景
+    <ul>
+      <li class="btn bg">1</li>
+      <li class="btn bg">2</li>
+      <!-- <li class="btn bg">3</li>
+      <li class="btn bg">4</li> -->
+    </ul>
+  </div>
+
+  <div id="phaserSet"></div>
+</body>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script type="module" src="../javascripts/phaser/pandaTest2.js"></script>
+
+</html>
