@@ -34,7 +34,8 @@ var GameScene = new Phaser.Class(
 
         if (keyArr[i] === 'role') {
           itmArr.forEach((itm, idx) => {
-            this.load.spritesheet(keyArr[i] + (idx * 1 + 1), itm, { frameWidth: 470, frameHeight: 680 });
+            // this.load.spritesheet(keyArr[i] + (idx * 1 + 1), itm, { frameWidth: 470, frameHeight: 680 });
+            this.load.spritesheet(keyArr[i] + (idx * 1 + 1), itm, { frameWidth: 117, frameHeight: 171 });
           })
         }
 
@@ -51,7 +52,7 @@ var GameScene = new Phaser.Class(
 
       for (let i in this.bgSourceArr) {
         var bg = this.add.image(512, 384, this.bgSourceArr[i]);
-        bg.setScale(0.5);
+        bg.setScale(2);
         bg.num = i * 1 + 1;
         bg.alpha = i === '0' ? 1 : 0;
         this.bgArr.push(bg)
@@ -92,14 +93,14 @@ var GameScene = new Phaser.Class(
       } else {
         player.setVelocityX(0);
         // player.anims.play('turn' + clothNum, true);
-        this.anims.staggerPlay('breath' + clothNum, this.player, 1000);
+        this.anims.staggerPlay('breath' + clothNum, player, -100);
       }
     },
     initDude: function (clothNum) {
       let clothImg = 'role' + clothNum
       var player = this.physics.add.sprite(this.targetX, this.targetY, clothImg);
       player.setId = clothNum;
-      player.setScale(0.5);
+      player.setScale(1.5);
       player.setBounce(0.2);
       player.setCollideWorldBounds(true);
       player.setInteractive();
