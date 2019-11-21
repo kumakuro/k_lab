@@ -27,4 +27,8 @@ router.get('/panda', function(req, res, next) {
   res.render('panda2', { title: 'Santa Panda' });
 });
 
+router.get('/test', function(req, res, next) {
+  res.render('phaser', { title: 'phaser test' });
+});
+
 module.exports = router;

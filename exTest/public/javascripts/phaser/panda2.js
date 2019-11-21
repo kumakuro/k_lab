@@ -3,8 +3,6 @@ import { santaJson } from './santa.js'
 var clothNum = 1;
 var backgroundNum = 1;
 
-
-
 var GameScene = new Phaser.Class(
   {
     Extends: Phaser.Scene,
@@ -19,7 +17,7 @@ var GameScene = new Phaser.Class(
 
         this.speed = 1;
         this.targetX = 300;
-        this.targetY = 400;
+        this.targetY = 600;
 
         this.bgSourceArr = [];
         this.bgArr = [];
@@ -34,7 +32,6 @@ var GameScene = new Phaser.Class(
 
         if (keyArr[i] === 'role') {
           itmArr.forEach((itm, idx) => {
-            // this.load.spritesheet(keyArr[i] + (idx * 1 + 1), itm, { frameWidth: 470, frameHeight: 680 });
             this.load.spritesheet(keyArr[i] + (idx * 1 + 1), itm, { frameWidth: 117, frameHeight: 171 });
           })
         }
@@ -100,7 +97,7 @@ var GameScene = new Phaser.Class(
       let clothImg = 'role' + clothNum
       var player = this.physics.add.sprite(this.targetX, this.targetY, clothImg);
       player.setId = clothNum;
-      player.setScale(1.5);
+      player.setScale(2.5);
       player.setBounce(0.2);
       player.setCollideWorldBounds(true);
       player.setInteractive();
