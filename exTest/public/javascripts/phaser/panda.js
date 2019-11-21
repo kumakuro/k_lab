@@ -1,5 +1,5 @@
-var clothNum = 4;
-var backgroundNum = 4;
+var clothNum = 1;
+var backgroundNum = 1;
 
 var GameScene = new Phaser.Class(
   {
@@ -26,6 +26,7 @@ var GameScene = new Phaser.Class(
       this.load.image('bg3', '../images/panda/sky3.png');
       this.load.image('bg4', '../images/panda/sky4.png');
       this.load.image('ground', '../images/panda/platform.png');
+      this.load.image('star', '../images/panda/star.png');
       this.load.spritesheet('dude1', '../images/panda/dude1.png', { frameWidth: 32, frameHeight: 48 });
       this.load.spritesheet('dude2', '../images/panda/dude2.png', { frameWidth: 32, frameHeight: 48 });
       this.load.spritesheet('dude3', '../images/panda/dude3.png', { frameWidth: 32, frameHeight: 48 });
@@ -123,6 +124,23 @@ var GameScene = new Phaser.Class(
         frameRate: 10,
         repeat: -1
       });
+
+      player.on('animationrepeat-right' + clothNum, function () {
+        var star = this.add.image(player.x - 32, player.y-50, 'star').setScale(0.8);
+        this.tweens.add({
+          targets: star,
+          props: {
+            x: {
+              value: '-=64', ease: 'Power1'
+            },
+            y: {
+              value: '+=70', ease: 'Bounce.easeOut'
+            }
+          },
+          duration: 750
+        });
+
+      }, this);
 
       return player
     },
