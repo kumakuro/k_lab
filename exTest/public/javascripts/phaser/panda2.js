@@ -1,7 +1,7 @@
 import { santaJson } from './santa.js'
 
-const screenWidth = 800
-const screenHeight = 600
+const screenWidth = 1024
+const screenHeight = 768
 var clothNum = 1;
 var backgroundNum = 1;
 var game = null;
