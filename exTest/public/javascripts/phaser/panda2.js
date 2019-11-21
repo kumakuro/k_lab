@@ -1,7 +1,10 @@
 import { santaJson } from './santa.js'
 
+const screenWidth = 800
+const screenHeight = 600
 var clothNum = 1;
 var backgroundNum = 1;
+var game = null;
 
 var GameScene = new Phaser.Class(
   {
@@ -26,6 +29,18 @@ var GameScene = new Phaser.Class(
       },
 
     preload: function () {
+      var progress = this.add.graphics();
+
+      this.load.on('progress', function (value) {
+        progress.clear();
+        progress.fillStyle(0xffffff, 1);
+        progress.fillRect(0, 270, screenWidth * value, 30);
+      });
+
+      this.load.on('complete', function () {
+        progress.destroy();
+      });
+
       let keyArr = Object.keys(santaJson)
       for (let i in keyArr) {
         let itmArr = santaJson[keyArr[i]]
@@ -143,15 +158,14 @@ var GameScene = new Phaser.Class(
   }
 );
 
-
 var config = {
   type: Phaser.AUTO,
   scale: {
     mode: Phaser.Scale.FIT,
     parent: 'phaserSet',
     autoCenter: Phaser.Scale.CENTER_BOTH,
-    width: 1024,
-    height: 768
+    width: screenWidth,
+    height: screenHeight
   },
   physics: {
     default: 'arcade',
@@ -163,8 +177,11 @@ var config = {
   scene: GameScene
 };
 
-var game = new Phaser.Game(config);
 
+function initGameScene(data) {
+  console.log('initData->', data)
+  game = new Phaser.Game(config);
+}
 function changeBg(num) {
   backgroundNum = num;
 }
@@ -172,7 +189,9 @@ function changeCloth(num) {
   clothNum = num;
 }
 
+
 export {
+  initGameScene,
   changeBg,
   changeCloth
 };

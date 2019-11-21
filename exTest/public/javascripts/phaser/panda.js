@@ -1,5 +1,8 @@
+const screenWidth = 800
+const screenHeight = 600
 var clothNum = 1;
 var backgroundNum = 1;
+var game = null;
 
 var GameScene = new Phaser.Class(
   {
@@ -21,6 +24,19 @@ var GameScene = new Phaser.Class(
       },
 
     preload: function () {
+
+      var progress = this.add.graphics();
+
+      this.load.on('progress', function (value) {
+        progress.clear();
+        progress.fillStyle(0xffffff, 1);
+        progress.fillRect(0, 270, screenWidth * value, 30);
+      });
+
+      this.load.on('complete', function () {
+        progress.destroy();
+      });
+
       this.load.image('bg1', '../images/panda/sky1.png');
       this.load.image('bg2', '../images/panda/sky2.png');
       this.load.image('bg3', '../images/panda/sky3.png');
@@ -126,7 +142,7 @@ var GameScene = new Phaser.Class(
       });
 
       player.on('animationrepeat-right' + clothNum, function () {
-        var star = this.add.image(player.x - 32, player.y-50, 'star').setScale(0.8);
+        var star = this.add.image(player.x - 32, player.y - 50, 'star').setScale(0.8);
         this.tweens.add({
           targets: star,
           props: {
@@ -165,8 +181,8 @@ var config = {
     mode: Phaser.Scale.FIT,
     parent: 'phaserSet',
     autoCenter: Phaser.Scale.CENTER_BOTH,
-    width: 800,
-    height: 600
+    width: screenWidth,
+    height: screenHeight
   },
   physics: {
     default: 'arcade',
@@ -178,8 +194,12 @@ var config = {
   scene: GameScene
 };
 
-var game = new Phaser.Game(config);
 
+
+function initGameScene(data) {
+  console.log('initData->', data)
+  game = new Phaser.Game(config);
+}
 function changeBg(num) {
   backgroundNum = num;
 }
@@ -187,7 +207,9 @@ function changeCloth(num) {
   clothNum = num;
 }
 
+
 export {
+  initGameScene,
   changeBg,
   changeCloth
 };
