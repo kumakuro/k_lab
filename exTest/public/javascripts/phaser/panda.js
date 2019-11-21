@@ -34,6 +34,7 @@ var GameScene = new Phaser.Class(
       });
 
       this.load.on('complete', function () {
+        progress.fillRect(0, 270, screenWidth, 30);
         progress.destroy();
       });
 
