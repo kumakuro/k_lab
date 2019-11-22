@@ -69,7 +69,7 @@ var GameScene = new Phaser.Class(
 
       for (let i in this.bgSourceArr) {
         var bg = this.add.image(512, 384, this.bgSourceArr[i]);
-        bg.setScale(2);
+        bg.setScale(0.5);
         bg.num = i * 1 + 1;
         bg.alpha = i === '0' ? 1 : 0;
         this.bgArr.push(bg)
@@ -114,7 +114,6 @@ var GameScene = new Phaser.Class(
         player.anims.play('left' + clothNum, true);
       } else {
         player.setVelocityX(0);
-        // player.anims.play('turn' + clothNum, true);
         this.anims.staggerPlay('breath' + clothNum, player, -100);
       }
 
