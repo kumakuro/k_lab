@@ -114,7 +114,8 @@ var GameScene = new Phaser.Class(
         player.anims.play('left' + clothNum, true);
       } else {
         player.setVelocityX(0);
-        player.anims.play('turn' + clothNum, true);
+        // player.anims.play('turn' + clothNum, true);
+        this.anims.staggerPlay('breath' + clothNum, player, -100);
       }
 
     },
