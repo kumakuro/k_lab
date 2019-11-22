@@ -1,11 +1,9 @@
 import { initGameScene, changeBg, changeCloth } from "./panda2.js";
 
-setTimeout(() => {
-  initGameScene({
-    name: 'ssss',
-    num: 12
-  })
-}, 3000)
+initGameScene({
+  name: 'ssss',
+  num: 12
+})
 
 $('.options .cloth').on('click', function () {
   changeCloth($(this).html())

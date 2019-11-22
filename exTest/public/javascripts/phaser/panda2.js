@@ -2,9 +2,11 @@ import { santaJson } from './santa.js'
 
 const screenWidth = 1024
 const screenHeight = 768
-var clothNum = 1;
+var clothNum = 2;
 var backgroundNum = 1;
 var game = null;
+var motionArr = ['idle', 'happy']
+
 
 var GameScene = new Phaser.Class(
   {
@@ -20,12 +22,14 @@ var GameScene = new Phaser.Class(
 
         this.speed = 1;
         this.targetX = 300;
-        this.targetY = 600;
+        this.targetY = 450;
 
         this.bgSourceArr = [];
         this.bgArr = [];
 
         this.ground = null;
+
+        this.motion = 0;
       },
 
     preload: function () {
@@ -96,26 +100,35 @@ var GameScene = new Phaser.Class(
       }
 
       var player = this.playerGroup.children.entries[this.playerGroup.children.entries.length - 1];
+      if (this.motion == 1) {
+        player.setVelocityX(0);
+        this.anims.staggerPlay('breath' + clothNum, player, -100);
+        return;
+      }
 
       if (Math.floor(this.targetX) - Math.floor(player.x) > 50) {
         player.setVelocityX(100);
         player.anims.play('right' + clothNum, true);
-      } else if (Math.floor(player.x) - Math.floor(this.targetX) > 50) {
+      }
+
+      if (Math.floor(player.x) - Math.floor(this.targetX) > 50) {
         player.setVelocityX(-100);
         player.anims.play('left' + clothNum, true);
-      } else {
-        player.setVelocityX(0);
-        // player.anims.play('turn' + clothNum, true);
-        this.anims.staggerPlay('breath' + clothNum, player, -100);
       }
+
+      if (Math.abs(Math.floor(player.x) - Math.floor(this.targetX)) <= 50) {
+        player.setVelocityX(0);
+        player.anims.play('turn' + clothNum, true);
+        // this.anims.staggerPlay('breath' + clothNum, this.player, -100);
+      }
+
+
     },
     initDude: function (clothNum) {
       let clothImg = 'role' + clothNum
       var player = this.physics.add.sprite(this.targetX, this.targetY, clothImg);
       player.setId = clothNum;
       player.setScale(2.5);
-      player.setBounce(0.2);
-      player.setCollideWorldBounds(true);
       player.setInteractive();
       player.on('pointerdown', this.clickDude, this)
 
@@ -150,11 +163,14 @@ var GameScene = new Phaser.Class(
     },
     clickDude: function () {
       console.log('clickDude')
+      this.motion = 1;
+      setTimeout(() => {
+        this.motion = 0;
+      }, 3000)
     },
     moveDude: function () {
       this.targetX = this.input.x
-      this.targetY = this.input.y
-      console.log('move?')
+      // this.targetY = this.input.y
     }
   }
 );
@@ -170,14 +186,13 @@ var config = {
   },
   physics: {
     default: 'arcade',
-    arcade: {
-      gravity: { y: 300 },
-      debug: false
-    }
+    // arcade: {
+    //   gravity: { y: 300 },
+    //   debug: false
+    // }
   },
   scene: GameScene
 };
-
 
 function initGameScene(data) {
   console.log('initData->', data)
