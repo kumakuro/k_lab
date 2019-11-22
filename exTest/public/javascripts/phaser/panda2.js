@@ -106,22 +106,16 @@ var GameScene = new Phaser.Class(
         return;
       }
 
-      if (Math.floor(this.targetX) - Math.floor(player.x) > 50) {
+      if (Math.floor(this.targetX) - Math.floor(player.x) > 50 && screenWidth - Math.floor(player.x) > 146) {
         player.setVelocityX(100);
         player.anims.play('right' + clothNum, true);
-      }
-
-      if (Math.floor(player.x) - Math.floor(this.targetX) > 50) {
+      } else if (Math.floor(player.x) - Math.floor(this.targetX) > 50 && Math.floor(player.x) - 0 > 146) {
         player.setVelocityX(-100);
         player.anims.play('left' + clothNum, true);
-      }
-
-      if (Math.abs(Math.floor(player.x) - Math.floor(this.targetX)) <= 50) {
+      } else {
         player.setVelocityX(0);
         player.anims.play('turn' + clothNum, true);
-        // this.anims.staggerPlay('breath' + clothNum, this.player, -100);
       }
-
 
     },
     initDude: function (clothNum) {
@@ -166,7 +160,7 @@ var GameScene = new Phaser.Class(
       this.motion = 1;
       setTimeout(() => {
         this.motion = 0;
-      }, 3000)
+      }, 2000)
     },
     moveDude: function () {
       this.targetX = this.input.x
@@ -185,11 +179,7 @@ var config = {
     height: screenHeight
   },
   physics: {
-    default: 'arcade',
-    // arcade: {
-    //   gravity: { y: 300 },
-    //   debug: false
-    // }
+    default: 'arcade'
   },
   scene: GameScene
 };
