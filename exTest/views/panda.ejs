@@ -7,59 +7,7 @@
 </head>
 
 <body>
-  <script>
-    window.onload = function () {
-
-      const screenWidth = 2048;
-      const screenHeight = 2048;
-      var game = new Phaser.Game(screenWidth, screenHeight, Phaser.AUTO, 'phaser-example',
-        {
-          preload: preload,
-          create: create,
-          update: update
-        }
-      );
-
-      var targetX = screenWidth / 2;
-      var stateArr = ['idle', 'you', 'zuo'];
-      var state = 1;
-      var pandaPlayer;
-
-      function preload() {
-        game.plugins.add(Fabrique.Plugins.Spine);
-        game.load.spine('panda', '/javascripts/phaser/shengdanyouniance.json');
-
-
-        var bar = game.add.graphics();
-        bar.beginFill(0x000000, 0.2);
-        bar.drawRect(0, 100, 800, 100);
-
-      }
-
-      function create() {
-        pandaPlayer = game.add.spine(targetX, screenHeight / 2 + 800, 'panda');
-        pandaPlayer.setAnimationByName(0, stateArr[state], true);
-        pandaPlayer.setSkinByName('2');
-
-        game.input.onDown.add(function () {
-          targetX = parseInt(game.input.activePointer.position.x);
-          
-          state = state === 1 ? 2 : 1
-          pandaPlayer.scale.x = state === 1 ? -1 : 1
-          pandaPlayer.setToSetupPose();
-        });
-      }
-
-      function update() {
-        if (targetX > parseInt(pandaPlayer.x)) {
-          pandaPlayer.x += 8;
-        }
-        if (targetX < parseInt(pandaPlayer.x)) {
-          pandaPlayer.x -= 8;
-        }
-      }
-    };
-
-  </script>
+  <script type="module" src=/javascripts/work/pandaTest.js></script>
 </body>
+
 </html>
