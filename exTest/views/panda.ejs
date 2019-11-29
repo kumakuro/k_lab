@@ -2,50 +2,64 @@
 <html lang="en">
 
 <head>
-  <script src="//cdn.jsdelivr.net/npm/phaser@3.20.1/dist/phaser.min.js"></script>
-  <script type="module" src="../javascripts/phaser/panda.js"></script>
-
-  <style>
-    .options {
-      position: fixed;
-    }
-
-    ul {
-      list-style: none;
-    }
-
-    .btn {
-      cursor: pointer;
-      border: 1px solid salmon;
-    }
-
-    .btn:hover {
-      background-color: salmon;
-    }
-  </style>
+  <script src="https://www.phaser-china.com/examples/libs/phaser.min.js"></script>
+  <script src="https://www.phaser-china.com/_plugins/phaser-spine.min.js"></script>
 </head>
 
 <body>
-  <div class="options">
-    衣服
-    <ul>
-      <li class="btn cloth">1</li>
-      <li class="btn cloth">2</li>
-      <li class="btn cloth">3</li>
-      <li class="btn cloth">4</li>
-    </ul>
-    背景
-    <ul>
-      <li class="btn bg">1</li>
-      <li class="btn bg">2</li>
-      <li class="btn bg">3</li>
-      <li class="btn bg">4</li>
-    </ul>
-  </div>
+  <script>
+    window.onload = function () {
 
-  <div id="phaserSet"></div>
+      const screenWidth = 2048;
+      const screenHeight = 2048;
+      var game = new Phaser.Game(screenWidth, screenHeight, Phaser.AUTO, 'phaser-example',
+        {
+          preload: preload,
+          create: create,
+          update: update
+        }
+      );
+
+      var targetX = screenWidth / 2;
+      var stateArr = ['idle', 'you', 'zuo'];
+      var state = 1;
+      var pandaPlayer;
+
+      function preload() {
+        game.plugins.add(Fabrique.Plugins.Spine);
+        game.load.spine('panda', '/javascripts/phaser/shengdanyouniance.json');
+
+
+        var bar = game.add.graphics();
+        bar.beginFill(0x000000, 0.2);
+        bar.drawRect(0, 100, 800, 100);
+
+      }
+
+      function create() {
+        pandaPlayer = game.add.spine(targetX, screenHeight / 2 + 800, 'panda');
+        pandaPlayer.setAnimationByName(0, stateArr[state], true);
+        pandaPlayer.setSkinByName('2');
+
+        game.input.onDown.add(function () {
+          targetX = parseInt(game.input.activePointer.position.x);
+          
+          state = state === 1 ? 2 : 1
+          pandaPlayer.scale.x = state === 1 ? -1 : 1
+          pandaPlayer.setToSetupPose();
+        });
+      }
+
+      function update() {
+        if (targetX > parseInt(pandaPlayer.x)) {
+          pandaPlayer.x += 8;
+        }
+        if (targetX < parseInt(pandaPlayer.x)) {
+          pandaPlayer.x -= 8;
+        }
+      }
+    };
+
+  </script>
 </body>
-<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
-<script type="module" src="../javascripts/phaser/pandaTest.js"></script>
-
 </html>
