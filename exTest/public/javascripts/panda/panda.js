@@ -24,6 +24,7 @@ function preload() {
     bar.drawRect(0, screenHeight / 2 - 200, screenWidth * (progress / 100), 50);
     bar.clear();
   }, game);
+
 }
 
 function create() {
@@ -49,28 +50,38 @@ function create() {
   })
 
   pandaPlayer = game.add.spine(targetX, screenHeight / 2 + 250, 'panda');
+  pandaPlayer.setSkinByName('1');
+  pandaPlayer.setToSetupPose();
+
   pandaPlayer.scale.x = pandaRatio
   pandaPlayer.scale.y = pandaRatio
-  pandaPlayer.setAnimationByName(0, 'walk', true);
-  pandaPlayer.setSkinByName('2');
 
-  for (var i in pandaPlayer.children) {
-    var itm = pandaPlayer.children[i]
-    console.log('**', i, itm.children.length, '**', itm)
-    itm.setAll('inputEnabled', true)
-    itm.callAll('events.onInputDown.add', 'events.onInputDown', clickPanda)
+  let skeleton = pandaPlayer.skeleton.slots
+  console.log('pandaPlayer->', pandaPlayer.skeleton.slots)
+  for (let i in skeleton) {
+    let stm = skeleton[i]
+    console.log(i, '->', stm.sprites)
   }
 
-  // game.input.onDown.add(function () {
-  //   targetX = parseInt(game.input.activePointer.position.x);
-  //   if (targetX > parseInt(pandaPlayer.x)) {
-  //     pandaPlayer.scale.x = pandaRatio
-  //   }
-  //   if (targetX < parseInt(pandaPlayer.x)) {
-  //     pandaPlayer.scale.x = -1 * pandaRatio
-  //   }
-  //   pandaPlayer.setToSetupPose();
-  // });
+  pandaPlayer.setAnimationByName(0, 'walk', true);
+
+  // for (var i in pandaPlayer.children) {
+  //   var itm = pandaPlayer.children[i]
+  //   console.log('**', i, itm.children.length, '**', itm)
+  //   itm.setAll('inputEnabled', true)
+  //   itm.callAll('events.onInputDown.add', 'events.onInputDown', clickPanda)
+  // }
+
+  game.input.onDown.add(function () {
+    targetX = parseInt(game.input.activePointer.position.x);
+    if (targetX > parseInt(pandaPlayer.x)) {
+      pandaPlayer.scale.x = pandaRatio
+    }
+    if (targetX < parseInt(pandaPlayer.x)) {
+      pandaPlayer.scale.x = -1 * pandaRatio
+    }
+    pandaPlayer.setToSetupPose();
+  });
 }
 
 function update() {
@@ -100,7 +111,7 @@ function initPanda(data) {
 
 function changeCloth(num) {
   console.log('changeCloth->', num)
-  pandaPlayer.setSkinByName('2');
+  pandaPlayer.setSkinByName(num);
   pandaPlayer.setToSetupPose();
 }
 
