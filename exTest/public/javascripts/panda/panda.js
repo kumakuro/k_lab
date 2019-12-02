@@ -6,47 +6,47 @@ const pandaRatio = 0.35;
 
 var targetX = screenWidth / 2;
 var stateArr = ['idle', 'walk', 'hunger'];
-var pandaPlayer;
-var bg;
+var bgArr = [], bgNum = 0;
+var pandaPlayer, game;
 
-var game = new Phaser.Game(screenWidth, screenHeight, Phaser.AUTO, 'phaserSet',
-  {
-    preload: preload,
-    create: create,
-    update: update
-  }
-);
 
 function preload() {
-  game.load.image('bg', '/javascripts/panda/image/bg1.png')
-  // game.load.image('bg', '/javascripts/panda/image/bg0.png')
+  game.load.image('bg1', '/javascripts/panda/image/bg1.png')
+  game.load.image('bg0', '/javascripts/panda/image/bg0.png')
+
   game.plugins.add(Fabrique.Plugins.Spine);
   game.load.spine('panda', '/javascripts/panda/shengdanyouniance.json');
 
   var bar = game.add.graphics();
 
   game.load.onFileComplete.add(progress => {
-    console.log(progress)
     bar.beginFill(0xffffff, 1);
-    bar.drawRect(0, screenHeight / 2 - 200, screenWidth * (progress / 100), 100);
+    bar.drawRect(0, screenHeight / 2 - 200, screenWidth * (progress / 100), 50);
+    bar.clear();
   }, game);
 }
 
 function create() {
-  bg = game.add.sprite(0, 0, 'bg');
-  bg.scale.x = bgRatio
-  bg.scale.y = bgRatio
-  bg.inputEnabled = true;
-  bg.events.onInputDown.add(() => {
-    targetX = parseInt(game.input.activePointer.position.x);
-    if (targetX > parseInt(pandaPlayer.x)) {
-      pandaPlayer.scale.x = pandaRatio
+  var bg0 = game.add.sprite(0, 0, 'bg0');
+  bg0.alpha = 0;
+  bg0.scale.x = bgRatio;
+  bg0.scale.y = bgRatio;
+  bg0.num = 0;
+  var bg1 = game.add.sprite(0, 0, 'bg1');
+  bg1.alpha = 0;
+  bg1.scale.x = bgRatio;
+  bg1.scale.y = bgRatio;
+  bg1.num = 1;
+  bgArr.push(bg1)
+  bgArr.push(bg0)
+
+  bgArr.map(itm => {
+    if (itm.num === bgNum) {
+      itm.alpha = 1;
+    } else {
+      itm.alpha = 0;
     }
-    if (targetX < parseInt(pandaPlayer.x)) {
-      pandaPlayer.scale.x = -1 * pandaRatio
-    }
-    pandaPlayer.setToSetupPose();
-  }, this)
+  })
 
   pandaPlayer = game.add.spine(targetX, screenHeight / 2 + 250, 'panda');
   pandaPlayer.scale.x = pandaRatio
@@ -54,6 +54,23 @@ function create() {
   pandaPlayer.setAnimationByName(0, 'walk', true);
   pandaPlayer.setSkinByName('2');
 
+  for (var i in pandaPlayer.children) {
+    var itm = pandaPlayer.children[i]
+    console.log('**', i, itm.children.length, '**', itm)
+    itm.setAll('inputEnabled', true)
+    itm.callAll('events.onInputDown.add', 'events.onInputDown', clickPanda)
+  }
+
+  // game.input.onDown.add(function () {
+  //   targetX = parseInt(game.input.activePointer.position.x);
+  //   if (targetX > parseInt(pandaPlayer.x)) {
+  //     pandaPlayer.scale.x = pandaRatio
+  //   }
+  //   if (targetX < parseInt(pandaPlayer.x)) {
+  //     pandaPlayer.scale.x = -1 * pandaRatio
+  //   }
+  //   pandaPlayer.setToSetupPose();
+  // });
 }
 
 function update() {
@@ -66,12 +83,30 @@ function update() {
   }
 }
 
+function clickPanda() {
+  console.log('clickPanda-click')
+}
 
 function initPanda(data) {
   console.log('initPanda->', data)
+  game = new Phaser.Game(screenWidth, screenHeight, Phaser.AUTO, 'phaserSet',
+    {
+      preload: preload,
+      create: create,
+      update: update
+    }
+  );
 }
-function changeCloth() { }
-function changeBg() { }
+
+function changeCloth(num) {
+  console.log('changeCloth->', num)
+  pandaPlayer.setSkinByName('2');
+  pandaPlayer.setToSetupPose();
+}
+
+function changeBg(num) {
+  console.log('changeBg->', num)
+}
 
 export {
   initPanda,

@@ -4,10 +4,54 @@
 <head>
   <script src="https://www.phaser-china.com/examples/libs/phaser.min.js"></script>
   <script src="https://www.phaser-china.com/_plugins/phaser-spine.min.js"></script>
+  <!-- <script src=/javascripts/panda/spine.2.3.js></script> -->
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .option {
+      position: fixed;
+      left: 0;
+      top: 0;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    li {
+      width: 50px;
+      height: 30px;
+      display: block;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    li:hover {
+      background-color: #dfdfdf;
+    }
+  </style>
 </head>
 
 <body>
-  <script type="module" src=/javascripts/work/pandaTest.js></script>
+  <div id="phaserSet"></div>
+  <div class="option">
+    衣服
+    <ul class="cloth">
+      <li>1</li>
+      <li>2</li>
+    </ul>
+    背景
+    <ul class="bg">
+      <li>1</li>
+      <li>2</li>
+    </ul>
+  </div>
+
 </body>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script type="module" src=/javascripts/work/pandaTest.js></script>
 
 </html>
