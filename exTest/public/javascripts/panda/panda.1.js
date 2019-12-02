@@ -27,7 +27,6 @@ function preload() {
   game.load.onFileComplete.add(progress => {
     bar.beginFill(0xffffff, 1);
     bar.drawRect(0, screenHeight / 2 - 200, screenWidth * (progress / 100), 50);
-    bar.clear();
   }, game);
 }
 
