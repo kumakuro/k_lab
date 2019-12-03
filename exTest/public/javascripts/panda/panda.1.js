@@ -32,8 +32,7 @@ var clothClickFlagArr = [null, null]; // 与衣服一一对应，换一套新衣
 var stateArr = ['hunger', 'walk', 'idle'], stateNum = 2, stateIn;  // 0-饥饿,1-饱腹,2-无聊
 var isHungry = 0, isHungryIn;
 var actionTimeout; // 小动作计时器
-
-
+var bubbleBg, bubbleText;
 
 function preload() {
   game.add.plugin(PhaserSpine.SpinePlugin);
@@ -43,6 +42,7 @@ function preload() {
 
   game.load.image('bg1', '/javascripts/panda/image/bg1.png')
   game.load.image('bg0', '/javascripts/panda/image/bg0.png')
+  game.load.image('bubble', '/javascripts/panda/image/bubble.png')
 
   var bar = game.add.graphics();
   game.load.onFileComplete.add(progress => {
@@ -88,6 +88,13 @@ function create() {
   } else if (actionTimeout) {
     clearTimeout(actionTimeout)
   }
+
+  var t = generateRandomText()
+  bubbleBg = game.add.sprite(200, 200, 'bubble');
+  // textBubble.alpha = 0;
+  var style = { font: "32px Arial", fill: "#ffffff", wordWrap: true, wordWrapWidth: bubbleBg.width, align: "center" }
+  bubbleText = game.add.text(bubbleBg.x, bubbleBg.y, 'ssssssss', style);
+  // text.alpha = 0;
 }
 
 function update() {
@@ -163,7 +170,6 @@ function bindPandaSkinClick() {
   clothClickFlagArr[clothIn] = true;
   for (var i in pandaPlayer.children) {
     var itm = pandaPlayer.children[i]
-    console.log(i, '->', itm.children, clothClickFlagArr[clothIn])
     if (itm.children.length > 0) {
       itm.setAll('inputEnabled', true)
       itm.callAll('events.onInputDown.add', 'events.onInputDown', clickPanda)
@@ -171,10 +177,9 @@ function bindPandaSkinClick() {
       clothClickFlagArr[clothIn] = false;
     }
   }
-  console.log('clothClickFlagArr->', clothClickFlagArr)
 }
 
-function clickPanda() {
+function generateRandomText() {
   var time = new Date();
   var hours = time.getHours();
   var textArr = [];
@@ -201,7 +206,12 @@ function clickPanda() {
   }
   var len = textArr.length
   text = textArr[parseInt(Math.random() * len)]
-  console.log('text->', text)
+  return text;
+}
+
+function clickPanda() {
+  // bubbleBg
+  bubbleText.setText(generateRandomText());
 }
 
 function initPanda({ level = 1, isHungry = 0, cloth = 0, bg = 0 }) {
