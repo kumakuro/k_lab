@@ -22,7 +22,7 @@ const timeTextArr = [
   'Good evening!'
 ]
 
-var pandaPlayer, game;
+var pandaPlayer, game, bubbleBg, bubbleText, transPanel;
 var targetX = screenWidth / 2;
 
 var levelNum = 1, levelIn; //1-幼年,2-中年,3-老年
@@ -32,7 +32,8 @@ var clothClickFlagArr = [null, null]; // 与衣服一一对应，换一套新衣
 var stateArr = ['hunger', 'walk', 'idle'], stateNum = 2, stateIn;  // 0-饥饿,1-饱腹,2-无聊
 var isHungry = 0, isHungryIn;
 var actionTimeout; // 小动作计时器
-var bubbleBg, bubbleText;
+var roleClick = false;
+
 
 function preload() {
   game.add.plugin(PhaserSpine.SpinePlugin);
@@ -49,6 +50,7 @@ function preload() {
     bar.beginFill(0xffffff, 1);
     bar.drawRect(0, screenHeight / 2 - 200, screenWidth * (progress / 100), 50);
   }, game);
+
 }
 
 function create() {
@@ -78,6 +80,8 @@ function create() {
   pandaPlayer = game.add.spine(targetX, screenHeight / 2 + 250, 'panda' + levelNum);
   pandaPlayer.scale.x = pandaRatio
   pandaPlayer.scale.y = pandaRatio
+  pandaPlayer.setMixByName('walk', 'idle', 0.2);
+  pandaPlayer.setMixByName('idle', 'walk', 0.2);
 
   pandaPlayer.setSkinByName(clothArr[clothIn]);
   pandaPlayer.setToSetupPose();
@@ -89,12 +93,11 @@ function create() {
     clearTimeout(actionTimeout)
   }
 
-  var t = generateRandomText()
-  bubbleBg = game.add.sprite(200, 200, 'bubble');
-  // textBubble.alpha = 0;
-  var style = { font: "32px Arial", fill: "#ffffff", wordWrap: true, wordWrapWidth: bubbleBg.width, align: "center" }
-  bubbleText = game.add.text(bubbleBg.x, bubbleBg.y, 'ssssssss', style);
-  // text.alpha = 0;
+  // // 透明遮罩
+  // transPanel = game.add.graphics();
+  // transPanel.beginFill(0xffffff, 0);
+  // transPanel.drawRect(0, 0, screenWidth, screenHeight);
+  // transPanel.inputEnabled = false;
 }
 
 function update() {
@@ -210,8 +213,44 @@ function generateRandomText() {
 }
 
 function clickPanda() {
-  // bubbleBg
-  bubbleText.setText(generateRandomText());
+  if(roleClick) return;
+  if (bubbleBg) {
+    clearBubble()
+  } else {
+    setTimeout(() => {
+      generateNewBubble();
+    }, 500)
+  }
+}
+
+function clearBubble() {
+  if (bubbleBg) {
+    bubbleBg.destroy();
+    bubbleText.destroy();
+    bubbleBg = null;
+    bubbleText = null;
+  }
+}
+
+function generateNewBubble() {
+
+  var t = generateRandomText()
+  var bubbleX = pandaPlayer.x > screenWidth / 2
+    ? pandaPlayer.x - pandaPlayer.width
+    : pandaPlayer.x + pandaPlayer.width;
+
+  bubbleBg = game.add.sprite(bubbleX, pandaPlayer.y - pandaPlayer.height, 'bubble');
+  bubbleBg.alpha = 0;
+  var style = { font: "32px Arial", fill: "#ffffff", wordWrap: true, wordWrapWidth: bubbleBg.width, align: "center" }
+  bubbleText = game.add.text(bubbleBg.x, bubbleBg.y, t, style);
+  bubbleText.alpha = 0;
+
+  game.add.tween(bubbleBg).to({ alpha: 1 }, 500, Phaser.Easing.Linear.None, true, 0, 0, false);
+  game.add.tween(bubbleText).to({ alpha: 1 }, 500, Phaser.Easing.Linear.None, true, 0, 0, false);
+
+  setTimeout(() => {
+    clearBubble()
+  }, 3000)
 }
 
 function initPanda({ level = 1, isHungry = 0, cloth = 0, bg = 0 }) {
