@@ -15,8 +15,10 @@ $('.option .bg').on('click', 'li', function () {
 
 setTimeout(function () {
   initPanda({
-    name: 'sss',
-    age: 12
+    level: 1,
+    isHungry: 0,
+    cloth: 1,
+    bg: 1
   })
-}, 100)
+}, 1000)
 

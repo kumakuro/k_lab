@@ -3,6 +3,24 @@ const screenWidth = 1024;
 const screenHeight = 768;
 const bgRatio = 0.5;
 const pandaRatio = 0.35;
+const normalTextArr = [
+  'Hi!',
+  'Welcome back!',
+  'Happy to see you.',
+  'I love you.'
+]
+const hungerTextArr = [
+  'I am hungry.',
+  'I want something to eat.',
+  'Can I have some meat?',
+  'I am starving.',
+  'My stomach is growling.'
+]
+const timeTextArr = [
+  'Good morning!',
+  'Good afternoon!',
+  'Good evening!'
+]
 
 var pandaPlayer, game;
 var targetX = screenWidth / 2;
@@ -11,7 +29,10 @@ var levelNum = 1, levelIn; //1-幼年,2-中年,3-老年
 var bgArr = [], bgNum = 0, bgIn; // 0-竹林，1-圣诞
 var clothArr = ['1', '2'], clothIn; // 1-没衣服，2-圣诞
 var clothClickFlagArr = [null, null]; // 与衣服一一对应，换一套新衣服时，重新绑定点击事件
-var stateArr = ['hunger', 'walk', 'idle'], stateNum = 1, stateIn;  // 0-饥饿,1-饱腹,2-无聊
+var stateArr = ['hunger', 'walk', 'idle'], stateNum = 2, stateIn;  // 0-饥饿,1-饱腹,2-无聊
+var isHungry = 0, isHungryIn;
+var actionTimeout; // 小动作计时器
+
 
 
 function preload() {
@@ -61,30 +82,61 @@ function create() {
   pandaPlayer.setSkinByName(clothArr[clothIn]);
   pandaPlayer.setToSetupPose();
   bindPandaSkinClick();
-  pandaPlayer.setAnimationByName(0, 'walk', true);
+  pandaPlayer.setAnimationByName(0, stateArr[stateNum], true);
+  if (stateArr[stateNum] == 'idle') {
+    actionsRandom()
+  } else if (actionTimeout) {
+    clearTimeout(actionTimeout)
+  }
 }
 
 function update() {
-  if (targetX > parseInt(pandaPlayer.x)) {
-    pandaPlayer.x += 8 * bgRatio;
+  if (isHungryIn != isHungry) isHungry = isHungryIn
+  if (Math.abs(targetX - parseInt(pandaPlayer.x)) < 60) {
+    stateIn = isHungry ? 0 : 2;
+  } else {
+    stateIn = 1;
   }
 
-  if (targetX < parseInt(pandaPlayer.x)) {
-    pandaPlayer.x -= 8 * bgRatio;
+  // 状态切换
+  if (stateIn != stateNum) {
+    stateNum = stateIn;
+    pandaPlayer.setAnimationByName(0, stateArr[stateNum], true);
+    if (stateArr[stateNum] == 'idle') {
+      actionsRandom()
+    } else if (actionTimeout) {
+      clearTimeout(actionTimeout)
+    }
   }
 
+  // 左右走的判断
+  if (targetX - 50 > parseInt(pandaPlayer.x)) {
+    pandaPlayer.x += isHungry ? 8 * bgRatio * 0.2 : 8 * bgRatio;
+  }
+  if (targetX < parseInt(pandaPlayer.x) - 50) {
+    pandaPlayer.x -= isHungry ? 8 * bgRatio * 0.2 : 8 * bgRatio;
+  }
+
+  // 换背景
   if (bgNum != bgIn) {
     bgNum = bgIn;
     changeBgArr()
   }
-
+  // 换衣服
   if (clothClickFlagArr[clothIn] == false) {
     bindPandaSkinClick();
   }
 }
 
+// 默认动作：向左走两步，向右走两步
+function actionsRandom() {
+  console.log('execute actionsRandom')
+  actionTimeout = setTimeout(() => {
+    console.log('timeout')
+  }, 5000)
+}
+
 function defineBgSpriteClick() {
-  console.log('bgNum->', bgNum)
   targetX = parseInt(game.input.activePointer.position.x);
   if (targetX > parseInt(pandaPlayer.x)) {
     pandaPlayer.scale.x = pandaRatio
@@ -123,25 +175,54 @@ function bindPandaSkinClick() {
 }
 
 function clickPanda() {
-  console.log('clickPanda-click')
-  return false;
+  var time = new Date();
+  var hours = time.getHours();
+  var textArr = [];
+  var text = '';
+
+  if (stateNum == '1') {
+    targetX = parseInt(pandaPlayer.x);
+    stateNum = isHungry ? '0' : '2';
+    pandaPlayer.setAnimationByName(0, stateArr[stateNum], true);
+  }
+
+  if (isHungry) {
+    textArr = hungerTextArr
+  } else {
+    if (hours <= 11 && hours >= 6) {
+      textArr = normalTextArr.concat(timeTextArr[0])
+    }
+    if (hours <= 16 && hours >= 12) {
+      textArr = normalTextArr.concat(timeTextArr[1])
+    }
+    if (hours <= 22 && hours >= 17) {
+      textArr = normalTextArr.concat(timeTextArr[2])
+    }
+  }
+  var len = textArr.length
+  text = textArr[parseInt(Math.random() * len)]
+  console.log('text->', text)
 }
 
-function initPanda({ level = 1, state = 1, cloth = 1, bg = 1 }) {
-  console.log('initPanda->', level, state, cloth, bg)
+function initPanda({ level = 1, isHungry = 0, cloth = 0, bg = 0 }) {
+  console.log('initPanda->', level, isHungry, cloth, bg)
 
   levelIn = level
-  stateIn = state
+  isHungryIn = isHungry
   clothIn = cloth
   bgIn = bg
 
-  game = new Phaser.Game(screenWidth, screenHeight, Phaser.AUTO, 'phaserSet',
-    {
-      preload: preload,
-      create: create,
-      update: update
-    }
-  );
+  setTimeout(() => {
+    game = new Phaser.Game(screenWidth, screenHeight, Phaser.AUTO, 'phaserSet',
+      {
+        preload: preload,
+        create: create,
+        update: update
+      }
+    );
+  }, 100)
+
+
 }
 
 function changeCloth(num) {

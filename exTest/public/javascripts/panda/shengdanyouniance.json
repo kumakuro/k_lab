@@ -615,6 +615,232 @@
 					]
 				}
 			}
+		},
+		"idle": {
+			"slots": {
+				"zuojiao8": {
+					"attachment": [
+						{
+							"time": 0,
+							"name": "zuojiao8"
+						}
+					]
+				}
+			},
+			"bones": {
+				"shenzi": {
+					"rotate": [
+						{
+							"time": 0,
+							"angle": 0.48,
+							"curve": [
+								0.25,
+								0,
+								0.75,
+								1
+							]
+						}
+					]
+				},
+				"tou": {
+					"rotate": [
+						{
+							"time": 0,
+							"angle": 0,
+							"curve": [
+								0.25,
+								0,
+								0.75,
+								1
+							]
+						}
+					]
+				},
+				"bone2": {
+					"rotate": [
+						{
+							"time": 0,
+							"angle": 0.28,
+							"curve": [
+								0.25,
+								0,
+								0.75,
+								1
+							]
+						}
+					]
+				},
+				"bone8": {
+					"rotate": [
+						{
+							"time": 0,
+							"angle": -23.79,
+							"curve": [
+								0.25,
+								0,
+								0.75,
+								1
+							]
+						}
+					]
+				},
+				"zuoshou": {
+					"rotate": [
+						{
+							"time": 0,
+							"angle": -13.72,
+							"curve": [
+								0.25,
+								0,
+								0.75,
+								1
+							]
+						}
+					]
+				},
+				"youshou": {
+					"rotate": [
+						{
+							"time": 0,
+							"angle": 11.93,
+							"curve": [
+								0.25,
+								0,
+								0.75,
+								1
+							]
+						}
+					]
+				},
+				"bizi": {
+					"translate": [
+						{
+							"time": 0,
+							"x": 0,
+							"y": 0,
+							"curve": [
+								0.25,
+								0,
+								0.75,
+								1
+							]
+						}
+					]
+				},
+				"zuiba": {
+					"translate": [
+						{
+							"time": 0,
+							"x": 0,
+							"y": 0,
+							"curve": [
+								0.25,
+								0,
+								0.75,
+								1
+							]
+						}
+					]
+				},
+				"root": {
+					"scale": [
+						{
+							"time": 0,
+							"x": 1,
+							"y": 1
+						}
+					]
+				}
+			}
+		},
+		"hunger": {
+			"slots": {
+				"zuojiao8": {
+					"attachment": [
+						{
+							"time": 0,
+							"name": "zuojiao8"
+						}
+					]
+				}
+			},
+			"bones": {
+				"shenzi": {
+					"rotate": [
+						{
+							"time": 0,
+							"angle": 0.48
+						}
+					]
+				},
+				"tou": {
+					"rotate": [
+						{
+							"time": 0,
+							"angle": 0
+						}
+					]
+				},
+				"bone2": {
+					"rotate": [
+						{
+							"time": 0,
+							"angle": 0.28
+						}
+					]
+				},
+				"bone8": {
+					"rotate": [
+						{
+							"time": 0,
+							"angle": 1.79
+						}
+					]
+				},
+				"zuoshou": {
+					"rotate": [
+						{
+							"time": 0,
+							"angle": 1
+						}
+					]
+				},
+				"youshou": {
+					"rotate": [
+						{
+							"time": 0,
+							"angle": 12
+						}
+					]
+				},
+				"bizi": {
+					"translate": [
+						{
+							"time": 0,
+							"x": 0,
+							"y": 0
+						}
+					]
+				},
+				"zuiba": {
+					"translate": [
+						{
+							"time": 0,
+							"x": 0,
+							"y": 0
+						}
+					]
+				},
+				"root": {
+					"scale": [
+						{
+							"time": 0,
+							"x": 1,
+							"y": 1
+						}
+					]
+				}
+			}
 		}
 	}
 }
