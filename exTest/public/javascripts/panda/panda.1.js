@@ -342,10 +342,9 @@ function initPanda({ level = 1, isHunger = 0, cloth = 0, bg = 0 }) {
   setTimeout(() => {
     game = new Phaser.Game(screenWidth, screenHeight, Phaser.AUTO, 'phaserSet',
       {
-        preload: preload
-        // preload: preload,
-        // create: create,
-        // update: update
+        preload: preload,
+        create: create,
+        update: update
       }
     );
   }, 100)
