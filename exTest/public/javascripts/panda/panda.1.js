@@ -290,9 +290,24 @@ function generateNewBubble() {
   bubbleText.anchor.set(0.5);
   // bubbleText.alpha = 0;
 
-  setTimeout(() => {
-    clearBubble()
-  }, 3000)
+
+  var bgTween = game.add.tween(bubbleBg).to({ alpha: 0 }, 2000, "Linear", true, 2000);
+  // 开始和结束的回调
+  bgTween.onStart.add(bgTweenStart, this);
+  bgTween.onComplete.add(bgTweenEnd, this);
+
+  // setTimeout(() => {
+  //   clearBubble()
+  // }, 3000)
+}
+
+function bgTweenStart() {
+
+}
+
+
+function bgTweenEnd() {
+  clearBubble()
 }
 
 function initPanda({ level = 1, isHungry = 0, cloth = 0, bg = 0 }) {

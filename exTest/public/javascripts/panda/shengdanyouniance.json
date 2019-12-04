@@ -805,14 +805,6 @@
 						}
 					]
 				},
-				"youshou": {
-					"rotate": [
-						{
-							"time": 0,
-							"angle": 12
-						}
-					]
-				},
 				"bizi": {
 					"translate": [
 						{
