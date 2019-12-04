@@ -299,20 +299,19 @@ function generateNewBubble() {
   bubbleText.anchor.set(0.5);
   bubbleText.alpha = 0;
 
-  bgTween = game.add.tween(bubbleBg).to({ alpha: 1, y: bubbleBg.y - 50 }, 500, "Linear", true);
-  textTween = game.add.tween(bubbleText).to({ alpha: 1, y: bubbleText.y - 50 }, 500, "Linear", true);
-
+  bgTween = game.add.tween(bubbleBg).to({ alpha: 1, y: bubbleBg.y - 50 }, 300, "Linear", true);
+  textTween = game.add.tween(bubbleText).to({ alpha: 1, y: bubbleText.y - 50 }, 300, "Linear", true);
   bgTween.onComplete.addOnce(tweenNext, this);
 }
 
 function tweenNext() {
-  bgTween.to({ alpha: 0, y: bubbleBg.y + 50 }, 500, "Linear", true, 2500);
-  textTween.to({ alpha: 0, y: bubbleText.y + 50 }, 500, "Linear", true, 2500);
+
+  textTween = game.add.tween(bubbleText).to({ alpha: 0, y: bubbleText.y + 50 }, 300, "Linear", true, 2700);
+  bgTween = game.add.tween(bubbleBg).to({ alpha: 0, y: bubbleBg.y + 50 }, 300, "Linear", true, 2700);
+
   bgTween.onComplete.add(bgTweenEnd, this);
 }
 function bgTweenEnd() {
-  bubbleText.alpha = 0;
-  bubbleBg.alpha = 0;
   clearBubble()
 }
 
