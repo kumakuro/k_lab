@@ -73,6 +73,9 @@ var actionTimeout; // 小动作计时器
 var roleClick = false;
 
 
+var bgTween, textTween;
+
+
 function preload() {
   game.add.plugin(PhaserSpine.SpinePlugin);
   game.load.spine('panda1', '/javascripts/panda/shengdanyouniance.json');
@@ -92,6 +95,7 @@ function preload() {
 }
 
 function create() {
+  // 背景图
   var bg0 = game.add.sprite(0, 0, 'bg0');
   bg0.alpha = 0;
   bg0.scale.x = bgRatio;
@@ -115,6 +119,7 @@ function create() {
   }
   changeBgArr()
 
+  // 角色
   pandaPlayer = game.add.spine(targetX, screenHeight / 2 + 250, 'panda' + levelNum);
   pandaPlayer.scale.x = pandaRatio
   pandaPlayer.scale.y = pandaRatio
@@ -136,6 +141,7 @@ function create() {
   // transPanel.beginFill(0xffffff, 0);
   // transPanel.drawRect(0, 0, screenWidth, screenHeight);
   // transPanel.inputEnabled = false;
+
 }
 
 function update() {
@@ -188,12 +194,11 @@ function defineBgSpriteClick() {
   targetX = parseInt(game.input.activePointer.position.x);
   if (targetX > parseInt(pandaPlayer.x)) {
     pandaPlayer.scale.x = pandaRatio;
-    clearBubble();
   }
   if (targetX < parseInt(pandaPlayer.x)) {
     pandaPlayer.scale.x = -1 * pandaRatio;
-    clearBubble();
   }
+  clearBubble();
   pandaPlayer.setToSetupPose();
 }
 
@@ -254,13 +259,10 @@ function generateRandomText() {
 
 function clickPanda() {
   if (roleClick) return;
-  if (bubbleBg) {
-    clearBubble()
-  } else {
-    setTimeout(() => {
-      generateNewBubble();
-    }, 500)
-  }
+  roleClick = true;
+  setTimeout(() => {
+    generateNewBubble();
+  }, 500)
 }
 
 function clearBubble() {
@@ -270,10 +272,17 @@ function clearBubble() {
     bubbleBg = null;
     bubbleText = null;
   }
+  roleClick = false;
+}
+
+function changeBubleText() {
+  var t = generateRandomText()
+  bubbleText.setText(t.text)
+  bubbleText.x = Math.floor(bubbleBg.x + bubbleBg.width / 2) + (pandaPlayer.x > screenWidth / 2 ? -10 : 10);
+  bubbleText.y = Math.floor(bubbleBg.y + bubbleBg.height / 2) + 10;
 }
 
 function generateNewBubble() {
-  console.log(pandaPlayer.x, ',', pandaPlayer.width)
   var t = generateRandomText()
   var pWidth = parseInt(Math.abs(pandaPlayer.width))
   var bubbleX = pandaPlayer.x > screenWidth / 2
@@ -282,39 +291,36 @@ function generateNewBubble() {
 
   bubbleBg = game.add.sprite(bubbleX, pandaPlayer.y - pandaPlayer.height, 'bubble');
   bubbleBg.scale.x = pandaPlayer.x > screenWidth / 2 ? -1 : 1;
-  // bubbleBg.alpha = 0;
+  bubbleBg.alpha = 0;
   var style = { font: t.fontSize + "px CenturyGothic-Bold", fill: "#FEAE24", wordWrap: true, wordWrapWidth: Math.abs(bubbleBg.width), align: "center" }
   bubbleText = game.add.text(0, 0, t.text, style)
   bubbleText.x = Math.floor(bubbleBg.x + bubbleBg.width / 2) + (pandaPlayer.x > screenWidth / 2 ? -10 : 10);
   bubbleText.y = Math.floor(bubbleBg.y + bubbleBg.height / 2) + 10;
   bubbleText.anchor.set(0.5);
-  // bubbleText.alpha = 0;
+  bubbleText.alpha = 0;
 
+  bgTween = game.add.tween(bubbleBg).to({ alpha: 1, y: bubbleBg.y - 50 }, 500, "Linear", true);
+  textTween = game.add.tween(bubbleText).to({ alpha: 1, y: bubbleText.y - 50 }, 500, "Linear", true);
 
-  var bgTween = game.add.tween(bubbleBg).to({ alpha: 0 }, 2000, "Linear", true, 2000);
-  // 开始和结束的回调
-  bgTween.onStart.add(bgTweenStart, this);
+  bgTween.onComplete.addOnce(tweenNext, this);
+}
+
+function tweenNext() {
+  bgTween.to({ alpha: 0, y: bubbleBg.y + 50 }, 500, "Linear", true, 2500);
+  textTween.to({ alpha: 0, y: bubbleText.y + 50 }, 500, "Linear", true, 2500);
   bgTween.onComplete.add(bgTweenEnd, this);
-
-  // setTimeout(() => {
-  //   clearBubble()
-  // }, 3000)
 }
-
-function bgTweenStart() {
-
-}
-
-
 function bgTweenEnd() {
+  bubbleText.alpha = 0;
+  bubbleBg.alpha = 0;
   clearBubble()
 }
 
-function initPanda({ level = 1, isHungry = 0, cloth = 0, bg = 0 }) {
-  console.log('initPanda->', level, isHungry, cloth, bg)
+function initPanda({ level = 1, isHunger = 0, cloth = 0, bg = 0 }) {
+  console.log('initPanda->', level, isHunger, cloth, bg)
 
   levelIn = level
-  isHungryIn = isHungry
+  isHungryIn = isHunger
   clothIn = cloth
   bgIn = bg
 
