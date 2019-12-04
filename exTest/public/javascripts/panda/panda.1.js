@@ -1,6 +1,7 @@
 
 const screenWidth = 1024;
 const screenHeight = 768;
+const loadingWidth = 360;
 const bgRatio = 0.5;
 const pandaRatio = 0.35;
 const normalTextArr = [
@@ -77,6 +78,27 @@ var bgTween, textTween;
 
 
 function preload() {
+
+  this.stage.backgroundColor = "#1A91E0";
+
+  // game.load.image('loadingBg', '/javascripts/panda/image/bg1.png')
+  // var loadingBg = game.add.sprite(0, 0, 'loadingBg');
+
+  var loadingText = game.add.text(game.world.centerX, game.world.centerY - 50, '加载中...0%', { font: "18px Arial", fill: "#333333", align: "center" });
+  loadingText.anchor.set(0.5);
+
+  var shadow = game.add.graphics();
+  shadow.beginFill(0x000000, 0.2);
+  shadow.drawRect(330, screenHeight / 2 - 25, loadingWidth, 25);
+
+  var bar = game.add.graphics();
+  game.load.onFileComplete.add(progress => {
+    console.log('progress->', progress)
+    loadingText.setText('加载中..' + progress + '%')
+    bar.beginFill(0xFEAE24, 1);
+    bar.drawRect(330, screenHeight / 2 - 25, loadingWidth * (progress / 100), 25);
+  }, game);
+
   game.add.plugin(PhaserSpine.SpinePlugin);
   game.load.spine('panda1', '/javascripts/panda/shengdanyouniance.json');
   game.load.spine('panda2', '/javascripts/panda/shengdanyouniance.json');
@@ -85,12 +107,6 @@ function preload() {
   game.load.image('bg1', '/javascripts/panda/image/bg1.png')
   game.load.image('bg0', '/javascripts/panda/image/bg0.png')
   game.load.image('bubble', '/javascripts/panda/image/bubble.png')
-
-  var bar = game.add.graphics();
-  game.load.onFileComplete.add(progress => {
-    bar.beginFill(0xffffff, 1);
-    bar.drawRect(0, screenHeight / 2 - 200, screenWidth * (progress / 100), 50);
-  }, game);
 
 }
 
@@ -326,9 +342,10 @@ function initPanda({ level = 1, isHunger = 0, cloth = 0, bg = 0 }) {
   setTimeout(() => {
     game = new Phaser.Game(screenWidth, screenHeight, Phaser.AUTO, 'phaserSet',
       {
-        preload: preload,
-        create: create,
-        update: update
+        preload: preload
+        // preload: preload,
+        // create: create,
+        // update: update
       }
     );
   }, 100)
