@@ -16,7 +16,7 @@ $('.option .bg').on('click', 'li', function () {
 setTimeout(function () {
   initPanda({
     level: 1,
-    isHungry: 0,
+    isHungry: 1,
     cloth: 1,
     bg: 1
   })

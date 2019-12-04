@@ -4,22 +4,60 @@ const screenHeight = 768;
 const bgRatio = 0.5;
 const pandaRatio = 0.35;
 const normalTextArr = [
-  'Hi!',
-  'Welcome back!',
-  'Happy to see you.',
-  'I love you.'
+  {
+    text: 'Hi!',
+    fontSize: 24
+  },
+  {
+    text: 'Welcome back!',
+    fontSize: 24
+  },
+  {
+    text: 'Happy to see you.',
+    fontSize: 24
+  },
+  {
+    text: 'I love you.',
+    fontSize: 24
+  }
 ]
 const hungerTextArr = [
-  'I am hungry.',
-  'I want something to eat.',
-  'Can I have some meat?',
-  'I am starving.',
-  'My stomach is growling.'
+  {
+    text: 'I am hungry.',
+    fontSize: 24
+  }, {
+    text: 'I want something to eat.',
+    fontSize: 20
+  }, {
+    text: 'Can I have some meat?',
+    fontSize: 22
+  }, {
+    text: 'I am starving.',
+    fontSize: 24
+  }, {
+    text: 'My stomach is growling.',
+    fontSize: 18
+  }
 ]
 const timeTextArr = [
-  'Good morning!',
-  'Good afternoon!',
-  'Good evening!'
+  {
+    text: 'Good morning!',
+
+
+    fontSize: 24
+  },
+  {
+    text: 'Good afternoon!',
+
+
+    fontSize: 24
+  },
+  {
+    text: 'Good evening!',
+
+
+    fontSize: 24
+  }
 ]
 
 var pandaPlayer, game, bubbleBg, bubbleText, transPanel;
@@ -149,10 +187,12 @@ function actionsRandom() {
 function defineBgSpriteClick() {
   targetX = parseInt(game.input.activePointer.position.x);
   if (targetX > parseInt(pandaPlayer.x)) {
-    pandaPlayer.scale.x = pandaRatio
+    pandaPlayer.scale.x = pandaRatio;
+    clearBubble();
   }
   if (targetX < parseInt(pandaPlayer.x)) {
-    pandaPlayer.scale.x = -1 * pandaRatio
+    pandaPlayer.scale.x = -1 * pandaRatio;
+    clearBubble();
   }
   pandaPlayer.setToSetupPose();
 }
@@ -213,7 +253,7 @@ function generateRandomText() {
 }
 
 function clickPanda() {
-  if(roleClick) return;
+  if (roleClick) return;
   if (bubbleBg) {
     clearBubble()
   } else {
@@ -233,20 +273,22 @@ function clearBubble() {
 }
 
 function generateNewBubble() {
-
+  console.log(pandaPlayer.x, ',', pandaPlayer.width)
   var t = generateRandomText()
+  var pWidth = parseInt(Math.abs(pandaPlayer.width))
   var bubbleX = pandaPlayer.x > screenWidth / 2
-    ? pandaPlayer.x - pandaPlayer.width
-    : pandaPlayer.x + pandaPlayer.width;
+    ? pandaPlayer.x - pWidth / 2
+    : pandaPlayer.x + pWidth / 2;
 
   bubbleBg = game.add.sprite(bubbleX, pandaPlayer.y - pandaPlayer.height, 'bubble');
-  bubbleBg.alpha = 0;
-  var style = { font: "32px Arial", fill: "#ffffff", wordWrap: true, wordWrapWidth: bubbleBg.width, align: "center" }
-  bubbleText = game.add.text(bubbleBg.x, bubbleBg.y, t, style);
-  bubbleText.alpha = 0;
-
-  game.add.tween(bubbleBg).to({ alpha: 1 }, 500, Phaser.Easing.Linear.None, true, 0, 0, false);
-  game.add.tween(bubbleText).to({ alpha: 1 }, 500, Phaser.Easing.Linear.None, true, 0, 0, false);
+  bubbleBg.scale.x = pandaPlayer.x > screenWidth / 2 ? -1 : 1;
+  // bubbleBg.alpha = 0;
+  var style = { font: t.fontSize + "px CenturyGothic-Bold", fill: "#FEAE24", wordWrap: true, wordWrapWidth: Math.abs(bubbleBg.width), align: "center" }
+  bubbleText = game.add.text(0, 0, t.text, style)
+  bubbleText.x = Math.floor(bubbleBg.x + bubbleBg.width / 2) + (pandaPlayer.x > screenWidth / 2 ? -10 : 10);
+  bubbleText.y = Math.floor(bubbleBg.y + bubbleBg.height / 2) + 10;
+  bubbleText.anchor.set(0.5);
+  // bubbleText.alpha = 0;
 
   setTimeout(() => {
     clearBubble()
@@ -270,8 +312,6 @@ function initPanda({ level = 1, isHungry = 0, cloth = 0, bg = 0 }) {
       }
     );
   }, 100)
-
-
 }
 
 function changeCloth(num) {
