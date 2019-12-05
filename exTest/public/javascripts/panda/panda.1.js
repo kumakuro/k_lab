@@ -66,23 +66,18 @@ var targetX = screenWidth / 2;
 
 var levelNum = 1, levelIn; //1-幼年,2-中年,3-老年
 var bgArr = [], bgNum = 0, bgIn; // 0-竹林，1-圣诞
-var clothArr = ['1', '2'], clothIn; // 1-没衣服，2-圣诞
+var clothArr = ['1', '2', '3', '4', '5'], clothIn; // 1-没衣服，2-圣诞
 var clothClickFlagArr = [null, null]; // 与衣服一一对应，换一套新衣服时，重新绑定点击事件
 var stateArr = ['hunger', 'walk', 'idle'], stateNum = 2, stateIn;  // 0-饥饿,1-饱腹,2-无聊
 var isHungry = 0, isHungryIn;
 var actionTimeout; // 小动作计时器
 var roleClick = false;
 
-
 var bgTween, textTween;
-
 
 function preload() {
 
   this.stage.backgroundColor = "#1A91E0";
-
-  // game.load.image('loadingBg', '/javascripts/panda/image/bg1.png')
-  // var loadingBg = game.add.sprite(0, 0, 'loadingBg');
 
   var loadingText = game.add.text(game.world.centerX, game.world.centerY - 50, '加载中...0%', { font: "18px Arial", fill: "#333333", align: "center" });
   loadingText.anchor.set(0.5);
@@ -101,8 +96,6 @@ function preload() {
 
   game.add.plugin(PhaserSpine.SpinePlugin);
   game.load.spine('panda1', '/javascripts/panda/shengdanyouniance.json');
-  game.load.spine('panda2', '/javascripts/panda/shengdanyouniance.json');
-  game.load.spine('panda3', '/javascripts/panda/shengdanyouniance.json');
 
   game.load.image('bg1', '/javascripts/panda/image/bg1.png')
   game.load.image('bg0', '/javascripts/panda/image/bg0.png')
@@ -146,11 +139,6 @@ function create() {
   pandaPlayer.setToSetupPose();
   bindPandaSkinClick();
   pandaPlayer.setAnimationByName(0, stateArr[stateNum], true);
-  if (stateArr[stateNum] == 'idle') {
-    actionsRandom()
-  } else if (actionTimeout) {
-    clearTimeout(actionTimeout)
-  }
 
   // // 透明遮罩
   // transPanel = game.add.graphics();
@@ -172,10 +160,14 @@ function update() {
   if (stateIn != stateNum) {
     stateNum = stateIn;
     pandaPlayer.setAnimationByName(0, stateArr[stateNum], true);
-    if (stateArr[stateNum] == 'idle') {
+  }
+
+  // 随机触发idle时的走路动作
+  if (stateArr[stateNum] == 'idle') {
+    let num = optionRandom();
+    // console.log('num->', num)
+    if (num === 0) {
       actionsRandom()
-    } else if (actionTimeout) {
-      clearTimeout(actionTimeout)
     }
   }
 
@@ -198,16 +190,24 @@ function update() {
   }
 }
 
+function optionRandom() {
+  return parseInt(Math.random() * 500)
+}
 // 默认动作：向左走两步，向右走两步
 function actionsRandom() {
-  console.log('execute actionsRandom')
-  actionTimeout = setTimeout(() => {
-    console.log('timeout')
-  }, 5000)
+
+  if (Math.abs(pandaPlayer.x) >= screenWidth / 2) {
+    targetX = parseInt(screenWidth / 2 - 100);
+    defineBgSpriteClick(targetX)
+  }
+  if (Math.abs(pandaPlayer.x) < screenWidth / 2) {
+    targetX = parseInt(screenWidth / 2 + 100);
+    defineBgSpriteClick(targetX)
+  }
 }
 
-function defineBgSpriteClick() {
-  targetX = parseInt(game.input.activePointer.position.x);
+function defineBgSpriteClick(num) {
+  targetX = num ? num : parseInt(game.input.activePointer.position.x);
   if (targetX > parseInt(pandaPlayer.x)) {
     pandaPlayer.scale.x = pandaRatio;
   }
@@ -321,7 +321,6 @@ function generateNewBubble() {
 }
 
 function tweenNext() {
-
   textTween = game.add.tween(bubbleText).to({ alpha: 0, y: bubbleText.y + 50 }, 300, "Linear", true, 2700);
   bgTween = game.add.tween(bubbleBg).to({ alpha: 0, y: bubbleBg.y + 50 }, 300, "Linear", true, 2700);
 
@@ -332,8 +331,6 @@ function bgTweenEnd() {
 }
 
 function initPanda({ level = 1, isHunger = 0, cloth = 0, bg = 0 }) {
-  console.log('initPanda->', level, isHunger, cloth, bg)
-
   levelIn = level
   isHungryIn = isHunger
   clothIn = cloth

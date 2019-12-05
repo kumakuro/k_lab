@@ -2,7 +2,7 @@ import {
   initPanda,
   changeCloth,
   changeBg
-} from '../panda/panda.1.js'
+} from '../panda/panda.2.js'
 
 
 $('.option .cloth').on('click', 'li', function () {
