@@ -57,12 +57,11 @@ const timeTextArr = [
 
 var game, roleWalk, roleBreath, roleHunger, roleArr = []; // 新增三种动作的角色
 var bindBodyArr = [false, false, false];// 给对应的状态绑定click事件
-var bubbleBg, bubbleText; // 气泡背景图，气泡文字
+var bubbleBg, bubbleText, bubbleClick = false; // 气泡背景图，气泡文字
 var targetX = screenWidth / 2; // 角色移动位置
 var bgArr = [], bgNum = 0, bgIn = 0; // 0-竹林，1-圣诞
 var clothArr = ['1', '2', '3', '4', '5'], clothIn = 0; // 1-没衣服，2-圣诞
 var state = 1, stateIn = null; // 0-walk;1-breath;2-hunger;
-// var bindWalkClick = false, bindBreathClick = false, bindHungerClick = false;
 var isHunger = 0, isHungerIn = null;
 var breathCount = 0; //  呼吸达到1000时，触发左右两步晃
 
@@ -80,6 +79,11 @@ function preload() {
   game.load.spine('roleWalk', '/javascripts/panda/yijizoulu.json');
   game.load.spine('roleBreath', '/javascripts/panda/yijihuxi.json');
   game.load.spine('roleHunger', '/javascripts/panda/yijijie.json');
+
+
+  game.load.spine('roleWalk1', '/javascripts/panda/yijizoulu.1.json');
+  game.load.spine('roleBreath1', '/javascripts/panda/yijihuxi.1.json');
+  game.load.spine('roleHunger1', '/javascripts/panda/yijijie.1.json');
 
 }
 
@@ -140,7 +144,13 @@ function create() {
 }
 
 function update() {
-  // 状态切换
+  // 切换背景图
+  if (bgNum != bgIn) {
+    bgNum = bgIn;
+    changeBgArr()
+  }
+
+  // 行走和固定位置的状态切换
   if (stateIn != null && stateIn != state) {
     state = stateIn;
     roleArr.forEach((itm, idx) => {
@@ -151,7 +161,7 @@ function update() {
     })
     setRoleSkeletonClick(state)
   }
-  // 左右走的判断
+  // 左走右走及不走的判定
   if (targetX - 100 > parseInt(roleWalk.x)) {
     roleWalk.x += isHunger ? 8 * bgRatio * 0.2 : 8 * bgRatio;
     syncAllRoleX(0, roleWalk.x)
@@ -164,12 +174,25 @@ function update() {
     stateIn = isHunger == 1 ? 2 : 1;
   }
 
+  // breath状态判定
+  if (state == 0) {
+    breathCount++;
+    if (breathCount == 1000) {
+      getBreathActionRandom()
+    }
+  }
+
   // 给不同的动作角色绑定click事件
   if (bindBodyArr.indexOf(false) > -1) {
     bindBodyArr.forEach((itm, idx) => {
       if (itm == false) { actionRoleBindClick(idx) }
     })
   }
+}
+
+// 呼吸时产生的随机动作
+function getBreathActionRandom() {
+  breathCount = 0
 }
 
 // 同步除指定role外其他的role的x参数
@@ -257,20 +280,31 @@ function setRoleSkeletonClick(idx) {
 function walkClick() {
   console.log('walk')
   targetX = roleWalk.x;
+  setTimeout(() => {
+    breathClick()
+  }, 300)
   return;
 }
 
 // breath角色的click
 function breathClick() {
   console.log('breath')
-  addTextBubble()
+  bubbleBindClick()
   return;
 }
 
 // hunger角色的click
 function hungerClick() {
   console.log('hunger')
+  bubbleBindClick()
   return;
+}
+
+// 点击触发bubble冒出
+function bubbleBindClick() {
+  if (bubbleClick) return;
+  bubbleClick = true;
+  addTextBubble()
 }
 
 // 获取随机提示语
@@ -339,7 +373,7 @@ function clearBubble() {
     bubbleBg = null;
     bubbleText = null;
   }
-  // roleClick = false;
+  bubbleClick = false;
 }
 
 // 初始化熊猫
