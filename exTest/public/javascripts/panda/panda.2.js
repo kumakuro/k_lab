@@ -133,8 +133,8 @@ function preload() {
   }, game);
 
 
-  game.load.image('bg1', '/javascripts/panda/image/bg1.png')
-  game.load.image('bg0', '/javascripts/panda/image/bg0.png')
+  game.load.image('bg1', '/javascripts/panda/image/bg1.jpg')
+  game.load.image('bg0', '/javascripts/panda/image/bg0.jpg')
   game.load.image('bubble', '/javascripts/panda/image/bubble.png')
 
   game.add.plugin(PhaserSpine.SpinePlugin);
