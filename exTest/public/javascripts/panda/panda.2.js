@@ -90,7 +90,7 @@ function preload() {
     height: '100%',
     position: 'absolute',
     top: 0,
-    'background-image': 'url("/javascripts/panda/image/loading.png")',
+    'background-image': 'url("/javascripts/panda/image/loading.jpg")',
     'background-size': '100%'
   })
 
@@ -135,7 +135,7 @@ function preload() {
 
   game.load.image('bg1', '/javascripts/panda/image/bg1.jpg')
   game.load.image('bg0', '/javascripts/panda/image/bg0.jpg')
-  game.load.image('bubble', '/javascripts/panda/image/bubble.jpg')
+  game.load.image('bubble', '/javascripts/panda/image/bubble.png')
 
   game.add.plugin(PhaserSpine.SpinePlugin);
   game.load.spine('roleWalk0', '/javascripts/panda/yijizoulu.json');
