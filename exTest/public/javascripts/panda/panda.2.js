@@ -135,7 +135,7 @@ function preload() {
 
   game.load.image('bg1', '/javascripts/panda/image/bg1.jpg')
   game.load.image('bg0', '/javascripts/panda/image/bg0.jpg')
-  game.load.image('bubble', '/javascripts/panda/image/bubble.png')
+  game.load.image('bubble', '/javascripts/panda/image/bubble.jpg')
 
   game.add.plugin(PhaserSpine.SpinePlugin);
   game.load.spine('roleWalk0', '/javascripts/panda/yijizoulu.json');
