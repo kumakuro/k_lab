@@ -55,6 +55,7 @@ const timeTextArr = [
   }
 ]
 
+var dom = "#phaserSet"
 var game, roleWalk, roleBreath, roleHunger, roleArr = []; // 新增三种动作的角色
 var bindBodyArr = [false, false, false];// 给对应的状态绑定click事件
 var bubbleBg, bubbleText, bubbleClick = false; // 气泡背景图，气泡文字
@@ -64,6 +65,7 @@ var clothArr = ['1', '2', '3', '4', '5'], clothIn = 0; // 1-没衣服，2-圣诞
 var state = 1, stateIn = null; // 0-walk;1-breath;2-hunger;
 var isHunger = 0, isHungerIn = null;
 var breathCount = 0; //  呼吸达到1000时，触发左右两步晃
+var level = 0;
 
 var bgTween, textTween; // 气泡的背景和文字
 
@@ -71,20 +73,79 @@ function preload() {
   /**
    * Todo: 用jq和dom节点做进度条
    */
+
+  $('#phaserSet').append('<div class="progressLayer"></div>')
+  $('#phaserSet .progressLayer').append('<div class="progressBox"></div>')
+  $('#phaserSet .progressBox').append('<div class="text"></div>')
+  $('#phaserSet .progressBox').append('<div class="bar"></div>')
+  $('#phaserSet .progressBox .bar').append('<div class="fill"></div>')
+
+  let $layer = $('#phaserSet .progressLayer')
+  let $pBox = $('#phaserSet .progressLayer .progressBox')
+  let $text = $('#phaserSet .progressLayer .progressBox .text')
+  let $bar = $('#phaserSet .progressLayer .progressBox .bar')
+  let $fill = $('#phaserSet .progressLayer .progressBox .bar .fill')
+
+  $layer.css({
+    width: '100%',
+    height: '100%',
+    position: 'absolute',
+    top: 0,
+    'background-image': 'url("/javascripts/panda/image/loading.png")',
+    'background-size': '100%'
+  })
+
+  $pBox.css({
+    width: '30%',
+    height: '13%',
+    position: 'absolute',
+    top: '43%',
+    left: '35%'
+  })
+
+  $text.css({
+    'text-align': 'center',
+    'margin-bottom': '30px'
+  })
+
+  $bar.css({
+    'width': '100%',
+    'height': '25px',
+    'background-color': 'rgba(0,0,0,0.2)',
+    'border-radius': '10px'
+  })
+
+  $fill.css({
+    'width': '0%',
+    'height': '100%',
+    'background-color': 'orange',
+    'border-radius': '10px'
+  })
+
+  $('canvas').css('opacity', '0')
+
+  game.load.onFileComplete.add(progress => {
+    $text.text(`加载中...${progress}%`);
+    $fill.css('width', `${progress}%`)
+    if (progress === 100) {
+      $layer.remove();
+      $('canvas').css('opacity', '1');
+    }
+  }, game);
+
+
   game.load.image('bg1', '/javascripts/panda/image/bg1.png')
   game.load.image('bg0', '/javascripts/panda/image/bg0.png')
   game.load.image('bubble', '/javascripts/panda/image/bubble.png')
 
   game.add.plugin(PhaserSpine.SpinePlugin);
-  game.load.spine('roleWalk', '/javascripts/panda/yijizoulu.json');
-  game.load.spine('roleBreath', '/javascripts/panda/yijihuxi.json');
-  game.load.spine('roleHunger', '/javascripts/panda/yijijie.json');
-
+  game.load.spine('roleWalk0', '/javascripts/panda/yijizoulu.json');
+  game.load.spine('roleBreath0', '/javascripts/panda/yijihuxi.json');
+  game.load.spine('roleHunger0', '/javascripts/panda/yijijie.json');
 
   game.load.spine('roleWalk1', '/javascripts/panda/yijizoulu.1.json');
   game.load.spine('roleBreath1', '/javascripts/panda/yijihuxi.1.json');
   game.load.spine('roleHunger1', '/javascripts/panda/yijijie.1.json');
-
 }
 
 function create() {
@@ -112,7 +173,9 @@ function create() {
   }
   changeBgArr()
 
-  roleWalk = game.add.spine(targetX, screenHeight / 2 + 250, 'roleWalk');
+  console.log(level, 'roleWalk' + level)
+
+  roleWalk = game.add.spine(targetX, screenHeight / 2 + 250, 'roleWalk' + level);
   roleWalk.scale.x = pandaRatio
   roleWalk.scale.y = pandaRatio
   roleWalk.setSkinByName(clothArr[clothIn]);
@@ -120,7 +183,7 @@ function create() {
   roleWalk.setAnimationByName(0, 'you', true);
   roleWalk.alpha = 0;
 
-  roleBreath = game.add.spine(targetX, screenHeight / 2 + 250, 'roleBreath');
+  roleBreath = game.add.spine(targetX, screenHeight / 2 + 250, 'roleBreath' + level);
   roleBreath.scale.x = pandaRatio
   roleBreath.scale.y = pandaRatio
   roleBreath.setSkinByName(clothArr[clothIn]);
@@ -128,7 +191,7 @@ function create() {
   roleBreath.setAnimationByName(0, 'you', true);
   roleBreath.alpha = 0;
 
-  roleHunger = game.add.spine(targetX, screenHeight / 2 + 250, 'roleHunger');
+  roleHunger = game.add.spine(targetX, screenHeight / 2 + 250, 'roleHunger' + level);
   roleHunger.scale.x = pandaRatio
   roleHunger.scale.y = pandaRatio
   roleHunger.setSkinByName(clothArr[clothIn]);
@@ -226,15 +289,17 @@ function defineBgSpriteClick(num) {
 
 // 切换背景图
 function changeBgArr() {
-  bgArr.map(itm => {
-    if (itm.num == bgNum) {
-      itm.alpha = 1;
-      itm.inputEnabled = true;
-    } else {
-      itm.alpha = 0;
-      itm.inputEnabled = false;
-    }
-  })
+  if (bgArr.length > 0) {
+    bgArr.map(itm => {
+      if (itm.num == bgNum) {
+        itm.alpha = 1;
+        itm.inputEnabled = true;
+      } else {
+        itm.alpha = 0;
+        itm.inputEnabled = false;
+      }
+    })
+  }
 }
 
 // 给三个动作角色的skeleton的每个部位绑定click事件
@@ -377,7 +442,8 @@ function clearBubble() {
 }
 
 // 初始化熊猫
-function initPanda({ level = 1, isHunger = 0, cloth = 0, bg = 0 }) {
+function initPanda({ level = 0, isHunger = 0, cloth = 0, bg = 0 }) {
+  level = level
   setTimeout(() => {
     game = new Phaser.Game(screenWidth, screenHeight, Phaser.AUTO, 'phaserSet',
       {
@@ -406,8 +472,36 @@ function changeBg(num) {
   bgIn = num;
 }
 
+// 切换角色
+function changeRole() {
+  game.destroy();
+
+  game, roleWalk, roleBreath, roleHunger, roleArr = []; // 新增三种动作的角色
+  bindBodyArr = [false, false, false];// 给对应的状态绑定click事件
+  bubbleBg, bubbleText, bubbleClick = false; // 气泡背景图，气泡文字
+  targetX = screenWidth / 2; // 角色移动位置
+  bgArr = [], bgNum = 0, bgIn = 1; // 0-竹林，1-圣诞
+  clothArr = ['1', '2', '3', '4', '5'], clothIn = 0; // 1-没衣服，2-圣诞
+  state = 1, stateIn = null; // 0-walk;1-breath;2-hunger;
+  isHunger = 0, isHungerIn = null;
+  breathCount = 0; //  呼吸达到1000时，触发左右两步晃
+  level = 1;
+
+  bgTween, textTween; // 气泡的背景和文字
+  setTimeout(() => {
+    game = new Phaser.Game(screenWidth, screenHeight, Phaser.AUTO, 'phaserSet',
+      {
+        preload: preload,
+        create: create,
+        update: update
+      }
+    );
+  }, 100)
+}
+
 export {
   initPanda,
   changeCloth,
-  changeBg
+  changeBg,
+  changeRole
 }
