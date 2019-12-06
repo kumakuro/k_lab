@@ -133,8 +133,9 @@ function preload() {
   }, game);
 
 
-  game.load.image('bg1', '/javascripts/panda/image/bg1.jpg')
   game.load.image('bg0', '/javascripts/panda/image/bg0.jpg')
+  game.load.image('bg1', '/javascripts/panda/image/bg1.jpg')
+  game.load.image('bg2', '/javascripts/panda/image/bg2.jpg')
   game.load.image('bubble', '/javascripts/panda/image/bubble.png')
 
   game.add.plugin(PhaserSpine.SpinePlugin);
@@ -149,24 +150,17 @@ function preload() {
 
 function create() {
   // 背景图
-  var bg0 = game.add.sprite(0, 0, 'bg0');
-  bg0.alpha = 0;
-  bg0.scale.x = bgRatio;
-  bg0.scale.y = bgRatio;
-  bg0.num = 0;
-  bg0.events.onInputDown.add(() => {
-    defineBgSpriteClick()
-  })
-  var bg1 = game.add.sprite(0, 0, 'bg1');
-  bg1.alpha = 0;
-  bg1.scale.x = bgRatio;
-  bg1.scale.y = bgRatio;
-  bg1.num = 1;
-  bg1.events.onInputDown.add(() => {
-    defineBgSpriteClick()
-  })
-  bgArr.push(bg1)
-  bgArr.push(bg0)
+  for (let i = 0; i < 3; i++) {
+    let bg = game.add.sprite(0, 0, 'bg' + i);
+    bg.alpha = 0;
+    bg.scale.x = bgRatio;
+    bg.scale.y = bgRatio;
+    bg.num = i;
+    bg.events.onInputDown.add(() => {
+      defineBgSpriteClick()
+    })
+    bgArr.push(bg)
+  }
   if (bgNum != bgIn) {
     bgNum = bgIn;
   }
@@ -206,10 +200,15 @@ function create() {
 }
 
 function update() {
+
   // 切换背景图
   if (bgNum != bgIn) {
     bgNum = bgIn;
     changeBgArr()
+  }
+  // 是否饥饿
+  if (isHunger != isHungerIn && isHungerIn != null) {
+    isHunger = isHungerIn
   }
 
   // 行走和固定位置的状态切换
@@ -225,11 +224,11 @@ function update() {
   }
   // 左走右走及不走的判定
   if (targetX - 100 > parseInt(roleWalk.x)) {
-    roleWalk.x += isHunger ? 8 * bgRatio * 0.2 : 8 * bgRatio;
+    roleWalk.x += isHunger == 1 ? 8 * bgRatio * 0.2 : 8 * bgRatio;
     syncAllRoleX(0, roleWalk.x)
   }
   if (targetX < parseInt(roleWalk.x) - 100) {
-    roleWalk.x -= isHunger ? 8 * bgRatio * 0.2 : 8 * bgRatio;
+    roleWalk.x -= isHunger == 1 ? 8 * bgRatio * 0.2 : 8 * bgRatio;
     syncAllRoleX(0, roleWalk.x)
   }
   if (Math.abs(targetX - parseInt(roleWalk.x)) <= 100) {
@@ -498,9 +497,15 @@ function changeRole() {
   }, 100)
 }
 
+// 切换饥饿度
+function changeHunger(num) {
+  isHungerIn = num;
+}
+
 export {
   initPanda,
   changeCloth,
   changeBg,
-  changeRole
+  changeRole,
+  changeHunger
 }

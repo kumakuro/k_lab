@@ -2,7 +2,8 @@ import {
   initPanda,
   changeCloth,
   changeBg,
-  changeRole
+  changeRole,
+  changeHunger
 } from '../panda/panda.2.js'
 
 
@@ -16,6 +17,10 @@ $('.option .bg').on('click', 'li', function () {
 
 $('.option .level').on('click', 'li', function () {
   changeRole($(this).html())
+})
+
+$('.option .hunger').on('click', 'li', function () {
+  changeHunger($(this).html())
 })
 
 setTimeout(function () {
