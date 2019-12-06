@@ -1,7 +1,6 @@
 
 const screenWidth = 1024;
 const screenHeight = 768;
-const loadingWidth = 360;
 const bgRatio = 0.5;
 const pandaRatio = 0.35;
 const normalTextArr = [
