@@ -166,7 +166,6 @@ function create() {
   }
   changeBgArr()
 
-  console.log(level, 'roleWalk' + level)
 
   roleWalk = game.add.spine(targetX, screenHeight / 2 + 250, 'roleWalk' + level);
   roleWalk.scale.x = pandaRatio
@@ -377,7 +376,7 @@ function getRandomText() {
   var textArr = [];
   var text = '';
 
-  if (isHunger) {
+  if (isHunger == 1) {
     textArr = hungerTextArr
   } else {
     if (hours <= 11 && hours >= 6) {
