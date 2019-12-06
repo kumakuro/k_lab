@@ -87,8 +87,8 @@ function preload() {
 
   $('#phaserSet').css("position", "relative")
   $layer.css({
-    width: '100%',
-    height: '100%',
+    width: $('canvas').width(),
+    height: $('canvas').height(),
     position: 'absolute',
     top: 0,
     'background-image': 'url("/javascripts/panda/image/loading.jpg")',
@@ -130,6 +130,7 @@ function preload() {
     $fill.css('width', `${progress}%`)
     if (progress === 100) {
       $layer.remove();
+      // $layer.css('opacity', '0.4');
       $('canvas').css('opacity', '1');
     }
   }, game);
@@ -257,28 +258,20 @@ function getBreathActionRandom() {
   let num = 0,
     randomNum = parseInt(Math.random() * 2)
 
-
   if (randomNum == 1) {
     if (screenHeight - roleWalk.x < 250) {
-      num = roleWalk.x - 200
+      num = parseInt(roleWalk.x - 200)
     } else {
-      num = roleWalk.x + 200
+      num = parseInt(roleWalk.x + 200)
     }
   } else {
     if (roleWalk.x - 0 < 250) {
-      num = roleWalk.x + 200
+      num = parseInt(roleWalk.x + 200)
     } else {
-      num = roleWalk.x - 200
+      num = parseInt(roleWalk.x - 200)
     }
   }
 
-  // if (roleWalk.x > screenWidth / 2) {
-  //   num = screenWidth / 2 - 150
-  // }
-  // if (roleWalk.x < screenWidth / 2) {
-  //   num = screenWidth / 2 + 150
-  // }
-  console.log('randomNum->', randomNum, '->', num)
   defineBgSpriteClick(num)
 }
 
@@ -368,7 +361,6 @@ function setRoleSkeletonClick(idx) {
 
 // walk角色的click
 function walkClick() {
-  console.log('walk')
   targetX = roleWalk.x;
   setTimeout(() => {
     breathClick()
@@ -378,14 +370,12 @@ function walkClick() {
 
 // breath角色的click
 function breathClick() {
-  console.log('breath')
   bubbleBindClick()
   return;
 }
 
 // hunger角色的click
 function hungerClick() {
-  console.log('hunger')
   bubbleBindClick()
   return;
 }
