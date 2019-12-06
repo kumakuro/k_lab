@@ -85,13 +85,15 @@ function preload() {
   let $bar = $('#phaserSet .progressLayer .progressBox .bar')
   let $fill = $('#phaserSet .progressLayer .progressBox .bar .fill')
 
+  $('#phaserSet').css("position", "relative")
   $layer.css({
     width: '100%',
     height: '100%',
     position: 'absolute',
     top: 0,
     'background-image': 'url("/javascripts/panda/image/loading.jpg")',
-    'background-size': '100%'
+    'background-size': '100% 100%',
+    'background-repeat': 'no-repeat'
   })
 
   $pBox.css({
