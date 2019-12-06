@@ -235,9 +235,9 @@ function update() {
   }
 
   // breath状态判定
-  if (state == 0) {
+  if (state == 1) {
     breathCount++;
-    if (breathCount == 1000) {
+    if (breathCount == 300) {
       getBreathActionRandom()
     }
   }
@@ -250,9 +250,34 @@ function update() {
   }
 }
 
-// 呼吸时产生的随机动作
+// 呼吸时产生的走动
 function getBreathActionRandom() {
-  breathCount = 0
+  let num = 0,
+    randomNum = parseInt(Math.random() * 2)
+
+
+  if (randomNum == 1) {
+    if (screenHeight - roleWalk.x < 250) {
+      num = roleWalk.x - 200
+    } else {
+      num = roleWalk.x + 200
+    }
+  } else {
+    if (roleWalk.x - 0 < 250) {
+      num = roleWalk.x + 200
+    } else {
+      num = roleWalk.x - 200
+    }
+  }
+
+  // if (roleWalk.x > screenWidth / 2) {
+  //   num = screenWidth / 2 - 150
+  // }
+  // if (roleWalk.x < screenWidth / 2) {
+  //   num = screenWidth / 2 + 150
+  // }
+  console.log('randomNum->', randomNum, '->', num)
+  defineBgSpriteClick(num)
 }
 
 // 同步除指定role外其他的role的x参数
@@ -266,7 +291,8 @@ function syncAllRoleX(s, x) {
 
 // 定义背景图精灵的点击事件
 function defineBgSpriteClick(num) {
-  let tx = num ? num : parseInt(game.input.activePointer.position.x);
+  breathCount = 0
+  let tx = num > 0 ? num : parseInt(game.input.activePointer.position.x);
 
   if (tx - 100 > parseInt(roleWalk.x)) {
     roleWalk.scale.x = pandaRatio;
@@ -365,6 +391,7 @@ function hungerClick() {
 // 点击触发bubble冒出
 function bubbleBindClick() {
   if (bubbleClick) return;
+  breathCount = 0;
   bubbleClick = true;
   addTextBubble()
 }

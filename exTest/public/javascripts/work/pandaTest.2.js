@@ -30,5 +30,5 @@ setTimeout(function () {
     cloth: 1,
     bg: 1
   })
-}, 1000)
+}, 300)
 
