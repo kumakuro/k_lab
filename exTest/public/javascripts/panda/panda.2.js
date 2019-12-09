@@ -428,7 +428,8 @@ function addTextBubble() {
   bubbleBg.alpha = 0;
   let x = Math.floor(bubbleBg.x + bubbleBg.width / 2) + (role.x > screenWidth / 2 ? -10 : 10),
     y = Math.floor(bubbleBg.y + bubbleBg.height / 2) + 10;
-  var style = { font: t.fontSize + "px CenturyGothic-Bold", fill: "#FEAE24", wordWrap: true, wordWrapWidth: Math.abs(bubbleBg.width), align: "center" }
+  // CenturyGothic-Bold
+  var style = { font: t.fontSize + "px myFont", fill: "#FEAE24", wordWrap: true, wordWrapWidth: Math.abs(bubbleBg.width), align: "center" }
   bubbleText = game.add.text(x, y, t.text, style)
   bubbleText.anchor.set(0.5);
   bubbleText.alpha = 0;
