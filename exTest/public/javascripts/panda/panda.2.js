@@ -30,7 +30,7 @@ const hungerTextArr = [
     fontSize: 20
   }, {
     text: 'Can I have some meat?',
-    fontSize: 22
+    fontSize: 20
   }, {
     text: 'I am starving.',
     fontSize: 24
