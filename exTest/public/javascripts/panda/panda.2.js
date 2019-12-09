@@ -2,7 +2,7 @@
 const screenWidth = 1024;
 const screenHeight = 768;
 const bgRatio = 0.5;
-const pandaRatio = 0.35;
+const pandaRatio = 0.25;
 const normalTextArr = [
   {
     text: 'Hi!',
@@ -288,13 +288,14 @@ function syncAllRoleX(s, x) {
 function defineBgSpriteClick(num) {
   breathCount = 0
   let tx = num > 0 ? num : parseInt(game.input.activePointer.position.x);
+  let rolwWidth = parseInt(Math.abs(roleWalk.width)/2)
 
-  if (tx - 100 > parseInt(roleWalk.x)) {
+  if (tx - rolwWidth > parseInt(roleWalk.x)) {
     roleWalk.scale.x = pandaRatio;
     targetX = tx;
     stateIn = 0;
   }
-  if (tx < parseInt(roleWalk.x) - 100) {
+  if (tx < parseInt(roleWalk.x) - rolwWidth) {
     roleWalk.scale.x = -1 * pandaRatio;
     targetX = tx;
     stateIn = 0;
