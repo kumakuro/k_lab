@@ -1,5 +1,5 @@
 {
-"skeleton": { "hash": "5C37uete3ToVZkLI4aAvRHIzO58", "spine": "3.6.53", "width": 698.56, "height": 1312.63, "images": "./images/" },
+"skeleton": { "hash": "h9zuaXKU0wgyY1FkBPFvmAElxh4", "spine": "3.6.53", "width": 894.28, "height": 1428.35, "images": "./images/" },
 "bones": [
 	{ "name": "root" },
 	{ "name": "yijixiongmaoce", "parent": "root" },
@@ -27,7 +27,8 @@
 	{ "name": "zuoyanjing", "bone": "zuoyan", "attachment": "zuoyanjing" },
 	{ "name": "youyanjing", "bone": "youyan", "attachment": "youyanjing" },
 	{ "name": "zuiba", "bone": "zuiba", "attachment": "zuiba" },
-	{ "name": "bizi", "bone": "bizi", "attachment": "bizi" }
+	{ "name": "bizi", "bone": "bizi", "attachment": "bizi" },
+	{ "name": "lingzi", "bone": "shenzi", "attachment": "kongbai" }
 ],
 "skins": {
 	"default": {
@@ -84,10 +85,30 @@
 			"cemiantou": { "x": 271.37, "y": 69.17, "scaleX": 4, "scaleY": 4, "rotation": -90.39, "width": 163, "height": 151 }
 		},
 		"weibo": {
-			"kongbai": { "name": "weibo2", "path": "weibo", "x": 343.99, "y": -178.05, "rotation": -87.81, "width": 191, "height": 187 }
+			"kongbai": {
+				"name": "weibo2",
+				"path": "weibo",
+				"x": 343.99,
+				"y": -178.05,
+				"scaleX": 4,
+				"scaleY": 4,
+				"rotation": -87.81,
+				"width": 47,
+				"height": 46
+			}
 		},
 		"weijin8": {
-			"kongbai": { "name": "weijin9", "path": "weijin8", "x": 465.72, "y": 59.01, "rotation": -87.81, "width": 548, "height": 235 }
+			"kongbai": {
+				"name": "weijin9",
+				"path": "weijin8",
+				"x": 465.72,
+				"y": 59.01,
+				"scaleX": 4,
+				"scaleY": 4,
+				"rotation": -87.81,
+				"width": 137,
+				"height": 59
+			}
 		},
 		"youjiao8": {
 			"youjiao8": { "name": "youjiao8shengdan", "x": 111.17, "y": 52.99, "scaleX": 4, "scaleY": 4, "rotation": 97.54, "width": 75, "height": 96 }
@@ -123,6 +144,9 @@
 		}
 	},
 	"4": {
+		"lingzi": {
+			"kongbai": { "name": "lingzi", "x": 437.42, "y": 143.27, "scaleX": 4.22, "scaleY": 6.095, "rotation": -73.5, "width": 83, "height": 45 }
+		},
 		"shenti8": {
 			"shenti8": { "name": "shenti2", "x": 307.07, "y": 76.1, "scaleX": 4, "scaleY": 4, "rotation": -87.81, "width": 151, "height": 148 }
 		},
@@ -136,7 +160,7 @@
 			"zuojiao8": { "name": "zuojiao2", "x": 185.29, "y": -7.29, "scaleX": 4, "scaleY": 4, "rotation": 91.57, "width": 77, "height": 75 }
 		},
 		"zuoshou8": {
-			"zuoshou8": { "name": "zuoshou2", "x": 183.54, "y": 4.37, "scaleX": 4, "scaleY": 4, "rotation": 111.23, "width": 62, "height": 109 }
+			"zuoshou8": { "name": "zuoshou2", "x": 171.55, "y": 14.31, "scaleX": 4, "scaleY": 4, "rotation": 111.23, "width": 62, "height": 109 }
 		}
 	},
 	"5": {

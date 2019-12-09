@@ -23,5 +23,9 @@ router.get('/panda', function(req, res, next) {
   res.render('panda', { title: 'panda' });
 });
 
+router.get('/three', function(req, res, next) {
+  res.render('three', { title: 'three' });
+});
+
 
 module.exports = router;

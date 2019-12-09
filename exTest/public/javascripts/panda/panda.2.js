@@ -183,7 +183,7 @@ function create() {
   roleBreath.scale.y = pandaRatio
   roleBreath.setSkinByName(clothArr[clothIn]);
   roleBreath.setToSetupPose();
-  roleBreath.setAnimationByName(0, 'you', true);
+  roleBreath.setAnimationByName(0, 'yijihuxi', true);
   roleBreath.alpha = 0;
 
   roleHunger = game.add.spine(targetX, screenHeight / 2 + 250, 'roleHunger' + level);
@@ -191,7 +191,7 @@ function create() {
   roleHunger.scale.y = pandaRatio
   roleHunger.setSkinByName(clothArr[clothIn]);
   roleHunger.setToSetupPose();
-  roleHunger.setAnimationByName(0, 'you', true);
+  roleHunger.setAnimationByName(0, 'yijijie', true);
   roleHunger.alpha = 0;
 
   roleArr.push(roleWalk);
@@ -489,7 +489,7 @@ function changeBg(num) {
 }
 
 // 切换角色
-function changeRole() {
+function changeRole(num) {
   game.destroy();
 
   game, roleWalk, roleBreath, roleHunger, roleArr = []; // 新增三种动作的角色
@@ -501,7 +501,7 @@ function changeRole() {
   state = 1, stateIn = null; // 0-walk;1-breath;2-hunger;
   isHunger = 0, isHungerIn = null;
   breathCount = 0; //  呼吸达到1000时，触发左右两步晃
-  level = 1;
+  level = num;
 
   bgTween, textTween; // 气泡的背景和文字
   setTimeout(() => {
