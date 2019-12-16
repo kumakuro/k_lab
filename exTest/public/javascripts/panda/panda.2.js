@@ -288,19 +288,18 @@ function syncAllRoleX(s, x) {
 function defineBgSpriteClick(num) {
   breathCount = 0
   let tx = num > 0 ? num : parseInt(game.input.activePointer.position.x);
-  let rolwWidth = parseInt(Math.abs(roleWalk.width)/2)
+  let rWidth = parseInt(Math.abs(roleWalk.width)/2)
 
-  if (tx - rolwWidth > parseInt(roleWalk.x)) {
+  if (tx - rWidth > parseInt(roleWalk.x)) {
     roleWalk.scale.x = pandaRatio;
     targetX = tx;
     stateIn = 0;
   }
-  if (tx < parseInt(roleWalk.x) - rolwWidth) {
+  if (tx < parseInt(roleWalk.x) - rWidth) {
     roleWalk.scale.x = -1 * pandaRatio;
     targetX = tx;
     stateIn = 0;
   }
-
   if (bubbleBg && bubbleText) {
     tweenNext(1)
   }
