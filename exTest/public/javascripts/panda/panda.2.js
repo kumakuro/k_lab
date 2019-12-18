@@ -56,6 +56,12 @@ const timeTextArr = [
 
 var dom = "#phaserSet"
 var game, roleWalk, roleBreath, roleHunger, roleArr = []; // 新增三种动作的角色
+var voiceArr = [
+  '/audio/eyes.mp3',
+  '/audio/knife.mp3',
+  '/audio/knight.mp3',
+  '/audio/wolfdisco.mp3'
+], vPlayArr = [], current;
 var bindBodyArr = [false, false, false];// 给对应的状态绑定click事件
 var bubbleBg, bubbleText, bubbleClick = false; // 气泡背景图，气泡文字
 var targetX = screenWidth / 2; // 角色移动位置
@@ -149,9 +155,18 @@ function preload() {
   game.load.spine('roleWalk1', '/javascripts/panda/yijizoulu.1.json');
   game.load.spine('roleBreath1', '/javascripts/panda/yijihuxi.1.json');
   game.load.spine('roleHunger1', '/javascripts/panda/yijijie.1.json');
+
+  voiceArr.forEach((itm, idx) => {
+    game.load.audio('voice' + idx, itm)
+  })
 }
 
 function create() {
+  // 背景音乐
+  voiceArr.forEach((itm, idx) => {
+    var temp = game.add.audio('voice' + idx)
+    vPlayArr.push(temp)
+  })
   // 背景图
   for (let i = 0; i < 3; i++) {
     let bg = game.add.sprite(0, 0, 'bg' + i);
@@ -288,7 +303,7 @@ function syncAllRoleX(s, x) {
 function defineBgSpriteClick(num) {
   breathCount = 0
   let tx = num > 0 ? num : parseInt(game.input.activePointer.position.x);
-  let rWidth = parseInt(Math.abs(roleWalk.width)/2)
+  let rWidth = parseInt(Math.abs(roleWalk.width) / 2)
 
   if (tx - rWidth > parseInt(roleWalk.x)) {
     roleWalk.scale.x = pandaRatio;
@@ -307,6 +322,10 @@ function defineBgSpriteClick(num) {
 
 // 切换背景图
 function changeBgArr() {
+  console.log('bgNum->', bgNum)
+  if (current) {
+    current.stop()
+  }
   if (bgArr.length > 0) {
     bgArr.map(itm => {
       if (itm.num == bgNum) {
@@ -317,6 +336,12 @@ function changeBgArr() {
         itm.inputEnabled = false;
       }
     })
+  }
+  if (vPlayArr.length > 0) {
+    if (vPlayArr[bgNum]) {
+      current = vPlayArr[bgNum]
+      current.loopFull(0.6);
+    }
   }
 }
 
