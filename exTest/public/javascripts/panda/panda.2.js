@@ -184,7 +184,6 @@ function create() {
   }
   changeBgArr()
 
-
   roleWalk = game.add.spine(targetX, screenHeight / 2 + 250, 'roleWalk' + level);
   roleWalk.scale.x = pandaRatio
   roleWalk.scale.y = pandaRatio
@@ -546,10 +545,21 @@ function changeHunger(num) {
   isHungerIn = num;
 }
 
+function changeMusic(num) {
+  if (current.paused && num == 1) {
+    current.resume()
+  }
+
+  if (num == 0) {
+    current.pause()
+  }
+}
+
 export {
   initPanda,
   changeCloth,
   changeBg,
   changeRole,
-  changeHunger
+  changeHunger,
+  changeMusic
 }

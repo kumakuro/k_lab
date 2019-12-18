@@ -3,7 +3,8 @@ import {
   changeCloth,
   changeBg,
   changeRole,
-  changeHunger
+  changeHunger,
+  changeMusic
 } from '../panda/panda.2.js'
 
 
@@ -22,6 +23,11 @@ $('.option .level').on('click', 'li', function () {
 $('.option .hunger').on('click', 'li', function () {
   changeHunger($(this).html())
 })
+
+$('.option .music').on('click', 'li', function () {
+  changeMusic($(this).html())
+})
+
 
 setTimeout(function () {
   initPanda({
