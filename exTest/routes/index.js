@@ -23,6 +23,10 @@ router.get('/panda', function(req, res, next) {
   res.render('panda', { title: 'panda' });
 });
 
+router.get('/role', function(req, res, next) {
+  res.render('role', { title: 'role模板' });
+});
+
 router.get('/three', function(req, res, next) {
   res.render('three', { title: 'three' });
 });
