@@ -57,10 +57,10 @@ const timeTextArr = [
 var dom = "#phaserSet"
 var game, roleWalk, roleBreath, roleHunger, roleArr = []; // 新增三种动作的角色
 var voiceArr = [
-  '/audio/eyes.mp3',
-  '/audio/knife.mp3',
-  '/audio/knight.mp3',
-  '/audio/wolfdisco.mp3'
+  '/audio/0.mp3',
+  '/audio/1.mp3',
+  '/audio/2.mp3',
+  '/audio/3.mp3'
 ], vPlayArr = [], current;
 var bindBodyArr = [false, false, false];// 给对应的状态绑定click事件
 var bubbleBg, bubbleText, bubbleClick = false; // 气泡背景图，气泡文字
