@@ -3,6 +3,12 @@
 
 <head>
   <script src="https://cdn.jsdelivr.net/npm/phaser@3.21.0/dist/phaser.min.js"></script>
+  <style>
+    * {
+      padding: 0px;
+      margin: 0px;
+    }
+  </style>
 </head>
 
 <body>
@@ -12,10 +18,15 @@
   </div>
 </body>
 <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
-<script type="module" src=/javascripts/role/role.js></script>
+<script type="module" src=/javascripts/work/roleTest.js></script>
 
 <script>
- 
+  window.onresize = function () {
+    console.log(
+      document.documentElement.clientWidth || document.body.clientWidth,
+      document.documentElement.clientHeight || document.body.clientHeight
+    )
+  }
 </script>
 
 </html>
