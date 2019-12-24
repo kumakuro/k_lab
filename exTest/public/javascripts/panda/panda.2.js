@@ -1,8 +1,11 @@
+const log = console.log.bind(console)
 
-const screenWidth = 1024;
-const screenHeight = 768;
-const bgRatio = 0.5;
-const pandaRatio = 0.25;
+const containerHeight = Number(localStorage.getItem("showHeight")) || window.innerHeight
+const containerWidth = containerHeight * 4 / 3;
+const factRatio = containerWidth / 1024;
+const screenWidth = containerWidth;
+const screenHeight = containerHeight;
+const bgRatio = 0.5 * factRatio;
 const normalTextArr = [
   {
     text: 'Hi!',
@@ -53,31 +56,68 @@ const timeTextArr = [
     fontSize: 24
   }
 ]
+const bgFileArr = [
+  '',
+  'https://imagine-cn.s3.cn-north-1.amazonaws.com.cn/iw/pets_image/pet-phaser-master/image/bg0.jpg',
+  'https://imagine-cn.s3.cn-north-1.amazonaws.com.cn/iw/pets_image/pet-phaser-master/image/bg2.jpg',
+  'https://imagine-cn.s3.cn-north-1.amazonaws.com.cn/iw/pets_image/pet-phaser-master/image/bg3.jpg',
+  'https://imagine-cn.s3.cn-north-1.amazonaws.com.cn/iw/pets_image/pet-phaser-master/image/bg4.jpg'
+];
+const musicFileArr = [
+  '',
+  'https://imagine-cn.s3.cn-north-1.amazonaws.com.cn/iw/pets_image/pet-scene-audio/chun0.mp3',
+  'https://imagine-cn.s3.cn-north-1.amazonaws.com.cn/iw/pets_image/pet-scene-audio/dong2.mp3',
+  'https://imagine-cn.s3.cn-north-1.amazonaws.com.cn/iw/pets_image/pet-scene-audio/xia3.mp3',
+  'https://imagine-cn.s3.cn-north-1.amazonaws.com.cn/iw/pets_image/pet-scene-audio/qiu4.mp3'
+];
+const roleFileArr = [
+  [
+    {
+      "roleWalk": "https://imagine-cn.s3.cn-north-1.amazonaws.com.cn/iw/pets_image/pet-phaser-master/yijizoulu.json",
+      "roleBreath": "https://imagine-cn.s3.cn-north-1.amazonaws.com.cn/iw/pets_image/pet-phaser-master/yijihuxi.json",
+      "roleHunger": "https://imagine-cn.s3.cn-north-1.amazonaws.com.cn/iw/pets_image/pet-phaser-master/yijijie.json"
+    },
+    {
+      "roleWalk": "https://imagine-cn.s3.cn-north-1.amazonaws.com.cn/iw/pets_image/pet-phaser-master/yijizoulu.1.json",
+      "roleBreath": "https://imagine-cn.s3.cn-north-1.amazonaws.com.cn/iw/pets_image/pet-phaser-master/yijihuxi.1.json",
+      "roleHunger": "https://imagine-cn.s3.cn-north-1.amazonaws.com.cn/iw/pets_image/pet-phaser-master/yijijie.1.json"
+    },
+    {
+      "roleWalk": "https://imagine-cn.s3.cn-north-1.amazonaws.com.cn/iw/pets_image/pet-phaser-master/yijizoulu.1.json",
+      "roleBreath": "https://imagine-cn.s3.cn-north-1.amazonaws.com.cn/iw/pets_image/pet-phaser-master/yijihuxi.1.json",
+      "roleHunger": "https://imagine-cn.s3.cn-north-1.amazonaws.com.cn/iw/pets_image/pet-phaser-master/yijijie.1.json"
+    }
+  ],
+  [
+    {
+      "roleWalk": "https://imagine-cn.s3.cn-north-1.amazonaws.com.cn/iw/pets_image/pet-phaser-master/fix-phone/yijizoulu.json",
+      "roleBreath": "https://imagine-cn.s3.cn-north-1.amazonaws.com.cn/iw/pets_image/pet-phaser-master/fix-phone/yijihuxi.json",
+      "roleHunger": "https://imagine-cn.s3.cn-north-1.amazonaws.com.cn/iw/pets_image/pet-phaser-master/fix-phone/yijijie.json"
+    }
+  ]
+]
+const animsObj = {
+  'roleWalk': 'you',
+  'roleBreath': 'yijihuxi',
+  'roleHunger': 'yijijie'
+}
+var levelIn = null, deviceTypeIn = null, pandaRatio = null;
+
 
 var dom = "#phaserSet"
-var game, roleWalk, roleBreath, roleHunger, roleArr = []; // 新增三种动作的角色
-var voiceArr = [
-  '/audio/0.mp3',
-  '/audio/1.mp3',
-  '/audio/2.mp3',
-  '/audio/3.mp3'
-], vPlayArr = [], current;
+var game, roleArr = []; // 新增三种动作的角色
+var vPlayArr = [], currentSound, testSound;
 var bindBodyArr = [false, false, false];// 给对应的状态绑定click事件
 var bubbleBg, bubbleText, bubbleClick = false; // 气泡背景图，气泡文字
 var targetX = screenWidth / 2; // 角色移动位置
-var bgArr = [], bgNum = 0, bgIn = 0; // 0-竹林，1-圣诞
-var clothArr = ['1', '2', '3', '4', '5'], clothIn = 0; // 1-没衣服，2-圣诞
+var bgArr = [], bgNum = 0, bgIn = 0; // 0-竹林，1-竹林, 2-沙滩，3-秋天，4-圣
+var clothArr = ['1', '5', '3', '4', '2'], clothIn = 0; // 1-没衣服，2-圣诞
 var state = 1, stateIn = null; // 0-walk;1-breath;2-hunger;
 var isHunger = 0, isHungerIn = null;
 var breathCount = 0; //  呼吸达到1000时，触发左右两步晃
-var level = 0;
-
 var bgTween, textTween; // 气泡的背景和文字
 
 function preload() {
-  /**
-   * Todo: 用jq和dom节点做进度条
-   */
 
   $('#phaserSet').append('<div class="progressLayer"></div>')
   $('#phaserSet .progressLayer').append('<div class="progressBox"></div>')
@@ -93,13 +133,10 @@ function preload() {
 
   $('#phaserSet').css("position", "relative")
   $layer.css({
-    width: $('canvas').width(),
-    height: $('canvas').height(),
+    width: screenWidth,
+    height: screenHeight,
     position: 'absolute',
-    top: 0,
-    'background-image': 'url("/javascripts/panda/image/loading.jpg")',
-    'background-size': '100% 100%',
-    'background-repeat': 'no-repeat'
+    top: 0
   })
 
   $pBox.css({
@@ -112,12 +149,13 @@ function preload() {
 
   $text.css({
     'text-align': 'center',
-    'margin-bottom': '30px'
+    'margin-bottom': '30px',
+    'font-size': 25 * factRatio + 'px'
   })
 
   $bar.css({
     'width': '100%',
-    'height': '25px',
+    'height': 25 * factRatio + 'px',
     'background-color': 'rgba(0,0,0,0.2)',
     'border-radius': '10px'
   })
@@ -136,40 +174,60 @@ function preload() {
     $fill.css('width', `${progress}%`)
     if (progress === 100) {
       $layer.remove();
-      // $layer.css('opacity', '0.4');
       $('canvas').css('opacity', '1');
     }
   }, game);
 
-
-  game.load.image('bg0', '/javascripts/panda/image/bg0.jpg')
-  game.load.image('bg1', '/javascripts/panda/image/bg1.jpg')
-  game.load.image('bg2', '/javascripts/panda/image/bg2.jpg')
-  game.load.image('bubble', '/javascripts/panda/image/bubble.png')
-
-  game.add.plugin(PhaserSpine.SpinePlugin);
-  game.load.spine('roleWalk0', '/javascripts/panda/yijizoulu.json');
-  game.load.spine('roleBreath0', '/javascripts/panda/yijihuxi.json');
-  game.load.spine('roleHunger0', '/javascripts/panda/yijijie.json');
-
-  game.load.spine('roleWalk1', '/javascripts/panda/yijizoulu.1.json');
-  game.load.spine('roleBreath1', '/javascripts/panda/yijihuxi.1.json');
-  game.load.spine('roleHunger1', '/javascripts/panda/yijijie.1.json');
-
-  voiceArr.forEach((itm, idx) => {
-    game.load.audio('voice' + idx, itm)
+  bgFileArr.forEach((itm, idx) => {
+    if (itm && itm != '') {
+      game.load.image('bg' + idx, itm + '?v=' + Math.random())
+    } else {
+      game.load.image('bg' + idx, bgFileArr[1] + '?v=' + Math.random())
+    }
   })
+
+  game.load.image('bubble', 'https://imagine-cn.s3.cn-north-1.amazonaws.com.cn/iw/pets_image/pet-phaser-master/image/bubble.png')
+  game.add.plugin(PhaserSpine.SpinePlugin);
+
+  log('deviceType:0-pad,1-phone; ->', deviceTypeIn, roleFileArr)
+  pandaRatio = deviceTypeIn == 1 ? factRatio : 0.25 * factRatio;
+  var rfArr = roleFileArr[deviceTypeIn]
+  for (let i in rfArr) {
+    let itm = rfArr[i]
+    if (levelIn == null || i != levelIn) continue;
+
+    let rArr = Object.keys(itm)
+    for (let r in rArr) {
+      let str = itm[rArr[r]] + '?v=' + parseInt(Math.random() * 10)
+      game.load.spine(rArr[r] + i, str)
+    }
+  }
+
+  musicFileArr.forEach((itm, idx) => {
+    if (itm != '') {
+      game.load.audio('voice' + idx, itm)
+    }
+  })
+
+  game.load.crossOrigin = 'anonymous';
 }
 
 function create() {
   // 背景音乐
-  voiceArr.forEach((itm, idx) => {
-    var temp = game.add.audio('voice' + idx)
+  musicFileArr.forEach((itm, idx) => {
+    var temp = game.add.audio('voice' + (itm != '' ? idx : 0))
     vPlayArr.push(temp)
   })
+
   // 背景图
-  for (let i = 0; i < 3; i++) {
-    let bg = game.add.sprite(0, 0, 'bg' + i);
+  for (let i = 0; i < 5; i++) {
+    let bg;
+    if (i == 0 || i == 1) {
+      bg = game.add.sprite(0, 0, 'bg0');
+    } else {
+      bg = game.add.sprite(0, 0, 'bg' + i);
+    }
+
     bg.alpha = 0;
     bg.scale.x = bgRatio;
     bg.scale.y = bgRatio;
@@ -184,39 +242,22 @@ function create() {
   }
   changeBgArr()
 
-  roleWalk = game.add.spine(targetX, screenHeight / 2 + 250, 'roleWalk' + level);
-  roleWalk.scale.x = pandaRatio
-  roleWalk.scale.y = pandaRatio
-  roleWalk.setSkinByName(clothArr[clothIn]);
-  roleWalk.setToSetupPose();
-  roleWalk.setAnimationByName(0, 'you', true);
-  roleWalk.alpha = 0;
 
-  roleBreath = game.add.spine(targetX, screenHeight / 2 + 250, 'roleBreath' + level);
-  roleBreath.scale.x = pandaRatio
-  roleBreath.scale.y = pandaRatio
-  roleBreath.setSkinByName(clothArr[clothIn]);
-  roleBreath.setToSetupPose();
-  roleBreath.setAnimationByName(0, 'yijihuxi', true);
-  roleBreath.alpha = 0;
-
-  roleHunger = game.add.spine(targetX, screenHeight / 2 + 250, 'roleHunger' + level);
-  roleHunger.scale.x = pandaRatio
-  roleHunger.scale.y = pandaRatio
-  roleHunger.setSkinByName(clothArr[clothIn]);
-  roleHunger.setToSetupPose();
-  roleHunger.setAnimationByName(0, 'yijijie', true);
-  roleHunger.alpha = 0;
-
-  roleArr.push(roleWalk);
-  roleArr.push(roleBreath);
-  roleArr.push(roleHunger);
+  for (let i in animsObj) {
+    let temp = game.add.spine(targetX, screenHeight / 2 + 250 * factRatio, i + levelIn);
+    temp.scale.x = pandaRatio
+    temp.scale.y = pandaRatio
+    temp.setSkinByName(clothArr[clothIn]);
+    temp.setToSetupPose();
+    temp.setAnimationByName(0, animsObj[i], true);
+    temp.alpha = 0;
+    roleArr.push(temp)
+  }
 
   roleArr[state].alpha = 1;
 }
 
 function update() {
-
   // 切换背景图
   if (bgNum != bgIn) {
     bgNum = bgIn;
@@ -239,15 +280,15 @@ function update() {
     setRoleSkeletonClick(state)
   }
   // 左走右走及不走的判定
-  if (targetX - 100 > parseInt(roleWalk.x)) {
-    roleWalk.x += isHunger == 1 ? 8 * bgRatio * 0.2 : 8 * bgRatio;
-    syncAllRoleX(0, roleWalk.x)
+  if (targetX - 100 * factRatio > parseInt(roleArr[0].x)) {
+    roleArr[0].x += isHunger == 1 ? 8 * bgRatio * 0.2 : 8 * bgRatio;
+    syncAllRoleX(0, roleArr[0].x)
   }
-  if (targetX < parseInt(roleWalk.x) - 100) {
-    roleWalk.x -= isHunger == 1 ? 8 * bgRatio * 0.2 : 8 * bgRatio;
-    syncAllRoleX(0, roleWalk.x)
+  if (targetX < parseInt(roleArr[0].x) - 100 * factRatio) {
+    roleArr[0].x -= isHunger == 1 ? 8 * bgRatio * 0.2 : 8 * bgRatio;
+    syncAllRoleX(0, roleArr[0].x)
   }
-  if (Math.abs(targetX - parseInt(roleWalk.x)) <= 100) {
+  if (Math.abs(targetX - parseInt(roleArr[0].x)) <= 100 * factRatio) {
     stateIn = isHunger == 1 ? 2 : 1;
   }
 
@@ -270,19 +311,20 @@ function update() {
 // 呼吸时产生的走动
 function getBreathActionRandom() {
   let num = 0,
-    randomNum = parseInt(Math.random() * 2)
+    randomNum = parseInt(Math.random() * 2),
+    walkDistance = 200 * factRatio;
 
   if (randomNum == 1) {
-    if (screenHeight - roleWalk.x < 250) {
-      num = parseInt(roleWalk.x - 200)
+    if (screenHeight - roleArr[0].x < 230 * factRatio) {
+      num = parseInt(roleArr[0].x - walkDistance)
     } else {
-      num = parseInt(roleWalk.x + 200)
+      num = parseInt(roleArr[0].x + walkDistance)
     }
   } else {
-    if (roleWalk.x - 0 < 250) {
-      num = parseInt(roleWalk.x + 200)
+    if (roleArr[0].x - 0 < 250) {
+      num = parseInt(roleArr[0].x + walkDistance)
     } else {
-      num = parseInt(roleWalk.x - 200)
+      num = parseInt(roleArr[0].x - walkDistance)
     }
   }
 
@@ -300,17 +342,18 @@ function syncAllRoleX(s, x) {
 
 // 定义背景图精灵的点击事件
 function defineBgSpriteClick(num) {
+
   breathCount = 0
   let tx = num > 0 ? num : parseInt(game.input.activePointer.position.x);
-  let rWidth = parseInt(Math.abs(roleWalk.width) / 2)
+  let rWidth = parseInt(Math.abs(roleArr[0].width) / 2)
 
-  if (tx - rWidth > parseInt(roleWalk.x)) {
-    roleWalk.scale.x = pandaRatio;
+  if (tx - rWidth > parseInt(roleArr[0].x)) {
+    roleArr[0].scale.x = pandaRatio;
     targetX = tx;
     stateIn = 0;
   }
-  if (tx < parseInt(roleWalk.x) - rWidth) {
-    roleWalk.scale.x = -1 * pandaRatio;
+  if (tx < parseInt(roleArr[0].x) - rWidth) {
+    roleArr[0].scale.x = -1 * pandaRatio;
     targetX = tx;
     stateIn = 0;
   }
@@ -321,9 +364,8 @@ function defineBgSpriteClick(num) {
 
 // 切换背景图
 function changeBgArr() {
-  console.log('bgNum->', bgNum)
-  if (current) {
-    current.stop()
+  if (currentSound) {
+    currentSound.stop()
   }
   if (bgArr.length > 0) {
     bgArr.map(itm => {
@@ -336,10 +378,12 @@ function changeBgArr() {
       }
     })
   }
+  console.log('vPlayArr->', vPlayArr.length, bgNum)
   if (vPlayArr.length > 0) {
     if (vPlayArr[bgNum]) {
-      current = vPlayArr[bgNum]
-      current.loopFull(0.6);
+      console.log(bgNum, vPlayArr[bgNum])
+      currentSound = vPlayArr[bgNum]
+      currentSound.loopFull(0.6);
     }
   }
 }
@@ -385,7 +429,7 @@ function setRoleSkeletonClick(idx) {
 
 // walk角色的click
 function walkClick() {
-  targetX = roleWalk.x;
+  targetX = roleArr[0].x;
   setTimeout(() => {
     breathClick()
   }, 300)
@@ -447,14 +491,25 @@ function addTextBubble() {
     ? role.x - pWidth / 2
     : role.x + pWidth / 2;
 
+
+
   bubbleBg = game.add.sprite(bubbleX, role.y - role.height, 'bubble');
-  bubbleBg.scale.x = role.x > screenWidth / 2 ? -1 : 1;
+  bubbleBg.scale.x = (role.x > screenWidth / 2 ? -1 : 1) * factRatio;
+  bubbleBg.scale.y = factRatio;
   bubbleBg.alpha = 0;
-  let x = Math.floor(bubbleBg.x + bubbleBg.width / 2) + (role.x > screenWidth / 2 ? -10 : 10),
-    y = Math.floor(bubbleBg.y + bubbleBg.height / 2) + 10;
-  // CenturyGothic-Bold
-  var style = { font: t.fontSize + "px myFont", fill: "#FEAE24", wordWrap: true, wordWrapWidth: Math.abs(bubbleBg.width), align: "center" }
+
+  let x = Math.floor(bubbleBg.x + bubbleBg.width / 2) + (role.x > screenWidth / 2 ? -10 : 10) * factRatio,
+    y = Math.floor(bubbleBg.y + bubbleBg.height / 2) + 10 * factRatio;
+  var style = {
+    font: t.fontSize + "px webfontB",
+    fill: "#FEAE24",
+    wordWrap: true,
+    wordWrapWidth: Math.abs(bubbleBg.width / factRatio),
+    align: "center"
+  }
   bubbleText = game.add.text(x, y, t.text, style)
+  bubbleText.scale.x = factRatio;
+  bubbleText.scale.y = factRatio;
   bubbleText.anchor.set(0.5);
   bubbleText.alpha = 0;
 
@@ -483,8 +538,34 @@ function clearBubble() {
 }
 
 // 初始化熊猫
-function initPanda({ level = 0, isHunger = 0, cloth = 0, bg = 0 }) {
-  level = level
+function initPanda({ level, isHunger, cloth, bg, init, deviceType }) {
+  switch (init) {
+    case 0:
+      initGameAndRole({ level, isHunger, cloth, bg, deviceType })
+      break;
+    case 1:
+      levelIn = level
+      isHungerIn = isHunger
+      bgIn = bg
+      changeCloth(cloth)
+      break;
+    default:
+      break;
+  }
+}
+
+// 初始化游戏和角色
+function initGameAndRole({ level, isHunger, cloth, bg, deviceType }) {
+  if (game) {
+    destroyPanda()
+  }
+
+  levelIn = level
+  isHungerIn = isHunger
+  bgIn = bg
+  clothIn = cloth
+  deviceTypeIn = deviceType
+
   setTimeout(() => {
     game = new Phaser.Game(screenWidth, screenHeight, Phaser.AUTO, 'phaserSet',
       {
@@ -493,15 +574,15 @@ function initPanda({ level = 0, isHunger = 0, cloth = 0, bg = 0 }) {
         update: update
       }
     );
-  }, 100)
+  }, 300)
 }
 
 // 换衣服：不同动作角色的skin重新绑定一次click事件
 function changeCloth(num) {
+  clothIn = num;
   roleArr.forEach((itm, idx) => {
-    itm.setSkinByName(num);
+    itm.setSkinByName(clothArr[clothIn]);
     itm.setToSetupPose();
-
     setTimeout(() => {
       actionRoleBindClick(idx)
     }, 300)
@@ -513,53 +594,49 @@ function changeBg(num) {
   bgIn = num;
 }
 
-// 切换角色
-function changeRole(num) {
-  game.destroy();
-
-  game, roleWalk, roleBreath, roleHunger, roleArr = []; // 新增三种动作的角色
-  bindBodyArr = [false, false, false];// 给对应的状态绑定click事件
-  bubbleBg, bubbleText, bubbleClick = false; // 气泡背景图，气泡文字
-  targetX = screenWidth / 2; // 角色移动位置
-  bgArr = [], bgNum = 0, bgIn = 1; // 0-竹林，1-圣诞
-  clothArr = ['1', '2', '3', '4', '5'], clothIn = 0; // 1-没衣服，2-圣诞
-  state = 1, stateIn = null; // 0-walk;1-breath;2-hunger;
-  isHunger = 0, isHungerIn = null;
-  breathCount = 0; //  呼吸达到1000时，触发左右两步晃
-  level = num;
-
-  bgTween, textTween; // 气泡的背景和文字
-  setTimeout(() => {
-    game = new Phaser.Game(screenWidth, screenHeight, Phaser.AUTO, 'phaserSet',
-      {
-        preload: preload,
-        create: create,
-        update: update
-      }
-    );
-  }, 100)
-}
-
 // 切换饥饿度
 function changeHunger(num) {
   isHungerIn = num;
 }
 
-function changeMusic(num) {
-  if (current.paused && num == 1) {
-    current.resume()
-  }
+// 销毁熊猫
+function destroyPanda() {
+  game.destroy()
+  game = null;
 
-  if (num == 0) {
-    current.pause()
-  }
+  roleArr = []; // 新增三种动作的角色
+  voiceArr = [], vPlayArr = [];
+  currentSound.destroy();
+  testSound.destroy();
+  bindBodyArr = [false, false, false];// 给对应的状态绑定click事件
+  bubbleClick = false; // 气泡背景图，气泡文字
+  targetX = screenWidth / 2; // 角色移动位置
+  bgArr = [], bgNum = 0, bgIn = 1;  // 0-竹林，1-竹林, 2-沙滩，3-秋天，4-圣诞
+  clothIn = 0; // 1-没衣服，2-圣诞
+  state = 1, stateIn = null; // 0-walk;1-breath;2-hunger;
+  isHunger = 0, isHungerIn = null;
+  breathCount = 0; //  呼吸达到1000时，触发左右两步晃
 }
+// 播放音乐
+function soundPlay(num) {
+  currentSound.destroy();
+  testSound = vPlayArr[num]
+  testSound.loopFull(0.6);
+}
+// 销毁音乐
+function soundDestroy() {
+  testSound.destroy();
+  currentSound = vPlayArr[bgNum]
+  currentSound.loopFull(0.6);
+}
+
 
 export {
   initPanda,
   changeCloth,
   changeBg,
-  changeRole,
   changeHunger,
-  changeMusic
+  destroyPanda,
+  soundPlay,
+  soundDestroy
 }

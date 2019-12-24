@@ -34,7 +34,8 @@ setTimeout(function () {
     level: 1,
     isHunger: 0,
     cloth: 1,
-    bg: 1
+    bg: 1, 
+    init: 0
   })
 }, 300)
 

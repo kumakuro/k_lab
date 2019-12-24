@@ -12,8 +12,8 @@ var filePath = '',
     bgFileArr = [], bgSetArr = [], bgNum = 0, bgIn = null,
     roleFileArr = [], roleSetArr = [], roleIn,
     stateNum = 1, stateIn = null,
-    clothNum, // 0-walk,1-breath,2-hunger
-    bindBodyArr = [false, false, false];  
+    clothNum, clothIn, // 0-walk,1-breath,2-hunger
+    bindBodyArr = [false, false, false];
 
 var config = {
     type: Phaser.WEBGL,
@@ -50,8 +50,11 @@ function preload() {
 function create() {
     bgFileArr.forEach((itm, idx) => {
         var temp = this.add.image(0, 0, 'bg' + idx).setOrigin(0);
-        temp.scale = factRatio;
         temp.alpha = 0;
+        temp.scale = factRatio;
+        // temp.events.onInputDown.add(() => {
+        //     bgSpriteClick()
+        // })
         bgSetArr.push(temp)
     })
 
@@ -81,7 +84,12 @@ function update() {
     }
 }
 
-// 换衣服
+// 定义背景精灵的点击事件
+function bgSpriteClick(){
+
+}
+
+// 换衣服且给衣服的各个部位绑定click事件
 function changeCloth(num) {
     roleSetArr.forEach((itm, idx) => {
         itm.setSkinByName(num);
@@ -98,35 +106,36 @@ function actionRoleBindClick(idx) {
     bindBodyArr[idx] = true
     let role = roleSetArr[idx]
     for (var i in role.children) {
-      var itm = role.children[i]
-      if (itm.children.length > 0) {
-        itm.setAll('inputEnabled', role.alpha == 1 ? true : false)
-        switch (idx) {
-          case 0:
-            itm.callAll('events.onInputDown.add', 'events.onInputDown', walkClick)
-            break;
-          case 1:
-            itm.callAll('events.onInputDown.add', 'events.onInputDown', breathClick)
-            break;
-          case 2:
-            itm.callAll('events.onInputDown.add', 'events.onInputDown', hungerClick)
-            break;
-          default:
-            break;
+        var itm = role.children[i]
+        if (itm.children.length > 0) {
+            itm.setAll('inputEnabled', role.alpha == 1 ? true : false)
+            switch (idx) {
+                case 0:
+                    itm.callAll('events.onInputDown.add', 'events.onInputDown', walkClick)
+                    break;
+                case 1:
+                    itm.callAll('events.onInputDown.add', 'events.onInputDown', breathClick)
+                    break;
+                case 2:
+                    itm.callAll('events.onInputDown.add', 'events.onInputDown', hungerClick)
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            bindBodyArr[idx] = false
         }
-      } else {
-        bindBodyArr[idx] = false
-      }
     }
-  }
-
+}
 
 // 设置背景的透明度
-function setBgAlpha(idx) {
+function setBgAlpha(num) {
     bgSetArr.forEach((itm, idx) => {
-        itm.alpha = 0
-        if (idx == bgIn) {
-            itm.alpha = 1
+        itm.alpha = 0;
+        itm.inputEnabled = false;
+        if (idx == num) {
+            itm.alpha = 1;
+            itm.inputEnabled = true;
         }
     })
 }
